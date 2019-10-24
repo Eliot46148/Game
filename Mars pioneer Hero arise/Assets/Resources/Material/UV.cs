@@ -2,21 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UV : MonoBehaviour {
+public class UV : MonoBehaviour
+{
 
-    public float cols = 16;
-    public float rows = 16;
+    public float cols = 24;
+    public float rows = 82;
     float tileCol = 0;
     float tileRow = 0;
     public Basic.BlockType blockType;
     private Basic basic = new Basic();
 
+    public Basic.BlockType BlockType {
+        get
+        {
+            return blockType;
+        }
+        set
+        {
+            blockType = value;
+        }
+    }
+
     public Vector2[] GetNewUVs(Basic.BlockType blockType)
     {
         Vector2[] blockUVs = new Vector2[24];
-        List<Vector2> side = GetSideUVs(basic.textures[(int)blockType].Side);
-        List<Vector2> plane = GetSideUVs(basic.textures[(int)blockType].Plane);
-        List<Vector2> under = GetSideUVs(basic.textures[(int)blockType].Under);
+        BlockTexture texture = basic.textures[(int)blockType];
+        List<Vector2> side = GetSideUVs(texture.Side);
+        List<Vector2> plane = GetSideUVs(texture.Plane);
+        List<Vector2> under = GetSideUVs(texture.Under);
         List<List<Vector2>> sides = new List<List<Vector2>>
         {
             side, side, side, side, plane, under
@@ -33,19 +46,19 @@ public class UV : MonoBehaviour {
             },
             new List<int>
             {
-                16, 17, 18, 19
+                16, 17, 19, 18
             },
             new List<int>
             {
-                23, 21, 20, 22
+                20, 21, 23, 22
             },
             new List<int>
             {
-                4, 5, 8, 9
+                5, 9, 4, 8
             },
             new List<int>
             {
-                15, 13 ,12, 14
+                14, 15, 13, 12
             }
         };
 
@@ -58,12 +71,12 @@ public class UV : MonoBehaviour {
 
     private List<Vector2> GetSideUVs(Vector2 vector)
     {
-        float i = vector.x;
-        float j = vector.y;
-        float ui = tileRow * i;
-        float ua = tileRow * (i + 1);
-        float vi = tileCol * (rows - j - 1);
-        float va = tileCol * (rows - j);
+        float i = vector.y;
+        float j = vector.x;
+        float ui = tileCol * i;
+        float ua = tileCol * (i + 1);
+        float vi = tileRow * (rows - j - 1);
+        float va = tileRow * (rows - j);
         return new List<Vector2>
         {
             new Vector2(ui, vi),
@@ -73,21 +86,23 @@ public class UV : MonoBehaviour {
         };
     }
 
-    void Start ()
+    void Start()
     {
+        if (BlockType == null)
+            BlockType = Basic.BlockType.Dirt;
+        SetTexture(BlockType);
+    }
+
+    public void SetTexture(Basic.BlockType type)
+    {
+        BlockType = type;
         tileCol = 1 / cols;
         tileRow = 1 / rows;
-        SetTexture(Basic.BlockType.Dirt);
-	}
-
-    public void SetTexture(Basic.BlockType blockType)
-    {
-        this.blockType = blockType;
-        this.GetComponent<MeshFilter>().mesh.uv = GetNewUVs(blockType);
+        this.GetComponent<MeshFilter>().mesh.uv = GetNewUVs(type);
     }
 
     void Update()
     {
-         
+
     }
 }

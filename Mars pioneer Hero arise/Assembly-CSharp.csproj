@@ -51,7 +51,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Basic.cs" />
+     <Compile Include="Assets\BuildBlockMesh.cs" />
+     <Compile Include="Assets\CamRotation.cs" />
      <Compile Include="Assets\Control.cs" />
+     <Compile Include="Assets\Resources\Material\UV.cs" />
  <Reference Include="UnityEngine.CoreModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2017.4.32f1/Editor/Data/Managed/UnityEngine/UnityEngine.CoreModule.dll</HintPath>
  </Reference>

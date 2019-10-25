@@ -26,7 +26,7 @@ public class UV : MonoBehaviour
     public Vector2[] GetNewUVs(Basic.BlockType blockType)
     {
         Vector2[] blockUVs = new Vector2[24];
-        BlockTexture texture = basic.textures[(int)blockType];
+        BlockTexture texture = basic.Blocks[(int)blockType].Texture;
         List<Vector2> side = GetSideUVs(texture.Side);
         List<Vector2> plane = GetSideUVs(texture.Plane);
         List<Vector2> under = GetSideUVs(texture.Under);
@@ -88,8 +88,6 @@ public class UV : MonoBehaviour
 
     void Start()
     {
-        if (BlockType == null)
-            BlockType = Basic.BlockType.Dirt;
         SetTexture(BlockType);
     }
 

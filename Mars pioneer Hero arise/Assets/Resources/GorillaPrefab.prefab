@@ -565,7 +565,7 @@ GameObject:
   - component: {fileID: 114255704337434462}
   - component: {fileID: 114083021060971360}
   m_Layer: 0
-  m_Name: Gorilla
+  m_Name: GorillaPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2519,7 +2519,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   newBlock: {fileID: 1395188069865928, guid: ba94760a722d7d042b9eb4b042fdffe8, type: 2}
-  currentBlock: 12
 --- !u!114 &114294260554155136
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2532,6 +2531,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
+  position: {x: 0, y: 0, z: 0}
+  sight: 100
 --- !u!124 &124224727863656322
 Behaviour:
   m_ObjectHideFlags: 1

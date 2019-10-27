@@ -5,11 +5,22 @@ using UnityEngine.UI;
 
 public class BuildBlockMesh : MonoBehaviour
 {
-    public GameObject newBlock;
+    public GameObject blockPrefab;
     private int currentBlock = 0;
     private GameObject toBeDestroy;
     private float time;
-    private List<BasicBlock> itemsBar;
+    private List<BasicBlock> itemsBar = new List<BasicBlock>
+        {
+            Basic.Blocks[(int)Basic.BlockType.Grass],
+            Basic.Blocks[(int)Basic.BlockType.Dirt],
+            Basic.Blocks[(int)Basic.BlockType.Stone],
+            Basic.Blocks[(int)Basic.BlockType.Sand],
+            Basic.Blocks[(int)Basic.BlockType.Gravel],
+            Basic.Blocks[(int)Basic.BlockType.Cobblestone],
+            Basic.Blocks[(int)Basic.BlockType.GoldOre],
+            Basic.Blocks[(int)Basic.BlockType.Water],
+            Basic.Blocks[(int)Basic.BlockType.Lava]
+        };
 
     public List<BasicBlock> ItemsBar
     {
@@ -39,29 +50,43 @@ public class BuildBlockMesh : MonoBehaviour
 
     void Start()
     {
-        Basic basic = new Basic();
         ItemsBar = new List<BasicBlock>
         {
-            basic.Blocks[(int)Basic.BlockType.Grass],
-            basic.Blocks[(int)Basic.BlockType.Dirt],
-            basic.Blocks[(int)Basic.BlockType.Stone],
-            basic.Blocks[(int)Basic.BlockType.Sand],
-            basic.Blocks[(int)Basic.BlockType.Gravel],
-            basic.Blocks[(int)Basic.BlockType.Cobblestone],
-            basic.Blocks[(int)Basic.BlockType.GoldOre],
-            basic.Blocks[(int)Basic.BlockType.Water],
-            basic.Blocks[(int)Basic.BlockType.Lava]
+            Basic.Blocks[(int)Basic.BlockType.Grass],
+            Basic.Blocks[(int)Basic.BlockType.Dirt],
+            Basic.Blocks[(int)Basic.BlockType.Stone],
+            Basic.Blocks[(int)Basic.BlockType.Sand],
+            Basic.Blocks[(int)Basic.BlockType.Gravel],
+            Basic.Blocks[(int)Basic.BlockType.Cobblestone],
+            Basic.Blocks[(int)Basic.BlockType.GoldOre],
+            Basic.Blocks[(int)Basic.BlockType.Water],
+            Basic.Blocks[(int)Basic.BlockType.Lava]
         };
 
-        int width = 100, height = 100;
+        int width = 20, height = 20;
+        float scale = 30;
+        Vector3 position = transform.position;
+        double[,] map = TerrainGeneration.CreateMap(width, height, position.x, position.z);
         for (int i = 0; i < height; i++)
             for (int j = 0; j < width; j++)
             {
-                Vector3 blockPos = new Vector3(-width/2 + i, 0, -height/2 + j);
-                CreateBlock(blockPos, new Basic().Blocks[(int)Basic.BlockType.Grass]);
+                bool first = true;
+                for (int k = (int)(map[i, j] * scale) - 1; k >= 0; k--)
+                {
+                    Vector3 blockPos = new Vector3(-width / 2 + i, k, -height / 2 + j);
+                    if (first)
+                    {
+                        Basic.CreateBlock(blockPrefab, blockPos, Basic.Blocks[(int)Basic.BlockType.Grass]);
+                        first = false;
+                    }
+                    else
+                        Basic.CreateBlock(blockPrefab, blockPos, Basic.Blocks[(int)Basic.BlockType.Dirt]);
+                }
             }
+        transform.position = new Vector3(position.x, (float)map[(int)position.x, (int)position.z] * scale, position.z);
     }
 
+    /*
     void Combine(GameObject block, Basic.BlockType blockType)
     {
         MeshFilter[] meshFilters = GetComponentsInChildren<MeshFilter>();
@@ -93,19 +118,7 @@ public class BuildBlockMesh : MonoBehaviour
         transform.gameObject.SetActive(true);
 
         Destroy(block);
-    }
-
-    public GameObject CreateBlock(Vector3 position, BasicBlock blockPrefab)
-    {
-        GameObject block = (GameObject)Instantiate(newBlock, position, Quaternion.identity);
-        //block.SetActive(false);
-        block.GetComponent<UV>().BlockType = blockPrefab.Type;
-        //block.transform.parent = this.transform;
-        block.tag = "Block";
-        block.layer = 8;
-        return block;
-        //Combine(block, blockType);
-    }
+    }*/
 
     void Update()
     {
@@ -122,7 +135,7 @@ public class BuildBlockMesh : MonoBehaviour
                 blockPos.y = (float)Mathf.Round(blockPos.y);
                 blockPos.z = (float)Mathf.Round(blockPos.z);
                 
-                CreateBlock(blockPos, ItemsBar[CurrentBlock]);
+                Basic.CreateBlock(blockPrefab, blockPos, ItemsBar[CurrentBlock]);
             }
         }
 

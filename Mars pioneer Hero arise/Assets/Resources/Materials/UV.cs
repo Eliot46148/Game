@@ -10,7 +10,6 @@ public class UV : MonoBehaviour
     float tileCol = 0;
     float tileRow = 0;
     public Basic.BlockType blockType;
-    private Basic basic = new Basic();
 
     public Basic.BlockType BlockType {
         get
@@ -26,7 +25,7 @@ public class UV : MonoBehaviour
     public Vector2[] GetNewUVs(Basic.BlockType blockType)
     {
         Vector2[] blockUVs = new Vector2[24];
-        BlockTexture texture = basic.Blocks[(int)blockType].Texture;
+        BlockTexture texture = Basic.Blocks[(int)blockType].Texture;
         List<Vector2> side = GetSideUVs(texture.Side);
         List<Vector2> plane = GetSideUVs(texture.Plane);
         List<Vector2> under = GetSideUVs(texture.Under);

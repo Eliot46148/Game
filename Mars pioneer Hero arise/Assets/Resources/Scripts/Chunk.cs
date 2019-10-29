@@ -25,9 +25,10 @@ public class Chunk
         GameObject chunkObject = new GameObject();
         meshRenderer = chunkObject.AddComponent<MeshRenderer>();
         meshFilter = chunkObject.AddComponent<MeshFilter>();
+        chunkObject.AddComponent<MeshCollider>();
         meshRenderer.material = world.texture;
 
-        chunkObject.transform.position = new Vector3(coord.x * Voxel.ChunkWidth, 0f, coord.x * Voxel.ChunkHeight);
+        chunkObject.transform.position = new Vector3(coord.x * Voxel.ChunkWidth, 0f, coord.z * Voxel.ChunkHeight);
         chunkObject.transform.parent = world.transform;
 
         chunkObject.name = "Chunk " + coord.x + ", " + coord.z;

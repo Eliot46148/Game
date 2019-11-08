@@ -51,12 +51,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Character Model\script\charControl.cs" />
      <Compile Include="Assets\Resources\Materials\UV.cs" />
      <Compile Include="Assets\Resources\Scripts\Basic.cs" />
      <Compile Include="Assets\Resources\Scripts\BuildBlockMesh.cs" />
      <Compile Include="Assets\Resources\Scripts\Cam.cs" />
      <Compile Include="Assets\Resources\Scripts\Chunk.cs" />
      <Compile Include="Assets\Resources\Scripts\Control.cs" />
+     <Compile Include="Assets\Resources\Scripts\MaterialControl.cs" />
      <Compile Include="Assets\Resources\Scripts\TerrainGeneration.cs" />
      <Compile Include="Assets\Resources\Scripts\UIControl.cs" />
      <Compile Include="Assets\Resources\Scripts\Voxel.cs" />
@@ -198,6 +200,9 @@
  </Reference>
  <Reference Include="UnityEngine.WindModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2017.4.32f1/Editor/Data/Managed/UnityEngine/UnityEngine.WindModule.dll</HintPath>
+ </Reference>
+ <Reference Include="Facebook.Unity.Settings">
+ <HintPath>C:/Project/Unity/Game/Mars pioneer Hero arise/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2017.4.32f1/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

@@ -17,23 +17,23 @@ public class Control : MonoBehaviour {
 	void FixedUpdate ()
     {
         CharacterController controller = GetComponent<CharacterController>();
-        if (true)//controller.isGrounded)
+        if (controller.isGrounded)
         {
-            moveDirection = new Vector3(Input.GetAxis("Horizontal"), -Input.GetAxis("Vertical"), 0);
+            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection *= speed;
             if (Input.GetKey(KeyCode.Space))
                 moveDirection.y = 4.0f;
-            if (Input.GetKey(KeyCode.Q))
+            if (Input.GetKey(KeyCode.LeftShift))
                 moveDirection.y = -4.0f;
-            /*if (Input.GetButton("Jump"))
-                moveDirection.y = jumpSpeed;*/
+            if (Input.GetButton("Jump"))
+                moveDirection.y = jumpSpeed;
         }
-        //moveDirection.y -= gravity * Time.deltaTime;
+        moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
         minimap.transform.position = new Vector3(transform.position.x, 200, transform.position.z);
 
         float h = 2.0f * Input.GetAxis("Mouse X");
-        transform.Rotate(0, 0, h);
+        transform.Rotate(0, h, 0);
     }
 }

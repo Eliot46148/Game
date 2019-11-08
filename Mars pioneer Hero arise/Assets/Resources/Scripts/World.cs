@@ -35,8 +35,8 @@ public class World : MonoBehaviour {
                     else
                         chunk = new Chunk(this, Basic.BlockType.Dirt, blockPos);
                 }
-            }
-        GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(position.x, (float)map[(int)position.x, (int)position.z] * scale, position.z);*/
+            }*/
+        GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(5, (float)map[(int)position.x, (int)position.z] * scale, 5);
 	}
 
     void GenerateWorld()

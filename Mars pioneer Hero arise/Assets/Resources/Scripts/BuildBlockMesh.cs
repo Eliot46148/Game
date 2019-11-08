@@ -71,8 +71,9 @@ public class BuildBlockMesh : MonoBehaviour
             for (int j = 0; j < width; j++)
             {
                 bool first = true;
-                for (int k = (int)(map[i, j] * scale) - 1; k >= 0; k--)
-                {
+                int k = 0;
+                //for (int k = (int)(map[i, j] * scale) - 1; k >= 0; k--)
+                //{
                     Vector3 blockPos = new Vector3(-width / 2 + i, k, -height / 2 + j);
                     if (first)
                     {
@@ -81,7 +82,7 @@ public class BuildBlockMesh : MonoBehaviour
                     }
                     else
                         Basic.CreateBlock(blockPrefab, blockPos, Basic.Blocks[(int)Basic.BlockType.Dirt]);
-                }
+                //}
             }
         transform.position = new Vector3(position.x, (float)map[(int)position.x, (int)position.z] * scale, position.z);
     }

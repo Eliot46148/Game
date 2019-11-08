@@ -8,6 +8,7 @@ public class Chunk
 
     MeshRenderer meshRenderer;
     MeshFilter meshFilter;
+    MeshCollider meshCollider;
 
     int vertexIndex = 0;
     List<Vector3> vertices = new List<Vector3>();
@@ -25,7 +26,8 @@ public class Chunk
         GameObject chunkObject = new GameObject();
         meshRenderer = chunkObject.AddComponent<MeshRenderer>();
         meshFilter = chunkObject.AddComponent<MeshFilter>();
-        chunkObject.AddComponent<MeshCollider>();
+        meshCollider = chunkObject.AddComponent<MeshCollider>();
+        meshCollider.convex = true;
         meshRenderer.material = world.texture;
 
         chunkObject.transform.position = new Vector3(coord.x * Voxel.ChunkWidth, 0f, coord.z * Voxel.ChunkHeight);
@@ -143,6 +145,7 @@ public class Chunk
         mesh.RecalculateNormals();
 
         meshFilter.mesh = mesh;
+        meshCollider.sharedMesh = mesh;
 
     }
 }

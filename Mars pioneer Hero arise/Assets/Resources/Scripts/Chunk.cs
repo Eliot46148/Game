@@ -6,6 +6,8 @@ public class Chunk
 {
     public ChunkCoord coord;
 
+    GameObject chunkObject;
+
     MeshRenderer meshRenderer;
     MeshFilter meshFilter;
     MeshCollider meshCollider;
@@ -17,21 +19,20 @@ public class Chunk
 
     World world;
 
-    Basic.BlockType[,,] voxelMap = new Basic.BlockType[Voxel.ChunkWidth, Voxel.ChunkHeight, Voxel.ChunkWidth];
+    byte[,,] voxelMap = new byte[Voxel.ChunkWidth, Voxel.ChunkHeight, Voxel.ChunkWidth];
 
     public Chunk(ChunkCoord c, World w)
     {
         coord = c;
         world = w;
-        GameObject chunkObject = new GameObject();
+        chunkObject = new GameObject();
         meshRenderer = chunkObject.AddComponent<MeshRenderer>();
         meshFilter = chunkObject.AddComponent<MeshFilter>();
         meshCollider = chunkObject.AddComponent<MeshCollider>();
-        meshCollider.convex = true;
         meshRenderer.material = world.texture;
 
-        chunkObject.transform.position = new Vector3(coord.x * Voxel.ChunkWidth, 0f, coord.z * Voxel.ChunkHeight);
-        chunkObject.transform.parent = world.transform;
+        chunkObject.transform.position = new Vector3(coord.x * Voxel.ChunkWidth, 0f, coord.z * Voxel.ChunkWidth);
+        chunkObject.transform.SetParent(world.transform);
 
         chunkObject.name = "Chunk " + coord.x + ", " + coord.z;
         chunkObject.tag = "Block";
@@ -46,22 +47,13 @@ public class Chunk
 
     void PopulateVoxelMap()
     {
-        double[,] map = TerrainGeneration.CreateMap(Voxel.ChunkWidth, Voxel.ChunkHeight, coord.x + Voxel.ChunkWidth / 2, coord.z + Voxel.ChunkHeight / 2);
         for (int y = 0; y < Voxel.ChunkHeight; y++)
         {
             for (int x = 0; x < Voxel.ChunkWidth; x++)
             {
                 for (int z = 0; z < Voxel.ChunkWidth; z++)
                 {
-                    if (y > (int)(map[x, z] * Voxel.ChunkHeight))
-                        voxelMap[x, y, z] = Basic.BlockType.Air;
-                    else if (y == 0)
-                        voxelMap[x, y, z] = Basic.BlockType.Bedrock;
-                    else if (y == (int)(map[x, z] * Voxel.ChunkHeight))
-                        voxelMap[x, y, z] = Basic.BlockType.Grass;
-                    else
-                        voxelMap[x, y, z] = Basic.BlockType.Dirt;
-
+                    voxelMap[x, y, z] = world.GetVoxel(new Vector3(x, y, z) + position);
                 }
             }
         }
@@ -77,9 +69,8 @@ public class Chunk
             {
                 for (int z = 0; z < Voxel.ChunkWidth; z++)
                 {
-
-                    AddVoxelDataToChunk(new Vector3(x, y, z), voxelMap[x, y, z]);
-
+                    if (world.basic.Blocks[(int)voxelMap[x,y,z]].isSolid)
+                        AddVoxelDataToChunk(new Vector3(x, y, z), voxelMap[x, y, z]);
                 }
             }
         }
@@ -94,6 +85,26 @@ public class Chunk
             return true;
     }
 
+    public bool isActive
+    {
+        get
+        {
+            return chunkObject.activeSelf;
+        }
+        set
+        {
+            chunkObject.SetActive(value);
+        }
+    }
+
+    public Vector3 position
+    {
+        get
+        {
+            return chunkObject.transform.position;
+        }
+    }
+
     bool CheckVoxel(Vector3 pos)
     {
 
@@ -102,26 +113,26 @@ public class Chunk
         int z = Mathf.FloorToInt(pos.z);
 
         if (!IsVoxelInChunks(x, y, z))
-            return false;
+            return world.basic.Blocks[(int)world.GetVoxel(pos + position)].isSolid;
 
-        return Basic.Blocks[(int)voxelMap[x, y, z]].IsSolid;
+        return world.basic.Blocks[(int)voxelMap[x, y, z]].isSolid;
 
     }
 
-    void AddVoxelDataToChunk(Vector3 position, Basic.BlockType type)
+    void AddVoxelDataToChunk(Vector3 position, byte type)
     {
         Vector2[] sides = new Vector2[6]
         {
-            Basic.Blocks[(int)type].Texture.Side,
-            Basic.Blocks[(int)type].Texture.Side,
-            Basic.Blocks[(int)type].Texture.Plane,
-            Basic.Blocks[(int)type].Texture.Under,
-            Basic.Blocks[(int)type].Texture.Side,
-            Basic.Blocks[(int)type].Texture.Side
+            world.basic.Blocks[type].blockTexture.Side,
+            world.basic.Blocks[type].blockTexture.Side,
+            world.basic.Blocks[type].blockTexture.Plane,
+            world.basic.Blocks[type].blockTexture.Under,
+            world.basic.Blocks[type].blockTexture.Side,
+            world.basic.Blocks[type].blockTexture.Side
         };
 
         for (int p = 0; p < 6; p++)
-            if (!CheckVoxel(position + Voxel.faceChecks[p]) && Basic.Blocks[(int)type].IsSolid)
+            if (!CheckVoxel(position + Voxel.faceChecks[p]) && world.basic.Blocks[(int)type].isSolid)
             {
                 for (int i = 0; i < 6; i++)
                 {
@@ -158,5 +169,15 @@ public class ChunkCoord
     {
         x = _x;
         z = _z;
+    }
+
+    public bool Equals(ChunkCoord other)
+    {
+        if (other == null)
+            return false;
+        else if (other.x == x && other.z == z)
+            return true;
+        else
+            return false;
     }
 }

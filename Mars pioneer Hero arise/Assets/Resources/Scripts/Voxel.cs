@@ -5,9 +5,19 @@ using UnityEngine;
 public class Voxel
 {
 
-    public static readonly int ChunkWidth = 30;
-    public static readonly int ChunkHeight = 30;
-    public static readonly int worldSizeChunk = 5;
+    public static readonly int ChunkWidth = 16;
+    public static readonly int ChunkHeight = 128;
+    public static readonly int WorldSizeInChunks = 30;
+
+    public static int WorldSizeInVoxels
+    {
+        get
+        {
+            return WorldSizeInChunks * ChunkWidth;
+        }
+    }
+
+    public static readonly int ViewDistanceInChunks = 5;
 
     public static readonly Vector3[] voxelVerts = new Vector3[8] {
 

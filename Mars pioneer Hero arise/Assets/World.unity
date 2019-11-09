@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -252,8 +252,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 61269161}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2}
-  m_LocalScale: {x: 2, y: 1, z: 1.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -269,9 +269,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 045172e45923dca488e50c3cd6fb38eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: 0
-  plater: {fileID: 0}
-  spawnPosotopn: {x: 0, y: 0, z: 0}
+  seed: 3432423
+  biome: {fileID: 11400000, guid: ca84af9b7cbe34e438c7d03a36755553, type: 2}
+  player: {fileID: 1063495618}
+  spawnPosition: {x: 0, y: 0, z: 0}
+  basic: {fileID: 11400000, guid: e77ecd2fc7e65464ebd24fae5f615faf, type: 2}
   texture: {fileID: 2100000, guid: 09b2330a7c12a8949b73a2d8a1748734, type: 2}
   tileX: 24
   tileY: 82
@@ -625,6 +627,8 @@ MonoBehaviour:
   itemsBar: {fileID: 249320691}
   texture: {fileID: 2800000, guid: 4f61cd1bbfae1e7469fe9c6d6c754bd7, type: 3}
   iconPrefab: {fileID: 1455688105370556, guid: 8851d9e3ded2efc40ab01ba02af55e26, type: 2}
+  basic: {fileID: 11400000, guid: e77ecd2fc7e65464ebd24fae5f615faf, type: 2}
+  backpack: {fileID: 1063495620}
 --- !u!1 &430720792
 GameObject:
   m_ObjectHideFlags: 0
@@ -1095,6 +1099,7 @@ GameObject:
   - component: {fileID: 1063495616}
   - component: {fileID: 1063495615}
   - component: {fileID: 1063495619}
+  - component: {fileID: 1063495620}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -1180,6 +1185,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockPrefab: {fileID: 1395188069865928, guid: ba94760a722d7d042b9eb4b042fdffe8,
     type: 2}
+  basic: {fileID: 11400000, guid: e77ecd2fc7e65464ebd24fae5f615faf, type: 2}
+  backpack: {fileID: 1063495620}
+--- !u!114 &1063495620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1063495614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fda07888afd635f479353e20acece4c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  basic: {fileID: 11400000, guid: e77ecd2fc7e65464ebd24fae5f615faf, type: 2}
+  itemsBar: 020000000300000001000000090000000a000000040000000b0000000c0000000d000000
 --- !u!1 &1080902636
 GameObject:
   m_ObjectHideFlags: 0
@@ -1343,7 +1363,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 33.69289
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -2159,13 +2179,13 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1

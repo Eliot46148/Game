@@ -53,13 +53,15 @@
   <ItemGroup>
      <Compile Include="Assets\Character Model\script\charControl.cs" />
      <Compile Include="Assets\Resources\Materials\UV.cs" />
+     <Compile Include="Assets\Resources\Scripts\Backpack.cs" />
      <Compile Include="Assets\Resources\Scripts\Basic.cs" />
+     <Compile Include="Assets\Resources\Scripts\BiomeAttribute.cs" />
      <Compile Include="Assets\Resources\Scripts\BuildBlockMesh.cs" />
      <Compile Include="Assets\Resources\Scripts\Cam.cs" />
      <Compile Include="Assets\Resources\Scripts\Chunk.cs" />
      <Compile Include="Assets\Resources\Scripts\Control.cs" />
      <Compile Include="Assets\Resources\Scripts\MaterialControl.cs" />
-     <Compile Include="Assets\Resources\Scripts\TerrainGeneration.cs" />
+     <Compile Include="Assets\Resources\Scripts\Noise.cs" />
      <Compile Include="Assets\Resources\Scripts\UIControl.cs" />
      <Compile Include="Assets\Resources\Scripts\Voxel.cs" />
      <Compile Include="Assets\Resources\Scripts\World.cs" />

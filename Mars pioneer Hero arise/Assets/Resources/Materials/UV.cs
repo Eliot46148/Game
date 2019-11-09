@@ -9,9 +9,10 @@ public class UV : MonoBehaviour
     public float rows = 82;
     float tileCol = 0;
     float tileRow = 0;
-    public Basic.BlockType blockType;
+    public Basic basic;
+    public BlockType blockType;
 
-    public Basic.BlockType BlockType {
+    public BlockType BlockType {
         get
         {
             return blockType;
@@ -22,10 +23,10 @@ public class UV : MonoBehaviour
         }
     }
 
-    public Vector2[] GetNewUVs(Basic.BlockType blockType)
+    public Vector2[] GetNewUVs(BlockType blockType)
     {
         Vector2[] blockUVs = new Vector2[24];
-        BlockTexture texture = Basic.Blocks[(int)blockType].Texture;
+        BlockTexture texture = basic.Blocks[(int)blockType].blockTexture;
         List<Vector2> side = GetSideUVs(texture.Side);
         List<Vector2> plane = GetSideUVs(texture.Plane);
         List<Vector2> under = GetSideUVs(texture.Under);
@@ -90,7 +91,7 @@ public class UV : MonoBehaviour
         SetTexture(BlockType);
     }
 
-    public void SetTexture(Basic.BlockType type)
+    public void SetTexture(BlockType type)
     {
         BlockType = type;
         tileCol = 1 / cols;

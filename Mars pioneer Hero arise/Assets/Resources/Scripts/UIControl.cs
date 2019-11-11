@@ -15,23 +15,30 @@ public class UIControl : MonoBehaviour {
 
     GameObject icons;
     List<BlockType> items;
+    List<GameObject> itemsObject = new List<GameObject>();
+    int iconSize;
     // Use this for initialization
     void Start ()
     {
+        iconSize = (int)(itemsBar.rectTransform.sizeDelta.x / 9);
         icons = GameObject.FindGameObjectWithTag("Item");
         items = backpack.ItemsBar;
         for (int i = 0; i < 9; i++)
         {
             GameObject icon = Instantiate(iconPrefab, icons.transform);
             Vector2 pos = basic.Blocks[(int)items[i]].icon;
-            icon.GetComponent<Image>().sprite = Sprite.Create(texture, new Rect(pos.y * 32, (34 - pos.x) * 32, 32, 32), pos);
-            icon.GetComponent<RectTransform>().localPosition = new Vector3(30 * i - 120, 0.5f, 0);
+            Sprite iconSprite = Sprite.Create(texture, new Rect(pos.y * 32, (34 - pos.x) * 32, 32, 32), pos);
+            icon.GetComponent<Image>().sprite = iconSprite;
+            icon.GetComponent<RectTransform>().localPosition = new Vector3(iconSize * i - iconSize * 4, 0.5f, 0);
+            icon.name = "Tool " + i;
+            itemsObject.Add(icon);
         }
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        selection.rectTransform.localPosition = new Vector3(((int)(itemsBar.rectTransform.sizeDelta.x/9) * backpack.CurrentBlock - (int)(itemsBar.rectTransform.sizeDelta.x/9 * 4)), 0.5f, 0);
+        int index = backpack.CurrentBlock;
+        selection.rectTransform.localPosition = new Vector3((iconSize * index - iconSize * 4), 0.5f, 0);
     }
 }

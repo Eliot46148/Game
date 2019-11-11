@@ -16,6 +16,8 @@ MonoBehaviour:
     icon: {x: 30, y: 14}
     type: 0
     isSolid: 0
+    renderNeighborFaces: 1
+    transparency: 1
     blockTexture:
       side: {x: 0, y: 0}
       plane: {x: 0, y: 0}
@@ -24,6 +26,8 @@ MonoBehaviour:
     icon: {x: 0, y: 0}
     type: 1
     isSolid: 1
+    renderNeighborFaces: 0
+    transparency: 0
     blockTexture:
       side: {x: 0, y: 1}
       plane: {x: 0, y: 1}
@@ -32,6 +36,8 @@ MonoBehaviour:
     icon: {x: 0, y: 1}
     type: 2
     isSolid: 1
+    renderNeighborFaces: 0
+    transparency: 0
     blockTexture:
       side: {x: 0, y: 3}
       plane: {x: 0, y: 0}
@@ -40,6 +46,8 @@ MonoBehaviour:
     icon: {x: 0, y: 2}
     type: 3
     isSolid: 1
+    renderNeighborFaces: 0
+    transparency: 0
     blockTexture:
       side: {x: 0, y: 2}
       plane: {x: 0, y: 2}
@@ -48,6 +56,8 @@ MonoBehaviour:
     icon: {x: 0, y: 3}
     type: 4
     isSolid: 1
+    renderNeighborFaces: 0
+    transparency: 0
     blockTexture:
       side: {x: 1, y: 0}
       plane: {x: 1, y: 0}
@@ -56,86 +66,148 @@ MonoBehaviour:
     icon: {x: 0, y: 4}
     type: 5
     isSolid: 1
+    renderNeighborFaces: 0
+    transparency: 0
     blockTexture:
       side: {x: 0, y: 4}
       plane: {x: 0, y: 4}
       under: {x: 0, y: 4}
   - name: Bedrock
     icon: {x: 0, y: 12}
-    type: 7
+    type: 6
     isSolid: 1
+    renderNeighborFaces: 0
+    transparency: 0
     blockTexture:
       side: {x: 1, y: 1}
       plane: {x: 1, y: 1}
       under: {x: 1, y: 1}
   - name: Water
     icon: {x: 18, y: 6}
-    type: 8
+    type: 7
     isSolid: 0
+    renderNeighborFaces: 0
+    transparency: 0
     blockTexture:
       side: {x: 3, y: 22}
       plane: {x: 3, y: 22}
       under: {x: 3, y: 22}
   - name: Lava
     icon: {x: 18, y: 7}
-    type: 10
+    type: 8
     isSolid: 0
+    renderNeighborFaces: 0
+    transparency: 0
     blockTexture:
       side: {x: 3, y: 21}
       plane: {x: 3, y: 21}
       under: {x: 3, y: 21}
   - name: Sand
     icon: {x: 1, y: 1}
-    type: 12
+    type: 9
     isSolid: 1
+    renderNeighborFaces: 0
+    transparency: 0
     blockTexture:
       side: {x: 1, y: 2}
       plane: {x: 1, y: 2}
       under: {x: 1, y: 2}
   - name: Gravel
     icon: {x: 1, y: 2}
-    type: 13
+    type: 10
     isSolid: 1
+    renderNeighborFaces: 0
+    transparency: 0
     blockTexture:
       side: {x: 1, y: 3}
       plane: {x: 1, y: 3}
       under: {x: 1, y: 3}
-  - name: GoldOre
+  - name: Gold Ore
     icon: {x: 1, y: 3}
-    type: 14
+    type: 11
     isSolid: 1
+    renderNeighborFaces: 0
+    transparency: 0
     blockTexture:
       side: {x: 2, y: 0}
       plane: {x: 2, y: 0}
       under: {x: 2, y: 0}
-  - name: IronOre
+  - name: Iron Ore
     icon: {x: 1, y: 4}
-    type: 15
+    type: 12
     isSolid: 1
+    renderNeighborFaces: 0
+    transparency: 0
     blockTexture:
       side: {x: 2, y: 1}
       plane: {x: 2, y: 1}
       under: {x: 2, y: 1}
-  - name: CoalOre
+  - name: Coal Ore
     icon: {x: 1, y: 5}
-    type: 16
+    type: 13
     isSolid: 1
+    renderNeighborFaces: 0
+    transparency: 0
     blockTexture:
       side: {x: 2, y: 2}
       plane: {x: 2, y: 2}
       under: {x: 2, y: 2}
-  - name: 
-    icon: {x: 0, y: 0}
-    type: 0
-    isSolid: 0
+  - name: Glass
+    icon: {x: 1, y: 15}
+    type: 14
+    isSolid: 1
+    renderNeighborFaces: 1
+    transparency: 0.8
     blockTexture:
-      side: {x: 0, y: 0}
-      plane: {x: 0, y: 0}
-      under: {x: 0, y: 0}
-  - name: 
-    icon: {x: 0, y: 0}
+      side: {x: 3, y: 1}
+      plane: {x: 3, y: 1}
+      under: {x: 3, y: 1}
+  - name: Oak Log
+    icon: {x: 1, y: 6}
+    type: 15
+    isSolid: 1
+    renderNeighborFaces: 0
+    transparency: 0
+    blockTexture:
+      side: {x: 1, y: 4}
+      plane: {x: 1, y: 5}
+      under: {x: 1, y: 5}
+  - name: Oak Leaves
+    icon: {x: 1, y: 10}
+    type: 16
+    isSolid: 1
+    renderNeighborFaces: 1
+    transparency: 0.5
+    blockTexture:
+      side: {x: 3, y: 4}
+      plane: {x: 3, y: 4}
+      under: {x: 3, y: 4}
+  - name: Cactus
+    icon: {x: 7, y: 13}
+    type: 17
+    isSolid: 1
+    renderNeighborFaces: 0
+    transparency: 0
+    blockTexture:
+      side: {x: 4, y: 6}
+      plane: {x: 4, y: 5}
+      under: {x: 4, y: 7}
+  - name: Snow Grass
+    icon: {x: 7, y: 10}
+    type: 18
+    isSolid: 1
+    renderNeighborFaces: 0
+    transparency: 0
+    blockTexture:
+      side: {x: 4, y: 4}
+      plane: {x: 4, y: 2}
+      under: {x: 0, y: 2}
+  - name: Empty
+    icon: {x: 30, y: 14}
     type: 0
     isSolid: 0
+    renderNeighborFaces: 0
+    transparency: 0
     blockTexture:
       side: {x: 0, y: 0}
       plane: {x: 0, y: 0}

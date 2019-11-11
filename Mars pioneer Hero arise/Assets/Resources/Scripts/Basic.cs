@@ -1,10 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
 using UnityEngine;
 
 public enum BlockType
 {
-    Air, Stone, Grass, Dirt, Cobblestone, Wooden, Bedrock, Water, Lava, Sand, Gravel, GoldOre, IronOre, CoalOre
+    Air, Stone, Grass, Dirt, Cobblestone, Wooden, Bedrock, Water, Lava, Sand, Gravel, GoldOre, IronOre, CoalOre, Glass, OakLog, OakLeaves, Cactus, SnowGrass
 }
 [CreateAssetMenu(fileName = "BlockAssets", menuName = "Minecraft/BlockAsset")]
 public class Basic : ScriptableObject
@@ -29,13 +33,37 @@ public class BasicBlock
     public Vector2 icon;
     public BlockType type;
     public bool isSolid;
+    public bool renderNeighborFaces;
+    public float transparency;
     public BlockTexture blockTexture;
+
     public BasicBlock(BlockType t, Vector2 i, BlockTexture texture, bool solid=true)
     {
         type = t;
         icon = i;
         blockTexture = texture;
         isSolid = solid;
+    }
+
+    public Vector2 GetTextureID(int faceIndex)
+    {
+
+        switch (faceIndex)
+        {
+
+            case 0:
+            case 1:
+            case 4:
+            case 5:
+                return blockTexture.side;
+            case 2:
+                return blockTexture.plane;
+            case 3:
+                return blockTexture.under;
+            default:
+                Debug.Log("Error in GetTextureID; invalid face index");
+                return Vector2.zero;
+        }
     }
 }
 

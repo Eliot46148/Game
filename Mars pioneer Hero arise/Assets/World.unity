@@ -790,6 +790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 416b23defe2b37f438e34ba50648a8f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  frameRate: 0
   selected: {fileID: 270279056}
   backpack: {fileID: 1063495620}
 --- !u!1 &306106521

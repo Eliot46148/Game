@@ -8,7 +8,7 @@ public class DebugScreen : MonoBehaviour {
     World world;
     Text text;
 
-    float frameRate;
+    public float frameRate;
     float timer;
 
     int halfWorldSizeInVoxels;

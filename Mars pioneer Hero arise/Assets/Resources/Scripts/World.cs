@@ -177,7 +177,7 @@ public class World : MonoBehaviour
     void ThreadedUpdate()
     {
 
-        while (true)
+        while (settings.enableThreading)
         {
 
             if (!applyingModifications)
@@ -195,6 +195,7 @@ public class World : MonoBehaviour
 
         if (settings.enableThreading)
         {
+            settings.enableThreading = false;
             ChunkUpdateThread.Abort();
         }
 

@@ -1,6 +1,6 @@
 WindowsStandalone
 PlayerPath?
-C:/Users/Joseph/Desktop/Game/t.exe
+C:/Users/josep/Desktop/Game/game.exe
 SceneListBegin?
 Assets/World.unity
 SceneListEnd?
@@ -155,4 +155,4 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 48632798ca74f511cc127c85f67ab57c Assembly-CSharp.dll:.UV
 cd4c2754dee380f992d8fa1c4a4ac7fa Assembly-CSharp.dll:.BiomeAttributes
-e2f91bd82a2da3e91f4b5030fbdfce33 Assembly-CSharp.dll:.DebugScreen
+6030eb3d280d7728441d366d3fdcc151 Assembly-CSharp.dll:.DebugScreen

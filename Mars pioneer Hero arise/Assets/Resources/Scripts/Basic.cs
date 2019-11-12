@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Xml;
-using System.Xml.Serialization;
 using UnityEngine;
 
+// 方塊ID定義
 public enum BlockType
 {
     Air, Stone, Grass, Dirt, Cobblestone, Wooden, Bedrock, Water, Lava, Sand, Gravel, GoldOre, IronOre, CoalOre, Glass, OakLog, OakLeaves, Cactus, SnowGrass
 }
+
+// 所有方塊設定
 [CreateAssetMenu(fileName = "BlockAssets", menuName = "Minecraft/BlockAsset")]
 public class Basic : ScriptableObject
 {
+    public int tileX;
+    public int tileY;
+    [Header("(用Empty去複製新增方塊)")]
     public List<BasicBlock> Blocks;
     public GameObject CreateBlock(GameObject blockPrefab, Vector3 position, BlockType newBlock)
     {
@@ -26,15 +29,21 @@ public class Basic : ScriptableObject
     }
 }
 
+// 基本方塊設定
 [System.Serializable]
 public class BasicBlock
 {
     public string name;
+    [Header("方塊圖示矩陣座標")]
     public Vector2 icon;
     public BlockType type;
+    [Header("方塊是否有實體")]
     public bool isSolid;
+    [Header("方塊是否不會擋住旁邊物體")]
     public bool renderNeighborFaces;
+    [Header("方塊透明度 (0為不透明)")]
     public float transparency;
+    [Header("方塊材質設定")]
     public BlockTexture blockTexture;
 
     public BasicBlock(BlockType t, Vector2 i, BlockTexture texture, bool solid=true)
@@ -70,7 +79,12 @@ public class BasicBlock
 [System.Serializable]
 public class BlockTexture
 {
-    public Vector2 side, plane, under;
+    [Header("材質四邊座標")]
+    public Vector2 side;
+    [Header("材質頂面座標")]
+    public Vector2 plane;
+    [Header("材質底面座標")]
+    public Vector2 under;
     public BlockTexture(Vector2 s)
     {
         Side = s;

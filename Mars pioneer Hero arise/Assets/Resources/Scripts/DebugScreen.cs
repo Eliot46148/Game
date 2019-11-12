@@ -32,7 +32,16 @@ public class DebugScreen : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        string debugText = "Debugging (Press F3 to enable/disable)";
+        string debugText = "";
+        debugText += "Game Version : " + world.settings.version;
+        debugText += "\n";
+        debugText += "Threading setting : " + world.settings.enableThreading;
+        debugText += "\n";
+        debugText += "Animated Chunks setting : " + world.settings.enableAnimatedChunks;
+        debugText += "\n";
+        debugText += "World seed : " + world.settings.seed;
+        debugText += "\n";
+        debugText += "Debugging (Press F3 to enable/disable)";
         debugText += "\n";
         debugText += "Frame Rate : " + frameRate + " fps";
         debugText += "\n";

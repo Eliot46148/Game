@@ -11,6 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 530f13305cbf7df4d830b648cad4d04f, type: 3}
   m_Name: BlockAssets
   m_EditorClassIdentifier: 
+  tileX: 24
+  tileY: 82
   Blocks:
   - name: Air
     icon: {x: 30, y: 14}

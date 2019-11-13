@@ -6,23 +6,17 @@ public static class Structure
 {
     public static Queue<VoxelMod> GenerateMajorFlora(int index, Vector3 position, int minTrunkHeight, int maxTrunkHeight)
     {
-
         switch (index)
         {
-
             case 0:
                 return MakeTree(position, minTrunkHeight, maxTrunkHeight, BlockType.OakLog, BlockType.OakLeaves);
-
             case 1:
-                return MakeCacti(position, minTrunkHeight, maxTrunkHeight);
-
+                return MakeCactus(position, minTrunkHeight, maxTrunkHeight);
         }
-
         return new Queue<VoxelMod>();
-
     }
 
-    public static Queue<VoxelMod> MakeTree(Vector3 position, int minTrunkHeight, int maxTrunkHeight, BlockType trunkID, BlockType leafID)
+    public static Queue<VoxelMod> MakeTree(Vector3 position, int minTrunkHeight, int maxTrunkHeight, BlockType trunkID = BlockType.OakLog, BlockType leafID = BlockType.OakLeaves)
     {
         Queue<VoxelMod> queue = new Queue<VoxelMod>();
         int height = (int)(maxTrunkHeight * Noise.Get2DPerlin(new Vector2(position.x, position.z), 250f, 3f));
@@ -34,21 +28,14 @@ public static class Structure
             queue.Enqueue(new VoxelMod(new Vector3(position.x, position.y + i, position.z), trunkID));
 
         for (int x = -3; x < 4; x++)
-        {
             for (int y = 0; y < 7; y++)
-            {
                 for (int z = -3; z < 4; z++)
-                {
                     queue.Enqueue(new VoxelMod(new Vector3(position.x + x, position.y + height + y, position.z + z), leafID));
-                }
-            }
-        }
         return queue;
     }
 
-    public static Queue<VoxelMod> MakeCacti(Vector3 position, int minTrunkHeight, int maxTrunkHeight)
+    public static Queue<VoxelMod> MakeCactus(Vector3 position, int minTrunkHeight, int maxTrunkHeight)
     {
-
         Queue<VoxelMod> queue = new Queue<VoxelMod>();
 
         int height = (int)(maxTrunkHeight * Noise.Get2DPerlin(new Vector2(position.x, position.z), 23456f, 2f));
@@ -60,7 +47,5 @@ public static class Structure
             queue.Enqueue(new VoxelMod(new Vector3(position.x, position.y + i, position.z), BlockType.Cactus));
 
         return queue;
-
     }
-
 }

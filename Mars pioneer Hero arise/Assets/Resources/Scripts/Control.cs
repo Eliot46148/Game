@@ -5,19 +5,23 @@ using UnityEngine.UI;
 
 public class Control : MonoBehaviour {
 
-    public bool isGrounded;
-    public bool isSprinting;
+    bool isGrounded;
+    bool isSprinting;
 
-    private Transform cam;
-    private World world;
+    public Transform cam;
+    public World world;
 
+    // 物理定義
     public float walkSpeed = 3f;
     public float sprintSpeed = 6f;
     public float jumpForce = 5f;
     public float gravity = -9.8f;
 
-    public float playerWidth = 0.15f;
+    // 玩家碰撞設定
+    public float playerWidth = 0.3f;
+    public float playerHHeight = 0.9f;
 
+    // 滑鼠鍵盤輸入的變數
     private float horizontal;
     private float vertical;
     private float mouseHorizontal;
@@ -26,34 +30,26 @@ public class Control : MonoBehaviour {
     private float verticalMomentum = 0;
     private bool jumpRequest;
 
+    // UI 物件
     public Camera minimap;
     public Backpack backpack;
 
-    public Transform highlightBlock;
-    public Transform placeBlock;
-    public float checkIncrement = 0.1f;
-    public float reach = 8f;
+    public Transform highlightBlock;    // 選中的方塊位置參考物件
+    public Transform placeBlock;        // 創建的方塊位置參考物件
+    public float checkIncrement = 0.1f; // 模擬 Raycast 的增量
+    public float reach = 8f;            // 玩家手長
 
+    // 除錯 UI Text
     public GameObject debugScreen;
-
-    /*
-    public float speed = 6.0F;
-    public float jumpSpeed = 8.0F;
-    public float gravity = 20.0F;
-    private Vector3 moveDirection = Vector3.zero;
-    */
 
     void Start ()
 	{
-        cam = GameObject.Find("Main Camera").transform;
-        world = GameObject.Find("World").GetComponent<World>();
-
-        world.inUI = false;
+        world.inUI = 0;    // 讀取中
     }
 
     void FixedUpdate()
     {
-        if (!world.inUI)
+        if (world.inUI == 1)
         {
             CalculateVelocity();
             if (jumpRequest)
@@ -64,6 +60,7 @@ public class Control : MonoBehaviour {
             transform.Translate(velocity, Space.World);
             minimap.transform.position = new Vector3(transform.position.x, 200, transform.position.z);
 
+            // 除錯畫面
             if (Input.GetKeyDown(KeyCode.F3))
                 debugScreen.SetActive(!debugScreen.activeSelf);
         }
@@ -71,12 +68,17 @@ public class Control : MonoBehaviour {
 
     private void Update()
     {
+        // 開啟背包UI (到 World -> inUI 的 Property去顯示Panel)
         if (Input.GetKeyDown(KeyCode.I))
         {
-            world.inUI = !world.inUI;
+            if (world.inUI == 0)
+                world.inUI = 1;
+            else if (world.inUI == 1)
+                world.inUI = 0;
         }
 
-        if (!world.inUI)
+        // 回到遊戲模式
+        if (world.inUI == 1)
         {
             GetPlayerInputs();
             PlaceCursorBlocks();
@@ -142,6 +144,7 @@ public class Control : MonoBehaviour {
         }
     }
 
+    // 模擬 Raucast 來讓玩家編輯刪除方塊
     private void PlaceCursorBlocks()
     {
 
@@ -171,6 +174,7 @@ public class Control : MonoBehaviour {
         placeBlock.gameObject.SetActive(false);
     }
 
+    // 六個方向碰撞檢查
     private float checkDownSpeed(float downSpeed)
     {
         if (

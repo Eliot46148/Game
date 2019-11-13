@@ -25,12 +25,12 @@ public static class Structure
             height = minTrunkHeight;
 
         for (int i = 1; i < height; i++)
-            queue.Enqueue(new VoxelMod(new Vector3(position.x, position.y + i, position.z), trunkID));
+            queue.Enqueue(new VoxelMod(new Vector3s(position.x, position.y + i, position.z), trunkID));
 
         for (int x = -3; x < 4; x++)
             for (int y = 0; y < 7; y++)
                 for (int z = -3; z < 4; z++)
-                    queue.Enqueue(new VoxelMod(new Vector3(position.x + x, position.y + height + y, position.z + z), leafID));
+                    queue.Enqueue(new VoxelMod(new Vector3s(position.x + x, position.y + height + y, position.z + z), leafID));
         return queue;
     }
 
@@ -44,7 +44,7 @@ public static class Structure
             height = minTrunkHeight;
 
         for (int i = 1; i <= height; i++)
-            queue.Enqueue(new VoxelMod(new Vector3(position.x, position.y + i, position.z), BlockType.Cactus));
+            queue.Enqueue(new VoxelMod(new Vector3s(position.x, position.y + i, position.z), BlockType.Cactus));
 
         return queue;
     }

@@ -13,20 +13,14 @@ public enum BlockType
 [CreateAssetMenu(fileName = "BlockAssets", menuName = "Minecraft/BlockAsset")]
 public class Basic : ScriptableObject
 {
-    public int tileX;
-    public int tileY;
+    [Header("方塊矩陣大小定義")]
+    public float tileRows;
+    public float tileCols;
+    [Header("方塊圖示矩陣大小定義")]
+    public float rows;
+    public float cols;
     [Header("(用Empty去複製新增方塊)")]
     public List<BasicBlock> Blocks;
-    public GameObject CreateBlock(GameObject blockPrefab, Vector3 position, BlockType newBlock)
-    {
-        GameObject block = (GameObject)GameObject.Instantiate(blockPrefab, position, Quaternion.identity);
-        block.GetComponent<UV>().BlockType = newBlock;
-        block.GetComponent<UV>().basic = this;
-        block.transform.parent = GameObject.Find("World").transform;
-        block.tag = "Block";
-        block.layer = 8;
-        return block;
-    }
 }
 
 // 基本方塊設定
@@ -35,7 +29,7 @@ public class BasicBlock
 {
     public string name;
     [Header("方塊圖示矩陣座標")]
-    public Vector2 icon;
+    public Vector2s icon;
     public BlockType type;
     [Header("方塊是否有實體")]
     public bool isSolid;
@@ -46,7 +40,7 @@ public class BasicBlock
     [Header("方塊材質設定")]
     public BlockTexture blockTexture;
 
-    public BasicBlock(BlockType t, Vector2 i, BlockTexture texture, bool solid=true)
+    public BasicBlock(BlockType t, Vector2s i, BlockTexture texture, bool solid=true)
     {
         type = t;
         icon = i;
@@ -54,7 +48,7 @@ public class BasicBlock
         isSolid = solid;
     }
 
-    public Vector2 GetTextureID(int faceIndex)
+    public Vector2s GetTextureID(int faceIndex)
     {
 
         switch (faceIndex)
@@ -70,8 +64,7 @@ public class BasicBlock
             case 3:
                 return blockTexture.under;
             default:
-                Debug.Log("Error in GetTextureID; invalid face index");
-                return Vector2.zero;
+                return new Vector2s(0, 0);
         }
     }
 }
@@ -80,31 +73,31 @@ public class BasicBlock
 public class BlockTexture
 {
     [Header("材質四邊座標")]
-    public Vector2 side;
+    public Vector2s side;
     [Header("材質頂面座標")]
-    public Vector2 plane;
+    public Vector2s plane;
     [Header("材質底面座標")]
-    public Vector2 under;
-    public BlockTexture(Vector2 s)
+    public Vector2s under;
+    public BlockTexture(Vector2s s)
     {
         Side = s;
         Plane = s;
         Under = s;
     }
-    public BlockTexture(Vector2 s, Vector2 p)
+    public BlockTexture(Vector2s s, Vector2s p)
     {
         Side = s;
         Under = p;
         Plane = p;
     }
-    public BlockTexture(Vector2 s, Vector2 p, Vector2 u)
+    public BlockTexture(Vector2s s, Vector2s p, Vector2s u)
     {
         Side = s;
         Under = u;
         Plane = p;
     }
 
-    public Vector2 Side
+    public Vector2s Side
     {
         get
         {
@@ -117,7 +110,7 @@ public class BlockTexture
         }
     }
 
-    public Vector2 Plane
+    public Vector2s Plane
     {
         get
         {
@@ -130,7 +123,7 @@ public class BlockTexture
         }
     }
 
-    public Vector2 Under
+    public Vector2s Under
     {
         get
         {
@@ -141,5 +134,34 @@ public class BlockTexture
         {
             under = value;
         }
+    }
+}
+
+// Perlin 雜訊產生地圖的程序化生成
+public static class Noise
+{
+
+    public static float Get2DPerlin(Vector2 position, float offset, float scale)
+    {
+        return Mathf.PerlinNoise((position.x + 0.1f) / VoxelData.ChunkWidth * scale + offset, (position.y + 0.1f) / VoxelData.ChunkWidth * scale + offset);
+    }
+
+    public static bool Get3DPerlin(Vector3 position, float offset, float scale, float threshold)
+    {
+        float x = (position.x + offset + 0.1f) * scale;
+        float y = (position.y + offset + 0.1f) * scale;
+        float z = (position.z + offset + 0.1f) * scale;
+
+        float AB = Mathf.PerlinNoise(x, y);
+        float BC = Mathf.PerlinNoise(y, z);
+        float AC = Mathf.PerlinNoise(x, z);
+        float BA = Mathf.PerlinNoise(y, x);
+        float CB = Mathf.PerlinNoise(z, y);
+        float CA = Mathf.PerlinNoise(z, x);
+
+        if ((AB + BC + AC + BA + CB + CA) / 6f > threshold)
+            return true;
+        else
+            return false;
     }
 }

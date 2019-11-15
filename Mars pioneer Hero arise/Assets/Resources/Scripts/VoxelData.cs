@@ -20,24 +20,24 @@ public static class VoxelData
         get { return WorldSizeInChunks * ChunkWidth; }
     }
 
-    public static readonly Vector3[] voxelVerts = new Vector3[8] {
-        new Vector3(0.0f, 0.0f, 0.0f),
-        new Vector3(1.0f, 0.0f, 0.0f),
-        new Vector3(1.0f, 1.0f, 0.0f),
-        new Vector3(0.0f, 1.0f, 0.0f),
-        new Vector3(0.0f, 0.0f, 1.0f),
-        new Vector3(1.0f, 0.0f, 1.0f),
-        new Vector3(1.0f, 1.0f, 1.0f),
-        new Vector3(0.0f, 1.0f, 1.0f)
+    public static readonly Vector3s[] voxelVerts = new Vector3s[8] {
+        new Vector3s(0, 0, 0),
+        new Vector3s(1, 0, 0),
+        new Vector3s(1, 1, 0),
+        new Vector3s(0, 1, 0),
+        new Vector3s(0, 0, 1),
+        new Vector3s(1, 0, 1),
+        new Vector3s(1, 1, 1),
+        new Vector3s(0, 1, 1)
     };
 
-    public static readonly Vector3[] faceChecks = new Vector3[6] {
-        new Vector3(0.0f, 0.0f, -1.0f),
-        new Vector3(0.0f, 0.0f, 1.0f),
-        new Vector3(0.0f, 1.0f, 0.0f),
-        new Vector3(0.0f, -1.0f, 0.0f),
-        new Vector3(-1.0f, 0.0f, 0.0f),
-        new Vector3(1.0f, 0.0f, 0.0f)
+    public static readonly Vector3s[] faceChecks = new Vector3s[6] {
+        new Vector3s(0.0f, 0.0f, -1.0f),
+        new Vector3s(0.0f, 0.0f, 1.0f),
+        new Vector3s(0.0f, 1.0f, 0.0f),
+        new Vector3s(0.0f, -1.0f, 0.0f),
+        new Vector3s(-1.0f, 0.0f, 0.0f),
+        new Vector3s(1.0f, 0.0f, 0.0f)
     };
 
     public static readonly int[,] voxelTris = new int[6, 4] {

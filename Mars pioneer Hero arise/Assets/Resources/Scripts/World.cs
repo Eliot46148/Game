@@ -51,16 +51,20 @@ public class World : MonoBehaviour
     private void Start()
     {
         loading.SetActive(true); // 讀取中
-        // 儲存設定檔
-        /*
-        string jsonExport = JsonUtility.ToJson(settings);
-        Debug.Log(jsonExport);
-        File.WriteAllText(Application.dataPath + "/settings.cfg", jsonExport);
-        */
 
-        // 讀取設定檔
-        string jsonImport = File.ReadAllText(Application.dataPath + "/settings.cfg");
-        settings = JsonUtility.FromJson<Settings>(jsonImport);
+        try
+        {
+            // 讀取設定檔
+            string jsonImport = File.ReadAllText(Application.dataPath + "/settings.cfg");
+            settings = JsonUtility.FromJson<Settings>(jsonImport);
+        }
+        catch
+        {
+            // 儲存設定檔
+            string jsonExport = JsonUtility.ToJson(settings);
+            Debug.Log("Generating settings file - " + jsonExport);
+            File.WriteAllText(Application.dataPath + "/settings.cfg", jsonExport);
+        }
 
         // 初始化亂數
         Random.InitState(settings.seed);
@@ -77,13 +81,13 @@ public class World : MonoBehaviour
         }
         spawnPosition = new Vector3((VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f, VoxelData.ChunkHeight - 50f, (VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f);
         GenerateWorld();
-        playerLastChunkCoord = GetChunkCoordFromVector3(player.position);
+        playerLastChunkCoord = GetChunkCoordFromVector3s(vs(player.position));
     }
 
     private void Update()
     {
         // 更新玩家所在區塊座標
-        playerChunkCoord = GetChunkCoordFromVector3(player.position);
+        playerChunkCoord = GetChunkCoordFromVector3s(vs(player.position));
 
         // 如果玩家所在區塊座標改變，就更新視野範圍
         if (!playerChunkCoord.Equals(playerLastChunkCoord))
@@ -101,10 +105,11 @@ public class World : MonoBehaviour
         // 更新預計被更新的區塊
         if (!settings.enableThreading)
         {
+
             if (!applyingModifications)
                 ApplyModifications();
 
-            if (chunksToUpdate.Count > 0)
+            if (chunksToUpdate.Count > 0) { }
                 UpdateChunks();
         }
     }
@@ -145,7 +150,6 @@ public class World : MonoBehaviour
     // 更新 預計被更新的區塊陣列
     void UpdateChunks()
     {
-
         bool updated = false;
         int index = 0;
 
@@ -155,14 +159,13 @@ public class World : MonoBehaviour
                 if (chunksToUpdate[index].isEditable)
                 {
                     chunksToUpdate[index].UpdateChunk();
-                    if (!activeChunks.Contains(chunksToUpdate[index].coord))
-                        activeChunks.Add(chunksToUpdate[index].coord);
+                    if (!activeChunks.Contains(chunksToUpdate[index].model.coord))
+                        activeChunks.Add(chunksToUpdate[index].model.coord);
                     chunksToUpdate.RemoveAt(index);
                     updated = true;
                 }
                 else
                     index++;
-
             }
     }
 
@@ -182,13 +185,11 @@ public class World : MonoBehaviour
     // 當結束遊戲時跳出多執行緒
     private void OnDisable()
     {
-
         if (settings.enableThreading)
         {
             settings.enableThreading = false;
             ChunkUpdateThread.Abort();
         }
-
     }
 
     // 處理生態區的改變
@@ -203,14 +204,14 @@ public class World : MonoBehaviour
             while (queue.Count > 0)
             {
                 VoxelMod v = queue.Dequeue();
-                ChunkCoord c = GetChunkCoordFromVector3(v.position);
+                ChunkCoord c = GetChunkCoordFromVector3s(v.position);
                 
                 if (chunks[c.x, c.z] == null)
                 {
                     chunks[c.x, c.z] = new Chunk(c, this);
                     chunksToCreate.Add(c);
                 }
-                chunks[c.x, c.z].modifications.Enqueue(v);
+                chunks[c.x, c.z].model.modifications.Enqueue(v);
             }
         }
         // 釋放改變
@@ -218,7 +219,7 @@ public class World : MonoBehaviour
     }
 
     // 從實際座標得到區塊座標
-    ChunkCoord GetChunkCoordFromVector3(Vector3 pos)
+    ChunkCoord GetChunkCoordFromVector3s(Vector3s pos)
     {
         int x = Mathf.FloorToInt(pos.x / VoxelData.ChunkWidth);
         int z = Mathf.FloorToInt(pos.z / VoxelData.ChunkWidth);
@@ -226,7 +227,7 @@ public class World : MonoBehaviour
     }
 
     // 從實際座標得到區塊
-    public Chunk GetChunkFromVector3(Vector3 pos)
+    public Chunk GetChunkFromVector3s(Vector3s pos)
     {
         int x = Mathf.FloorToInt(pos.x / VoxelData.ChunkWidth);
         int z = Mathf.FloorToInt(pos.z / VoxelData.ChunkWidth);
@@ -237,7 +238,7 @@ public class World : MonoBehaviour
     void CheckViewDistance()
     {
         List<ChunkCoord> previouslyActiveChunks = new List<ChunkCoord>(activeChunks);
-        ChunkCoord coord = GetChunkCoordFromVector3(player.position);
+        ChunkCoord coord = GetChunkCoordFromVector3s(vs(player.position));
         playerLastChunkCoord = playerChunkCoord;
         activeChunks.Clear();
 
@@ -277,7 +278,7 @@ public class World : MonoBehaviour
     }
 
     // 用實際座標確認方塊是否為實體
-    public bool CheckForVoxel(Vector3 pos)
+    public bool CheckForVoxel(Vector3s pos)
     {
         ChunkCoord thisChunk = new ChunkCoord(pos);
 
@@ -285,13 +286,14 @@ public class World : MonoBehaviour
             return false;
 
         if (chunks[thisChunk.x, thisChunk.z] != null && chunks[thisChunk.x, thisChunk.z].isEditable)
-            return blocks[(int)chunks[thisChunk.x, thisChunk.z].GetVoxelFromGlobalVector3(pos).id].isSolid;
+
+            return blocks[(int)chunks[thisChunk.x, thisChunk.z].model.GetVoxelFromGlobalVector3s(pos).id].isSolid;
 
         return blocks[(int)GetInitialVoxel(pos)].isSolid;
     }
 
     // 用實際座標得到方塊
-    public VoxelState GetVoxelState(Vector3 pos)
+    public VoxelState GetVoxelState(Vector3s pos)
     {
 
         ChunkCoord thisChunk = new ChunkCoord(pos);
@@ -300,7 +302,7 @@ public class World : MonoBehaviour
             return null;
 
         if (chunks[thisChunk.x, thisChunk.z] != null && chunks[thisChunk.x, thisChunk.z].isEditable)
-            return chunks[thisChunk.x, thisChunk.z].GetVoxelFromGlobalVector3(pos);
+            return chunks[thisChunk.x, thisChunk.z].model.GetVoxelFromGlobalVector3s(pos);
 
         return new VoxelState(GetInitialVoxel(pos));
 
@@ -363,14 +365,14 @@ public class World : MonoBehaviour
         {
             _spawnPosition = value;
             // 玩家所在區塊
-            Chunk chunk = GetChunkFromVector3(value);
+            Chunk chunk = GetChunkFromVector3s(vs(value));
             if (chunk != null)
             {
-                Vector3 chunkVoxelPos = value - chunk.position;
+                Vector3s chunkVoxelPos = vs(value) - chunk.model.position;
                 ChunkCoord coord = new ChunkCoord(chunkVoxelPos);
                 int i;
                 for (i = VoxelData.ChunkHeight - 1; i > -1; i--)
-                    if (chunk.voxelMap[coord.x, i, coord.z].id != BlockType.Air)
+                    if (chunk.model.voxelMap[coord.x, i, coord.z].id != BlockType.Air)
                         break;
                 player.position = _spawnPosition = new Vector3(_spawnPosition.x, i + 1.5f, _spawnPosition.z);
             }
@@ -404,7 +406,7 @@ public class World : MonoBehaviour
     }
 
     // 用實際座標取得生態圈的方塊
-    public BlockType GetInitialVoxel(Vector3 pos)
+    public BlockType GetInitialVoxel(Vector3s pos)
     {
         int yPos = Mathf.FloorToInt(pos.y);
 
@@ -472,7 +474,7 @@ public class World : MonoBehaviour
         if (voxelValue == BlockType.Stone)
             foreach (Lode lode in biome.lodes)
                 if (yPos > lode.minHeight && yPos < lode.maxHeight)
-                    if (Noise.Get3DPerlin(pos, lode.noiseOffset, lode.scale, lode.threshold))
+                    if (Noise.Get3DPerlin(sv(pos), lode.noiseOffset, lode.scale, lode.threshold))
                         voxelValue = lode.blockID;
         
         /* 生態圈表面植被規則 */
@@ -480,7 +482,7 @@ public class World : MonoBehaviour
         if (yPos == terrainHeight && biome.placeMajorFlora)
             if (Noise.Get2DPerlin(new Vector2(pos.x, pos.z), 0, biome.majorFloraZoneScale) > biome.majorFloraZoneThreshold)
                 if (Noise.Get2DPerlin(new Vector2(pos.x, pos.z), 0, biome.majorFloraPlacementScale) > biome.majorFloraPlacementThreshold)
-                    modifications.Enqueue(Structure.GenerateMajorFlora(biome.majorFloraIndex, pos, biome.minHeight, biome.maxHeight));
+                    modifications.Enqueue(Structure.GenerateMajorFlora(biome.majorFloraIndex, sv(pos), biome.minHeight, biome.maxHeight));
 
         return voxelValue;
 
@@ -500,7 +502,7 @@ public class World : MonoBehaviour
     }
 
     // 用實際座標確認方塊是否在世界中
-    bool IsVoxelInWorld(Vector3 pos)
+    bool IsVoxelInWorld(Vector3s pos)
     {
 
         if (pos.x >= 0 && pos.x < VoxelData.WorldSizeInVoxels && pos.y >= 0 && pos.y < VoxelData.ChunkHeight && pos.z >= 0 && pos.z < VoxelData.WorldSizeInVoxels)
@@ -510,6 +512,52 @@ public class World : MonoBehaviour
 
     }
 
+    public static Vector3s vs(Vector3 a)
+    {
+        return new Vector3s(a.x, a.y, a.z);
+    }
+
+    public static Vector3 sv(Vector3s a)
+    {
+        return new Vector3(a.x, a.y, a.z);
+    }
+
+    public static Vector2 s2v(Vector2s a)
+    {
+        return new Vector2(a.x, a.y);
+    }
+
+    public static Color sc(Colors a)
+    {
+        return new Color(a.r, a.g, a.b, a.a);
+    }
+
+    public static Color[] sl2cl(List<Colors> a)
+    {
+        int n = a.Count;
+        Color[] output = new Color[n];
+        for (int i = 0; i < n; i++)
+            output[i] = sc(a[i]);
+        return output;
+    }
+
+    public static Vector3[] sl3vl(List<Vector3s> a)
+    {
+        int n = a.Count;
+        Vector3[] output = new Vector3[n];
+        for (int i = 0; i < n; i++)
+            output[i] = sv(a[i]);
+        return output;
+    }
+
+    public static Vector2[] sl2vl(List<Vector2s> a)
+    {
+        int n = a.Count;
+        Vector2[] output = new Vector2[n];
+        for (int i = 0; i < n; i++)
+            output[i] = s2v(a[i]);
+        return output;
+    }
 }
 
 [System.Serializable]

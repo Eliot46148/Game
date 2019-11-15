@@ -301,17 +301,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings:
-    version: 0.0.1
-    viewDistance: 4
+    version: Beta
+    viewDistance: 3
     enableThreading: 1
     enableAnimatedChunks: 0
     mouseSensitivity: 1
-    seed: 1234
+    seed: 0
   biomes:
   - {fileID: 11400000, guid: ca84af9b7cbe34e438c7d03a36755553, type: 2}
   - {fileID: 11400000, guid: 68f1cc039ed33ef4a8e7596a782f29f1, type: 2}
   - {fileID: 11400000, guid: f45b623fa43cab848a60139ac64e223b, type: 2}
-  globalLightLevel: 0.85
+  globalLightLevel: 0.5
   day: {r: 0.50980395, g: 0.6745098, b: 1, a: 0}
   night: {r: 0.011764707, g: 0.015686275, b: 0.027450982, a: 0}
   basic: {fileID: 11400000, guid: e77ecd2fc7e65464ebd24fae5f615faf, type: 2}
@@ -1769,7 +1769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basic: {fileID: 11400000, guid: e77ecd2fc7e65464ebd24fae5f615faf, type: 2}
-  itemsBar: 0e0000000400000005000000110000001200000006000000020000000300000011000000
+  itemsBar: 0e0000000400000005000000110000001200000006000000020000000300000000000000
 --- !u!1 &1080902636
 GameObject:
   m_ObjectHideFlags: 0
@@ -3225,7 +3225,7 @@ RectTransform:
   m_GameObject: {fileID: 2114734577}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.99994814, y: 0.99994814, z: 0.99994814}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 234971880}
   m_Father: {fileID: 399974698}
@@ -3234,7 +3234,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 288, y: 162}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2114734579
 MonoBehaviour:

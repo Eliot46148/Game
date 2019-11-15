@@ -118,12 +118,8 @@ bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.Audi
 463516d5b5fe8e67a0a24c48f2095b04 UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
 c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingCollider
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
-<<<<<<< HEAD
-9dcccdfe8cee645e16ef57d7ded4fdf6 Assembly-CSharp.dll:.Control
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UIBbuttonClick
-=======
 bf8f0f07d7e454330175bb96b6119e08 Assembly-CSharp.dll:.Control
->>>>>>> b1dfd8e11a2515d487f2a939bf21318051d730e5
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UIBbuttonClick
 e076a7f19eedded6bb895c7dfd909b3a Assembly-CSharp.dll:.Backpack
 32e8fe00b63ed946490b898f6024a2f2 Facebook.Unity.Settings.dll:Facebook.Unity.Settings.FacebookSettings
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator

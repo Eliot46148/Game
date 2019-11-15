@@ -15,6 +15,10 @@ public class UIBbuttonClick : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void setGameSetting()
+    {
+    }
     // Use this for initialization
     void Start()
     {

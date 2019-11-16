@@ -58,7 +58,7 @@ public class ChunkModel
         }
 
         ClearMeshData();
-        CalculateLight();
+        //CalculateLight();
 
         for (int y = 0; y < VoxelData.ChunkHeight; y++)
             for (int x = 0; x < VoxelData.ChunkWidth; x++)
@@ -203,7 +203,7 @@ public class ChunkModel
                 {
                     vertices.Add(pos + VoxelData.voxelVerts[VoxelData.voxelTris[p, i]]);            // 網格座標
                     normals.Add(VoxelData.faceChecks[p]);                                           // 網格方向
-                    colors.Add(new Colors(0, 0, 0, lightLevel));                                    // 材質亮度
+                    //colors.Add(new Colors(0, 0, 0, lightLevel));                                    // 材質亮度
                 }
 
                 AddTexture(world.blocks[(int)blockID].GetTextureID(p));

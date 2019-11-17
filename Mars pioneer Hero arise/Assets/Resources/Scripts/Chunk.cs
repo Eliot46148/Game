@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[Serializable]
 public class Chunk                              // 區塊
 {
 
@@ -28,7 +29,7 @@ public class Chunk                              // 區塊
     }
 
     // 初始化
-    public void Init()
+    public void Init(List<VoxelMod> data = null)
     {
         // 創建區塊
         chunkObject = new GameObject();
@@ -46,7 +47,7 @@ public class Chunk                              // 區塊
         chunkObject.transform.SetParent(world.transform);
         chunkObject.name = "Chunk " + model.coord.x + ", " + model.coord.z;
 
-        model.PopulateVoxelMap();
+        model.PopulateVoxelMap(data);
 
         // 多執行緒
         lock (world.ChunkUpdateThreadLock)
@@ -88,7 +89,6 @@ public class Chunk                              // 區塊
     // 優先修改一個方塊(與周圍) 由玩家控制等
     public void EditVoxel(Vector3 pos, BlockType newID)
     {
-
         int xCheck = Mathf.FloorToInt(pos.x);
         int yCheck = Mathf.FloorToInt(pos.y);
         int zCheck = Mathf.FloorToInt(pos.z);
@@ -96,6 +96,7 @@ public class Chunk                              // 區塊
         xCheck -= Mathf.FloorToInt(chunkObject.transform.position.x);
         zCheck -= Mathf.FloorToInt(chunkObject.transform.position.z);
 
+        model.modificationsRecord.Add(new VoxelMod(new Vector3s(xCheck, yCheck, zCheck), newID));
         model.voxelMap[xCheck, yCheck, zCheck].id = newID;
 
         lock (world.ChunkUpdateThreadLock)
@@ -103,7 +104,6 @@ public class Chunk                              // 區塊
             world.chunksToUpdate.Insert(0, this);
             model.UpdateSurroundingVoxels(xCheck, yCheck, zCheck);
         }
-
     }
 
     // 繪製區塊
@@ -134,6 +134,7 @@ public class Chunk                              // 區塊
 }
 
 // 方塊座標
+[Serializable]
 public class ChunkCoord
 {
     public int x;
@@ -169,6 +170,7 @@ public class ChunkCoord
 }
 
 // 方塊Data
+[Serializable]
 public class VoxelState
 {
     public BlockType id;                // 方塊ID
@@ -188,6 +190,7 @@ public class VoxelState
 }
 
 // 修改方塊Data
+[Serializable]
 public class VoxelMod
 {
     public Vector3s position;    // 修改方塊位置

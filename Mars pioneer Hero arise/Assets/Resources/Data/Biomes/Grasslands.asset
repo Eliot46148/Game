@@ -23,7 +23,7 @@ MonoBehaviour:
   majorFloraZoneThreshold: 0.6
   majorFloraPlacementScale: 15
   majorFloraPlacementThreshold: 0.8
-  placeMajorFlora: 0
+  placeMajorFlora: 1
   maxHeight: 12
   minHeight: 5
   lodes:

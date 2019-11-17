@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class Control : MonoBehaviour {
 
@@ -122,7 +123,15 @@ public class Control : MonoBehaviour {
     private void GetPlayerInputs()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            List<string> map = new List<string>();
+            for (int mx = 0; mx < VoxelData.WorldSizeInChunks; mx++)
+                for (int mz = 0; mz < VoxelData.WorldSizeInChunks; mz++)
+                    if (world.chunks[mx, mz] != null && world.chunks[mx, mz].model.modificationsRecord.Count > 0)
+                        map.Add(JsonUtility.ToJson(new WrappingClass(world.chunks[mx, mz].model.coord, world.chunks[mx, mz].model.modificationsRecord), true));
+            File.WriteAllText(Application.dataPath + "/saveData.cfg", JsonUtility.ToJson(new SaveData(transform.position, transform.rotation, map), true));
             SceneManager.LoadScene(0);
+        }
 
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");

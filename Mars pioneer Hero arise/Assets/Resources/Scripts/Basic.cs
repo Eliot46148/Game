@@ -165,3 +165,31 @@ public static class Noise
             return false;
     }
 }
+
+[System.Serializable]
+public class WrappingClass
+{
+    public ChunkCoord Coordinate;
+    public List<VoxelMod> Modifications;
+
+    public WrappingClass(ChunkCoord c, List<VoxelMod> map)
+    {
+        Coordinate = c;
+        Modifications = map;
+    }
+}
+
+[System.Serializable]
+public class SaveData
+{
+    public Vector3 PlayerPosition;
+    public Quaternion PlayerRotation;
+    public List<string> VoxelMaps;
+
+    public SaveData(Vector3 pos, Quaternion rot, List<string> map)
+    {
+        PlayerPosition = pos;
+        PlayerRotation = rot;
+        VoxelMaps = map;
+    }
+}

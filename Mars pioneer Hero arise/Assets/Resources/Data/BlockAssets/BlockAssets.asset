@@ -328,7 +328,7 @@ MonoBehaviour:
       y: 13
     type: 17
     isSolid: 1
-    renderNeighborFaces: 0
+    renderNeighborFaces: 1
     transparency: 0
     blockTexture:
       side:

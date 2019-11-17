@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
+[Serializable]
 public class ChunkModel
 {
     World world;                                // 方塊世界本體
@@ -28,6 +31,7 @@ public class ChunkModel
 
     // 預定修改方塊矩陣
     public Queue<VoxelMod> modifications = new Queue<VoxelMod>();
+    public List<VoxelMod> modificationsRecord = new List<VoxelMod>();
 
     // Constructor
     public ChunkModel(ChunkCoord _coord, World _world)
@@ -37,12 +41,19 @@ public class ChunkModel
     }
 
     // 定義方塊矩陣
-    public void PopulateVoxelMap()
+    public void PopulateVoxelMap(List<VoxelMod> data = null)
     {
         for (int y = 0; y < VoxelData.ChunkHeight; y++)
             for (int x = 0; x < VoxelData.ChunkWidth; x++)
                 for (int z = 0; z < VoxelData.ChunkWidth; z++)
                     voxelMap[x, y, z] = new VoxelState(world.GetInitialVoxel(new Vector3s(x, y, z) + position));
+
+        if (data != null)
+        {
+            modificationsRecord = data;
+            foreach (VoxelMod mod in data)
+                voxelMap[(int)mod.position.x, (int)mod.position.y, (int)mod.position.z] = new VoxelState(mod.id);
+        }
 
         isVoxelMapPopulated = true;
     }
@@ -58,7 +69,7 @@ public class ChunkModel
         }
 
         ClearMeshData();
-        CalculateLight();
+        //CalculateLight();
 
         for (int y = 0; y < VoxelData.ChunkHeight; y++)
             for (int x = 0; x < VoxelData.ChunkWidth; x++)
@@ -203,7 +214,7 @@ public class ChunkModel
                 {
                     vertices.Add(pos + VoxelData.voxelVerts[VoxelData.voxelTris[p, i]]);            // 網格座標
                     normals.Add(VoxelData.faceChecks[p]);                                           // 網格方向
-                    colors.Add(new Colors(0, 0, 0, lightLevel));                                    // 材質亮度
+                    //colors.Add(new Colors(0, 0, 0, lightLevel));                                    // 材質亮度
                 }
 
                 AddTexture(world.blocks[(int)blockID].GetTextureID(p));

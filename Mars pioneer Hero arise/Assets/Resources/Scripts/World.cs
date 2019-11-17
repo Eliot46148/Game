@@ -8,6 +8,7 @@ public class World : MonoBehaviour
 {
     [Header("主遊戲設定")]
     public Settings settings;
+    public SaveData data = null;
 
     [Header("世界生成參數")]
     public BiomeAttributes[] biomes;
@@ -31,7 +32,7 @@ public class World : MonoBehaviour
     ChunkCoord playerLastChunkCoord;
 
     // 區塊矩陣
-    Chunk[,] chunks = new Chunk[VoxelData.WorldSizeInChunks, VoxelData.WorldSizeInChunks];
+    public Chunk[,] chunks = new Chunk[VoxelData.WorldSizeInChunks, VoxelData.WorldSizeInChunks];
     List<ChunkCoord> activeChunks = new List<ChunkCoord>();     // 顯示中的區塊座標矩陣
     List<ChunkCoord> chunksToCreate = new List<ChunkCoord>();   // 預計被生成的區塊座標陣列
     List<Chunk> _chunksToUpdate = new List<Chunk>();            // 預計被更新的區塊陣列
@@ -66,6 +67,19 @@ public class World : MonoBehaviour
             File.WriteAllText(Application.dataPath + "/settings.cfg", jsonExport);
         }
 
+        try
+        {
+            //throw new System.InvalidOperationException("Debugging");
+            string jsonImport = File.ReadAllText(Application.dataPath + "/saveData.cfg");
+            data = JsonUtility.FromJson<SaveData>(jsonImport);
+            spawnPosition = data.PlayerPosition;
+            player.rotation = data.PlayerRotation;
+        }
+        catch
+        {
+            spawnPosition = new Vector3((VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f, VoxelData.ChunkHeight - 50f, (VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f);
+        }
+
         // 初始化亂數
         Random.InitState(settings.seed);
         // 初始化光源設定
@@ -79,7 +93,6 @@ public class World : MonoBehaviour
             ChunkUpdateThread = new Thread(new ThreadStart(ThreadedUpdate));
             ChunkUpdateThread.Start();
         }
-        spawnPosition = new Vector3((VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f, VoxelData.ChunkHeight - 50f, (VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f);
         GenerateWorld();
         playerLastChunkCoord = GetChunkCoordFromVector3s(vs(player.position));
     }
@@ -117,13 +130,28 @@ public class World : MonoBehaviour
     // 生成主要副程式
     void GenerateWorld()
     {
-        for (int x = (VoxelData.WorldSizeInChunks / 2) - settings.viewDistance; x < (VoxelData.WorldSizeInChunks / 2) + settings.viewDistance; x++)
+        if (data != null)
         {
-            for (int z = (VoxelData.WorldSizeInChunks / 2) - settings.viewDistance; z < (VoxelData.WorldSizeInChunks / 2) + settings.viewDistance; z++)
+            foreach (string json in data.VoxelMaps)
             {
-                ChunkCoord newChunk = new ChunkCoord(x, z);
-                chunks[x, z] = new Chunk(newChunk, this);
-                chunksToCreate.Add(newChunk);
+                WrappingClass wrapper = JsonUtility.FromJson<WrappingClass>(json);
+                chunks[wrapper.Coordinate.x, wrapper.Coordinate.z] = new Chunk(wrapper.Coordinate, this);
+                chunks[wrapper.Coordinate.x, wrapper.Coordinate.z].Init(wrapper.Modifications);
+                _isPlayerPlace = true;
+                loading.SetActive(false); // 讀取結束
+                inUI = 1;
+            }
+        }
+        else
+        {
+            for (int x = (VoxelData.WorldSizeInChunks / 2) - settings.viewDistance; x < (VoxelData.WorldSizeInChunks / 2) + settings.viewDistance; x++)
+            {
+                for (int z = (VoxelData.WorldSizeInChunks / 2) - settings.viewDistance; z < (VoxelData.WorldSizeInChunks / 2) + settings.viewDistance; z++)
+                {
+                    ChunkCoord newChunk = new ChunkCoord(x, z);
+                    chunks[x, z] = new Chunk(newChunk, this);
+                    chunksToCreate.Add(newChunk);
+                }
             }
         }
 
@@ -421,7 +449,6 @@ public class World : MonoBehaviour
             return BlockType.Bedrock;
 
         /* 生態圈選擇規則 */
-
         int solidGroundHeight = 42;
         float sumOfHeights = 0f;
         int count = 0;
@@ -457,7 +484,6 @@ public class World : MonoBehaviour
         int terrainHeight = Mathf.FloorToInt(sumOfHeights + solidGroundHeight);
 
         /* 生態圈地表規則 */
-
         BlockType voxelValue = 0;
 
         if (yPos == terrainHeight)
@@ -470,7 +496,6 @@ public class World : MonoBehaviour
             voxelValue = BlockType.Stone;
 
         /* 生態圈內部礦物規則 */
-
         if (voxelValue == BlockType.Stone)
             foreach (Lode lode in biome.lodes)
                 if (yPos > lode.minHeight && yPos < lode.maxHeight)
@@ -478,7 +503,6 @@ public class World : MonoBehaviour
                         voxelValue = lode.blockID;
         
         /* 生態圈表面植被規則 */
-        
         if (yPos == terrainHeight && biome.placeMajorFlora)
             if (Noise.Get2DPerlin(new Vector2(pos.x, pos.z), 0, biome.majorFloraZoneScale) > biome.majorFloraZoneThreshold)
                 if (Noise.Get2DPerlin(new Vector2(pos.x, pos.z), 0, biome.majorFloraPlacementScale) > biome.majorFloraPlacementThreshold)

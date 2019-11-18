@@ -248,6 +248,7 @@
     <Compile Include="Assets\Resources\Scripts\UIControl.cs" />
     <Compile Include="Assets\Resources\Scripts\VoxelData.cs" />
     <Compile Include="Assets\Resources\Scripts\World.cs" />
+    <Compile Include="Assets\Resources\UI\LoadScene.cs" />
     <Compile Include="Assets\Resources\UI\MusicControl.cs" />
     <Compile Include="Assets\Resources\UI\UIBbuttonClick.cs" />
   </ItemGroup>

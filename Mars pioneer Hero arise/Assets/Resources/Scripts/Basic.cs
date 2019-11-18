@@ -6,7 +6,7 @@ using UnityEngine;
 // 方塊ID定義
 public enum BlockType
 {
-    Air, Stone, Grass, Dirt, Cobblestone, Wooden, Bedrock, Water, Lava, Sand, Gravel, GoldOre, IronOre, CoalOre, Glass, OakLog, OakLeaves, Cactus, SnowGrass
+    Air, Stone, Grass, Dirt, Cobblestone, Wooden, Bedrock, Water, Lava, Sand, Gravel, GoldOre, IronOre, CoalOre, Glass, OakLog, OakLeaves, Cactus, SnowGrass, Box
 }
 
 // 所有方塊設定
@@ -184,12 +184,14 @@ public class SaveData
 {
     public Vector3 PlayerPosition;
     public Quaternion PlayerRotation;
+    public List<BlockType> items;
     public List<string> VoxelMaps;
 
-    public SaveData(Vector3 pos, Quaternion rot, List<string> map)
+    public SaveData(Vector3 pos, Quaternion rot, List<BlockType> i, List<string> map)
     {
         PlayerPosition = pos;
         PlayerRotation = rot;
+        items = i;
         VoxelMaps = map;
     }
 }

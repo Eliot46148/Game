@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class World : MonoBehaviour
 {
@@ -70,7 +71,7 @@ public class World : MonoBehaviour
         try
         {
             //throw new System.InvalidOperationException("Debugging");
-            string jsonImport = File.ReadAllText(Application.dataPath + "/saveData.cfg");
+            string jsonImport = File.ReadAllText(Application.dataPath + "/saveData.save");
             data = JsonUtility.FromJson<SaveData>(jsonImport);
             spawnPosition = data.PlayerPosition;
             player.rotation = data.PlayerRotation;
@@ -99,6 +100,7 @@ public class World : MonoBehaviour
 
     private void Update()
     {
+        Camera.main.backgroundColor = Color.Lerp(night, day, globalLightLevel);
         // 更新玩家所在區塊座標
         playerChunkCoord = GetChunkCoordFromVector3s(vs(player.position));
 
@@ -139,7 +141,7 @@ public class World : MonoBehaviour
                 chunks[wrapper.Coordinate.x, wrapper.Coordinate.z].Init(wrapper.Modifications);
                 _isPlayerPlace = true;
                 loading.SetActive(false); // 讀取結束
-                inUI = 1;
+                UIState = 1;
             }
         }
         else
@@ -171,7 +173,7 @@ public class World : MonoBehaviour
             spawnPosition = new Vector3((VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f, VoxelData.ChunkHeight - 128f, (VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f);
             _isPlayerPlace = true;
             loading.SetActive(false); // 讀取結束
-            inUI = 1;
+            UIState = 1;
         }
     }
 
@@ -218,6 +220,7 @@ public class World : MonoBehaviour
             settings.enableThreading = false;
             ChunkUpdateThread.Abort();
         }
+        UIState = 0;
     }
 
     // 處理生態區的改變
@@ -337,7 +340,7 @@ public class World : MonoBehaviour
     }
 
     // 更改UI模式的 Property
-    public int inUI
+    public int UIState
     {
         get { return _inUI; }
         set
@@ -581,6 +584,23 @@ public class World : MonoBehaviour
         for (int i = 0; i < n; i++)
             output[i] = s2v(a[i]);
         return output;
+    }
+
+    public void ExitAndSave()
+    {
+        List<string> map = new List<string>();
+        for (int mx = 0; mx < VoxelData.WorldSizeInChunks; mx++)
+            for (int mz = 0; mz < VoxelData.WorldSizeInChunks; mz++)
+                if (chunks[mx, mz] != null && chunks[mx, mz].model.modificationsRecord.Count > 0)
+                    map.Add(JsonUtility.ToJson(new WrappingClass(chunks[mx, mz].model.coord, chunks[mx, mz].model.modificationsRecord), true));
+        File.WriteAllText(Application.dataPath + "/saveData.save", JsonUtility.ToJson(new SaveData(player.position, player.rotation, player.GetComponent<Backpack>().itemsBar, map), true));
+        Exit();
+    }
+
+    public void Exit()
+    {
+        UIState = 1;
+        SceneManager.LoadScene(0);
     }
 }
 

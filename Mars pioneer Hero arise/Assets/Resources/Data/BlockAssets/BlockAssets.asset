@@ -58,7 +58,7 @@ MonoBehaviour:
       y: 1
     type: 2
     isSolid: 1
-    renderNeighborFaces: 0
+    renderNeighborFaces: 1
     transparency: 0
     blockTexture:
       side:
@@ -328,7 +328,7 @@ MonoBehaviour:
       y: 13
     type: 17
     isSolid: 1
-    renderNeighborFaces: 1
+    renderNeighborFaces: 0
     transparency: 0
     blockTexture:
       side:
@@ -358,6 +358,24 @@ MonoBehaviour:
       under:
         x: 0
         y: 0
+  - name: Box
+    icon:
+      x: 6
+      y: 2
+    type: 19
+    isSolid: 1
+    renderNeighborFaces: 1
+    transparency: 0
+    blockTexture:
+      side:
+        x: 6
+        y: 19
+      plane:
+        x: 6
+        y: 17
+      under:
+        x: 6
+        y: 17
   - name: Empty
     icon:
       x: 0

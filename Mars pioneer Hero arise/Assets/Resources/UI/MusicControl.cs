@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class MusicControl : MonoBehaviour
 {
-    private AudioSource audioSource;
+    private static AudioSource audioSource;
     private bool muteState;
     private float preVolume;
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        DontDestroyOnLoad(audioSource);
         audioSource.volume = 0.5f;
-        muteState = false;
+        muteState = false;x
         preVolume = audioSource.volume;
     }
 

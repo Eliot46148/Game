@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using System.IO;
 
 public class Control : MonoBehaviour {
@@ -43,15 +42,16 @@ public class Control : MonoBehaviour {
 
     // 除錯 UI Text
     public GameObject debugScreen;
+    public GameObject escPanel;
 
     void Start ()
 	{
-        world.inUI = 0;    // 讀取中
+        world.UIState = 0;    // 讀取中
     }
 
     void FixedUpdate()
     {
-        if (world.inUI == 1)
+        if (world.UIState == 1)
         {
             CalculateVelocity();
             if (jumpRequest)
@@ -73,14 +73,20 @@ public class Control : MonoBehaviour {
         // 開啟背包UI (到 World -> inUI 的 Property去顯示Panel)
         if (Input.GetKeyDown(KeyCode.I))
         {
-            if (world.inUI == 0)
-                world.inUI = 1;
-            else if (world.inUI == 1)
-                world.inUI = 0;
+            if (world.UIState == 2)
+                world.UIState = 1;
+            else if (world.UIState == 1)
+                world.UIState = 2;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            escPanel.SetActive(!escPanel.activeSelf);
+            world.UIState = (escPanel.activeSelf ? 0 : 1);
         }
 
         // 回到遊戲模式
-        if (world.inUI == 1)
+        if (world.UIState == 1)
         {
             GetPlayerInputs();
             PlaceCursorBlocks();
@@ -122,17 +128,6 @@ public class Control : MonoBehaviour {
 
     private void GetPlayerInputs()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            List<string> map = new List<string>();
-            for (int mx = 0; mx < VoxelData.WorldSizeInChunks; mx++)
-                for (int mz = 0; mz < VoxelData.WorldSizeInChunks; mz++)
-                    if (world.chunks[mx, mz] != null && world.chunks[mx, mz].model.modificationsRecord.Count > 0)
-                        map.Add(JsonUtility.ToJson(new WrappingClass(world.chunks[mx, mz].model.coord, world.chunks[mx, mz].model.modificationsRecord), true));
-            File.WriteAllText(Application.dataPath + "/saveData.cfg", JsonUtility.ToJson(new SaveData(transform.position, transform.rotation, map), true));
-            SceneManager.LoadScene(0);
-        }
-
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
         mouseHorizontal = Input.GetAxis("Mouse X");
@@ -147,10 +142,42 @@ public class Control : MonoBehaviour {
 
         if (highlightBlock.gameObject.activeSelf)
         {
+            Vector3s pos = World.vs(highlightBlock.position);
+            Chunk chunk = world.GetChunkFromVector3s(pos);
+            BlockType id = BlockType.Air;
+            if (chunk != null)
+                id = chunk.model.voxelMap[(int)pos.x % VoxelData.ChunkWidth, (int)pos.y % VoxelData.ChunkHeight, (int)pos.z % VoxelData.ChunkWidth].id;
             if (Input.GetMouseButtonDown(0))
                 world.GetChunkFromVector3s(World.vs(highlightBlock.position)).EditVoxel(highlightBlock.position, BlockType.Air);
             if (Input.GetMouseButtonDown(1))
-                world.GetChunkFromVector3s(World.vs(placeBlock.position)).EditVoxel(placeBlock.position, backpack.CurrentBlockType);
+            {
+                switch (id)
+                {
+                    case (BlockType.Box):
+                        world.Exit();
+                        break;
+
+                    default:
+                        world.GetChunkFromVector3s(World.vs(placeBlock.position)).EditVoxel(placeBlock.position, backpack.CurrentBlockType);
+                        break;
+                }
+            }
+        }
+
+
+        // Chose cube
+        var d = Input.GetAxis("Mouse ScrollWheel");
+        if (d > 0.08f)
+        {
+            backpack.CurrentBlock--;
+            if ((int)backpack.CurrentBlock < 0)
+                backpack.CurrentBlock = 0;
+        }
+        else if (d < -0.15f)
+        {
+            backpack.CurrentBlock++;
+            if ((int)backpack.CurrentBlock > 8)
+                backpack.CurrentBlock = 8;
         }
     }
 

@@ -240,6 +240,7 @@
   <ItemGroup>
     <Compile Include="Assets\BallMove.cs" />
     <Compile Include="Assets\Character Model\script\charControl.cs" />
+    <Compile Include="Assets\Move.cs" />
     <Compile Include="Assets\Resources\Scripts\Backpack.cs" />
     <Compile Include="Assets\Resources\Scripts\Basic.cs" />
     <Compile Include="Assets\Resources\Scripts\BiomeAttributes.cs" />

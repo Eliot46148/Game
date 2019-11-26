@@ -25,6 +25,8 @@ public class UIControl : MonoBehaviour {
         items = backpack.ItemsBar;
         float height = texture.height / basic.rows;
         float width = texture.width / basic.cols;
+
+
         for (int i = 0; i < 9; i++)
         {
             Vector2 pos = World.s2v(basic.Blocks[(int)items[i]].icon);

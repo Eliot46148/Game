@@ -341,6 +341,7 @@
   <ItemGroup>
     <None Include="Assets\Resources\Shaders\StandardBlockShader.shader" />
     <None Include="Assets\Resources\Shaders\TransparentBlockShader.shader" />
+    <None Include="Assets\SimpleSky\ReadMe.txt" />
     <None Include="Assets\voxel_scifi_free\Standard Assets\Effects\ImageEffects\Shaders\BlendModesOverlay.shader" />
     <None Include="Assets\voxel_scifi_free\Standard Assets\Effects\ImageEffects\Shaders\BlurEffectConeTaps.shader" />
     <None Include="Assets\voxel_scifi_free\Standard Assets\Effects\ImageEffects\Shaders\CameraMotionBlur.shader" />

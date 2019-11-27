@@ -26,7 +26,24 @@ public class Move : MonoBehaviour {
         }
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
+
+        /*if(GameObject.Find("Minecraft").transform.position.y < -23)
+        {
+            GameObject.Find("Minecraft").transform.position = new Vector3(18.19f, 2.85f, 4.23f);
+        }*/
     }
 
-
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        Debug.Log("SSS");
+        if(hit.gameObject.tag == "moon")
+        {
+            GameObject.Find("Minecraft").transform.position = new Vector3(18.19f, 2.85f, 4.23f);
+            //Invoke("SetPosition",1f);
+        }
+    }
+    /*void SetPosition()
+    {
+        GameObject.Find("Minecraft").transform.position = new Vector3(18.19f, 2.85f, 4.23f);
+    }*/
 }

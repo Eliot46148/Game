@@ -20,4 +20,12 @@ public class InventoryToolbar : MonoBehaviour {
         }
 
     }
+
+    public void Update()
+    {
+        foreach(UIItemSlot s in slots)
+        {
+            s.UpdateSlot();
+        }
+    }
 }

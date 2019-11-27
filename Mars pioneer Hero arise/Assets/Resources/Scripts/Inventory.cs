@@ -13,7 +13,7 @@ public class Inventory : MonoBehaviour {
     {
         world = GameObject.Find("World").GetComponent<World>();
 
-        for (int i = 1; i < world.blocks.Count-1; i++)
+        for (int i = 0; i < 27; i++)
         {
             GameObject newslot = Instantiate(slotPrefab, transform);
 

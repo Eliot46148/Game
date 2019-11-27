@@ -33,7 +33,6 @@ public class Control : MonoBehaviour {
 
     // UI 物件
     public Camera minimap;
-    public Backpack backpack;
     public Toolbar toolbar;
 
     public Transform highlightBlock;    // 選中的方塊位置參考物件
@@ -75,7 +74,7 @@ public class Control : MonoBehaviour {
     private void Update()
     {
         // 開啟背包UI (到 World -> inUI 的 Property去顯示Panel)
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             InventoryPanel.SetActive(!InventoryPanel.activeSelf);
             world.UIState = (InventoryPanel.activeSelf ? 0 : 1);

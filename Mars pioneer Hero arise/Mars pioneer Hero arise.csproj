@@ -245,7 +245,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Character Model\script\charControl.cs" />
-    <Compile Include="Assets\Resources\Scripts\Backpack.cs" />
     <Compile Include="Assets\Resources\Scripts\Basic.cs" />
     <Compile Include="Assets\Resources\Scripts\BiomeAttributes.cs" />
     <Compile Include="Assets\Resources\Scripts\Chunk.cs" />
@@ -258,7 +257,6 @@
     <Compile Include="Assets\Resources\Scripts\ItemStack.cs" />
     <Compile Include="Assets\Resources\Scripts\Structure.cs" />
     <Compile Include="Assets\Resources\Scripts\Toolbar.cs" />
-    <Compile Include="Assets\Resources\Scripts\UIControl.cs" />
     <Compile Include="Assets\Resources\Scripts\UIItemSlot.cs" />
     <Compile Include="Assets\Resources\Scripts\VoxelData.cs" />
     <Compile Include="Assets\Resources\Scripts\World.cs" />

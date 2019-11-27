@@ -593,7 +593,7 @@ public class World : MonoBehaviour
             for (int mz = 0; mz < VoxelData.WorldSizeInChunks; mz++)
                 if (chunks[mx, mz] != null && chunks[mx, mz].model.modificationsRecord.Count > 0)
                     map.Add(JsonUtility.ToJson(new WrappingClass(chunks[mx, mz].model.coord, chunks[mx, mz].model.modificationsRecord), true));
-        File.WriteAllText(Application.dataPath + "/saveData.save", JsonUtility.ToJson(new SaveData(player.position, player.rotation, player.GetComponent<Backpack>().itemsBar, map), true));
+        //File.WriteAllText(Application.dataPath + "/saveData.save", JsonUtility.ToJson(new SaveData(player.position, player.rotation, player.GetComponent<Toolbar>().it, map), true));
         Exit();
     }
 

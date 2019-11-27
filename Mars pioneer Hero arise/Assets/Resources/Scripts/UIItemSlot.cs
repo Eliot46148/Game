@@ -148,6 +148,12 @@ public class ItemSlot
         }
     }
 
+    public void add(int amt)
+    {
+        stack.amount += amt;
+        uiItemSlot.UpdateSlot();
+    }
+
     public ItemStack TakeAll()
     {
         ItemStack handover = new ItemStack(stack.id, stack.amount);

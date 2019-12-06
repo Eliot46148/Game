@@ -17,12 +17,10 @@ public class DebugScreen : MonoBehaviour {
     public Text selected;
     List<BlockType> items;
 
-    public Backpack backpack;
 
     // Use this for initialization
     void Start ()
     {
-        items = backpack.ItemsBar;
         world = GameObject.Find("World").GetComponent<World>();
         text = GetComponent<Text>();
 
@@ -50,8 +48,7 @@ public class DebugScreen : MonoBehaviour {
 
 
 
-        int index = backpack.CurrentBlock;
-        selected.text = System.Enum.GetName(typeof(BlockType), items[index]);
+        selected.text = System.Enum.GetName(typeof(BlockType), items[0]);
 
         text.text = debugText;
 

@@ -20,7 +20,7 @@ public class Control : MonoBehaviour {
 
     // 玩家碰撞設定
     public float playerWidth = 0.3f;
-    public float playerHHeight = 0.9f;
+    public float playerHeight = 0.9f;
 
     // 滑鼠鍵盤輸入的變數
     private float horizontal;
@@ -37,6 +37,7 @@ public class Control : MonoBehaviour {
 
     public Transform highlightBlock;    // 選中的方塊位置參考物件
     public Transform placeBlock;        // 創建的方塊位置參考物件
+    public GameObject dropItem;         // 掉落物品
     public float checkIncrement = 0.1f; // 模擬 Raycast 的增量
     public float reach = 8f;            // 玩家手長
     public int CurrentBlock = 2;
@@ -117,15 +118,18 @@ public class Control : MonoBehaviour {
         // Apply vertical momentum (falling/jumping).
         velocity += Vector3.up * verticalMomentum * Time.fixedDeltaTime;
 
-        if ((velocity.z > 0 && front) || (velocity.z < 0 && back))
+        if ((velocity.z > 0 && front(world, transform.position, playerWidth)) || (velocity.z < 0 && back(world, transform.position, playerWidth)))
             velocity.z = 0;
-        if ((velocity.x > 0 && right) || (velocity.x < 0 && left))
+        if ((velocity.x > 0 && right(world, transform.position, playerWidth)) || (velocity.x < 0 && left(world, transform.position, playerWidth)))
             velocity.x = 0;
 
         if (velocity.y < 0)
-            velocity.y = checkDownSpeed(velocity.y);
+        {
+            velocity.y = checkDownSpeed(world, transform.position, velocity.y, playerWidth);
+            isGrounded = (velocity.y == 0 ? true : false);
+        }
         else if (velocity.y > 0)
-            velocity.y = checkUpSpeed(velocity.y);
+            velocity.y = checkUpSpeed(world, transform.position, velocity.y, playerWidth);
     }
 
     private void GetPlayerInputs()
@@ -150,7 +154,11 @@ public class Control : MonoBehaviour {
             if (chunk != null)
                 id = chunk.model.voxelMap[(int)pos.x % VoxelData.ChunkWidth, (int)pos.y % VoxelData.ChunkHeight, (int)pos.z % VoxelData.ChunkWidth].id;
             if (Input.GetMouseButtonDown(0))
+            {
+                GameObject drop = Instantiate(dropItem, highlightBlock.position, Quaternion.identity);
+                drop.GetComponent<DropItem>().ChangeSkin(world.GetChunkFromVector3s(World.vs(highlightBlock.position)).GetBlockID(highlightBlock.position));
                 world.GetChunkFromVector3s(World.vs(highlightBlock.position)).EditVoxel(highlightBlock.position, BlockType.Air);
+            }
             if (Input.GetMouseButtonDown(1))
             {
                 switch (id)
@@ -205,88 +213,70 @@ public class Control : MonoBehaviour {
     }
 
     // 六個方向碰撞檢查
-    private float checkDownSpeed(float downSpeed)
+    public static float checkDownSpeed(World world, Vector3 position, float downSpeed, float width)
     {
         if (
-            world.CheckForVoxel(new Vector3s(transform.position.x - playerWidth, transform.position.y + downSpeed, transform.position.z - playerWidth)) ||
-            world.CheckForVoxel(new Vector3s(transform.position.x + playerWidth, transform.position.y + downSpeed, transform.position.z - playerWidth)) ||
-            world.CheckForVoxel(new Vector3s(transform.position.x + playerWidth, transform.position.y + downSpeed, transform.position.z + playerWidth)) ||
-            world.CheckForVoxel(new Vector3s(transform.position.x - playerWidth, transform.position.y + downSpeed, transform.position.z + playerWidth))
+            world.CheckForVoxel(new Vector3s(position.x - width, position.y + downSpeed, position.z - width)) ||
+            world.CheckForVoxel(new Vector3s(position.x + width, position.y + downSpeed, position.z - width)) ||
+            world.CheckForVoxel(new Vector3s(position.x + width, position.y + downSpeed, position.z + width)) ||
+            world.CheckForVoxel(new Vector3s(position.x - width, position.y + downSpeed, position.z + width))
            )
-        {
-            isGrounded = true;
             return 0;
-        }
         else
-        {
-            isGrounded = false;
             return downSpeed;
-        }
     }
 
-    private float checkUpSpeed(float upSpeed)
+    public static float checkUpSpeed(World world, Vector3 position, float upSpeed, float width)
     {
         if (
-            world.CheckForVoxel(new Vector3s(transform.position.x - playerWidth, transform.position.y + 2f + upSpeed, transform.position.z - playerWidth)) ||
-            world.CheckForVoxel(new Vector3s(transform.position.x + playerWidth, transform.position.y + 2f + upSpeed, transform.position.z - playerWidth)) ||
-            world.CheckForVoxel(new Vector3s(transform.position.x + playerWidth, transform.position.y + 2f + upSpeed, transform.position.z + playerWidth)) ||
-            world.CheckForVoxel(new Vector3s(transform.position.x - playerWidth, transform.position.y + 2f + upSpeed, transform.position.z + playerWidth))
+            world.CheckForVoxel(new Vector3s(position.x - width, position.y + 2f + upSpeed, position.z - width)) ||
+            world.CheckForVoxel(new Vector3s(position.x + width, position.y + 2f + upSpeed, position.z - width)) ||
+            world.CheckForVoxel(new Vector3s(position.x + width, position.y + 2f + upSpeed, position.z + width)) ||
+            world.CheckForVoxel(new Vector3s(position.x - width, position.y + 2f + upSpeed, position.z + width))
            )
             return 0;
         else
             return upSpeed;
     }
 
-    public bool front
+    public static bool front(World world, Vector3 position, float width)
     {
-        get
-        {
-            if (
-                world.CheckForVoxel(new Vector3s(transform.position.x, transform.position.y, transform.position.z + playerWidth)) ||
-                world.CheckForVoxel(new Vector3s(transform.position.x, transform.position.y + 1f, transform.position.z + playerWidth))
-                )
-                return true;
-            else
-                return false;
-        }
+        if (
+            world.CheckForVoxel(new Vector3s(position.x, position.y, position.z + width)) ||
+            world.CheckForVoxel(new Vector3s(position.x, position.y + 1f, position.z + width))
+            )
+            return true;
+        else
+            return false;
     }
-    public bool back
+    public static bool back(World world, Vector3 position, float width)
     {
-        get
-        {
-            if (
-                world.CheckForVoxel(new Vector3s(transform.position.x, transform.position.y, transform.position.z - playerWidth)) ||
-                world.CheckForVoxel(new Vector3s(transform.position.x, transform.position.y + 1f, transform.position.z - playerWidth))
-                )
-                return true;
-            else
-                return false;
-        }
+        if (
+            world.CheckForVoxel(new Vector3s(position.x, position.y, position.z - width)) ||
+            world.CheckForVoxel(new Vector3s(position.x, position.y + 1f, position.z - width))
+            )
+            return true;
+        else
+            return false;
     }
-    public bool left
+    public static bool left(World world, Vector3 position, float width)
     {
-        get
-        {
-            if (
-                world.CheckForVoxel(new Vector3s(transform.position.x - playerWidth, transform.position.y, transform.position.z)) ||
-                world.CheckForVoxel(new Vector3s(transform.position.x - playerWidth, transform.position.y + 1f, transform.position.z))
-                )
-                return true;
-            else
-                return false;
-        }
+        if (
+            world.CheckForVoxel(new Vector3s(position.x - width, position.y, position.z)) ||
+            world.CheckForVoxel(new Vector3s(position.x - width, position.y + 1f, position.z))
+            )
+            return true;
+        else
+            return false;
     }
-    public bool right
+    public static bool right(World world, Vector3 position, float width)
     {
-        get
-        {
-            if (
-                world.CheckForVoxel(new Vector3s(transform.position.x + playerWidth, transform.position.y, transform.position.z)) ||
-                world.CheckForVoxel(new Vector3s(transform.position.x + playerWidth, transform.position.y + 1f, transform.position.z))
-                )
-                return true;
-            else
-                return false;
-        }
+        if (
+            world.CheckForVoxel(new Vector3s(position.x + width, position.y, position.z)) ||
+            world.CheckForVoxel(new Vector3s(position.x + width, position.y + 1f, position.z))
+            )
+            return true;
+        else
+            return false;
     }
 }

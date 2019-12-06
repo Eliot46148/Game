@@ -106,6 +106,18 @@ public class Chunk                              // 區塊
         }
     }
 
+    public BlockType GetBlockID(Vector3 pos)
+    {
+        int xCheck = Mathf.FloorToInt(pos.x);
+        int yCheck = Mathf.FloorToInt(pos.y);
+        int zCheck = Mathf.FloorToInt(pos.z);
+
+        xCheck -= Mathf.FloorToInt(chunkObject.transform.position.x);
+        zCheck -= Mathf.FloorToInt(chunkObject.transform.position.z);
+
+        return model.voxelMap[xCheck, yCheck, zCheck].id;
+    }
+
     // 繪製區塊
     public void CreateMesh()
     {

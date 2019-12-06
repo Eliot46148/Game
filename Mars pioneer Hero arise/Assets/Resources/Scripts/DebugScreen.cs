@@ -48,7 +48,7 @@ public class DebugScreen : MonoBehaviour {
 
 
 
-        selected.text = System.Enum.GetName(typeof(BlockType), items[0]);
+        //selected.text = System.Enum.GetName(typeof(BlockType), items[0]);
 
         text.text = debugText;
 

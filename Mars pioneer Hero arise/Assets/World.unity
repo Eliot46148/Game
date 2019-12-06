@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5406755, g: 0.5717683, b: 0.6142678, a: 1}
+  m_IndirectSpecularColor: {r: 0.5406742, g: 0.57176703, b: 0.61426646, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -3727,12 +3727,13 @@ MonoBehaviour:
   sprintSpeed: 6
   jumpForce: 6
   gravity: -15
-  playerWidth: 0.25
-  playerHHeight: 0.9
+  playerWidth: 0.3
+  playerHeight: 0.9
   minimap: {fileID: 1819692566}
   toolbar: {fileID: 1589553765}
   highlightBlock: {fileID: 43893106}
   placeBlock: {fileID: 1945579680}
+  dropItem: {fileID: 1896896905973696, guid: 7f3d35926b651854eba0b2e3b6acb4cf, type: 2}
   checkIncrement: 0.1
   reach: 8
   CurrentBlock: 0
@@ -5792,7 +5793,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1711143166
 RectTransform:
   m_ObjectHideFlags: 0

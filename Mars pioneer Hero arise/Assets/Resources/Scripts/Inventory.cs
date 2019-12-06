@@ -7,7 +7,7 @@ public class Inventory : MonoBehaviour {
     public GameObject slotPrefab;
     World world;
     public Basic basic;
-    List<ItemSlot> slots = new List<ItemSlot>();
+    public List<ItemSlot> slots = new List<ItemSlot>();
 
     private void Start()
     {
@@ -18,7 +18,7 @@ public class Inventory : MonoBehaviour {
             GameObject newslot = Instantiate(slotPrefab, transform);
 
             ItemStack stack = new ItemStack(2, 10);
-            ItemSlot slot = new ItemSlot(newslot.GetComponent<UIItemSlot>(), stack);
+            slots.Add(new ItemSlot(newslot.GetComponent<UIItemSlot>(), stack));
             //slot.isCreative = true;
         }
     }

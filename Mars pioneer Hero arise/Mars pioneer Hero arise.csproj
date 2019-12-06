@@ -241,7 +241,6 @@
     <Compile Include="Assets\BallMove.cs" />
     <Compile Include="Assets\Character Model\script\charControl.cs" />
     <Compile Include="Assets\Move.cs" />
-    <Compile Include="Assets\Resources\Scripts\Backpack.cs" />
     <Compile Include="Assets\Resources\Scripts\Basic.cs" />
     <Compile Include="Assets\Resources\Scripts\BiomeAttributes.cs" />
     <Compile Include="Assets\Resources\Scripts\Chunk.cs" />
@@ -249,8 +248,13 @@
     <Compile Include="Assets\Resources\Scripts\ChunkModel.cs" />
     <Compile Include="Assets\Resources\Scripts\Control.cs" />
     <Compile Include="Assets\Resources\Scripts\DebugScreen.cs" />
+    <Compile Include="Assets\Resources\Scripts\DragAndDropHandler.cs" />
+    <Compile Include="Assets\Resources\Scripts\Inventory.cs" />
+    <Compile Include="Assets\Resources\Scripts\InventoryToolbar.cs" />
+    <Compile Include="Assets\Resources\Scripts\ItemStack.cs" />
     <Compile Include="Assets\Resources\Scripts\Structure.cs" />
-    <Compile Include="Assets\Resources\Scripts\UIControl.cs" />
+    <Compile Include="Assets\Resources\Scripts\Toolbar.cs" />
+    <Compile Include="Assets\Resources\Scripts\UIItemSlot.cs" />
     <Compile Include="Assets\Resources\Scripts\VoxelData.cs" />
     <Compile Include="Assets\Resources\Scripts\World.cs" />
     <Compile Include="Assets\Resources\UI\MusicControl.cs" />

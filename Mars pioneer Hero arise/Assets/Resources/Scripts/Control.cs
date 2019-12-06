@@ -33,16 +33,19 @@ public class Control : MonoBehaviour {
 
     // UI 物件
     public Camera minimap;
-    public Backpack backpack;
+    public Toolbar toolbar;
 
     public Transform highlightBlock;    // 選中的方塊位置參考物件
     public Transform placeBlock;        // 創建的方塊位置參考物件
     public float checkIncrement = 0.1f; // 模擬 Raycast 的增量
     public float reach = 8f;            // 玩家手長
+    public int CurrentBlock = 2;
 
     // 除錯 UI Text
     public GameObject debugScreen;
     public GameObject escPanel;
+    public GameObject InventoryPanel;
+    public GameObject CursorSlot;
 
     void Start ()
 	{
@@ -71,12 +74,11 @@ public class Control : MonoBehaviour {
     private void Update()
     {
         // 開啟背包UI (到 World -> inUI 的 Property去顯示Panel)
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            if (world.UIState == 2)
-                world.UIState = 1;
-            else if (world.UIState == 1)
-                world.UIState = 2;
+            InventoryPanel.SetActive(!InventoryPanel.activeSelf);
+            world.UIState = (InventoryPanel.activeSelf ? 0 : 1);
+            CursorSlot.SetActive(!CursorSlot.activeSelf);
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -158,30 +160,21 @@ public class Control : MonoBehaviour {
                         break;
 
                     default:
-                        world.GetChunkFromVector3s(World.vs(placeBlock.position)).EditVoxel(placeBlock.position, backpack.CurrentBlockType);
+                        {
+                            if (toolbar.slots[toolbar.slotindex].HasItem)
+                            {
+                                world.GetChunkFromVector3s(World.vs(placeBlock.position)).EditVoxel(placeBlock.position, (BlockType)toolbar.slots[toolbar.slotindex].itemSlot.stack.id);
+                                toolbar.slots[toolbar.slotindex].itemSlot.Take(1);
+                            }
+                        }
                         break;
                 }
             }
         }
-
-
-        // Chose cube
-        var d = Input.GetAxis("Mouse ScrollWheel");
-        if (d > 0.08f)
-        {
-            backpack.CurrentBlock--;
-            if ((int)backpack.CurrentBlock < 0)
-                backpack.CurrentBlock = 0;
-        }
-        else if (d < -0.15f)
-        {
-            backpack.CurrentBlock++;
-            if ((int)backpack.CurrentBlock > 8)
-                backpack.CurrentBlock = 8;
-        }
+        
     }
 
-    // 模擬 Raucast 來讓玩家編輯刪除方塊
+    // 模擬 Raycast 來讓玩家編輯刪除方塊
     private void PlaceCursorBlocks()
     {
 

@@ -30,6 +30,7 @@ public class BasicBlock
     public string name;
     [Header("方塊圖示矩陣座標")]
     public Vector2s icon;
+    public Sprite iconImage;
     public BlockType type;
     [Header("方塊是否有實體")]
     public bool isSolid;
@@ -135,6 +136,59 @@ public class BlockTexture
             under = value;
         }
     }
+}
+
+public class Item
+{
+    public Item(BlockType t, int n, bool i)
+    {
+        type = t;
+        number = n;
+        isblock = i;
+    }
+    public BlockType type;
+    public int number;
+    public bool isblock;
+
+    public BlockType Type
+    {
+        get
+        {
+            return type;
+        }
+
+        set
+        {
+            type = value;
+        }
+    }
+
+    public int Number
+    {
+        get
+        {
+            return number;
+        }
+
+        set
+        {
+            number = value;
+        }
+    }
+
+    public bool Isblock
+    {
+        get
+        {
+            return isblock;
+        }
+
+        set
+        {
+            isblock = value;
+        }
+    }
+
 }
 
 // Perlin 雜訊產生地圖的程序化生成

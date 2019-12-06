@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class UIBbuttonClick : MonoBehaviour
 {
 
@@ -12,11 +13,7 @@ public class UIBbuttonClick : MonoBehaviour
 
     public void QuitApplacation()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-      Application.Quit();
-#endif
+        Application.Quit();
     }
 
     public void setGameSetting()

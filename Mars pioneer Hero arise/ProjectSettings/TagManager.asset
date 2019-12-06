@@ -4,8 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Block
-  - Item
   - UIItemSlot
   layers:
   - Default
@@ -16,8 +14,8 @@ TagManager:
   - UI
   - 
   - 
-  - World
-  - Player
+  - 
+  - 
   - 
   - 
   - 

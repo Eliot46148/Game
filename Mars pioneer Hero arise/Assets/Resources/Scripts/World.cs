@@ -588,12 +588,13 @@ public class World : MonoBehaviour
 
     public void ExitAndSave()
     {
-        List<string> map = new List<string>();
+        List<string> map = new List<string>();  
         for (int mx = 0; mx < VoxelData.WorldSizeInChunks; mx++)
             for (int mz = 0; mz < VoxelData.WorldSizeInChunks; mz++)
                 if (chunks[mx, mz] != null && chunks[mx, mz].model.modificationsRecord.Count > 0)
                     map.Add(JsonUtility.ToJson(new WrappingClass(chunks[mx, mz].model.coord, chunks[mx, mz].model.modificationsRecord), true));
         //File.WriteAllText(Application.dataPath + "/saveData.save", JsonUtility.ToJson(new SaveData(player.position, player.rotation, player.GetComponent<Toolbar>().it, map), true));
+
         Exit();
     }
 

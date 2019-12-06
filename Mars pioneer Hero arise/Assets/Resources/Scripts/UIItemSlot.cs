@@ -161,6 +161,12 @@ public class ItemSlot
         return handover;
     }
 
+    public ItemStack GetStack()
+    {
+        ItemStack handover = new ItemStack(stack.id, stack.amount);
+        return handover;
+    }
+
     public void InsertStack(ItemStack _stack)
     {
         stack = _stack;

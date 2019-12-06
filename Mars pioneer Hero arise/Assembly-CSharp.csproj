@@ -65,6 +65,7 @@
      <Compile Include="Assets\Resources\Scripts\DropItem.cs" />
      <Compile Include="Assets\Resources\Scripts\Inventory.cs" />
      <Compile Include="Assets\Resources\Scripts\InventoryToolbar.cs" />
+     <Compile Include="Assets\Resources\Scripts\ItemData.cs" />
      <Compile Include="Assets\Resources\Scripts\ItemStack.cs" />
      <Compile Include="Assets\Resources\Scripts\Structure.cs" />
      <Compile Include="Assets\Resources\Scripts\Toolbar.cs" />

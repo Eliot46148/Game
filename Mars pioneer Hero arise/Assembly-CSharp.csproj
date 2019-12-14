@@ -62,10 +62,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\BallMove.cs" />
     <Compile Include="Assets\Character Model\MoveAndAnimatorController.cs" />
     <Compile Include="Assets\Character Model\script\charControl.cs" />
-    <Compile Include="Assets\Move.cs" />
     <Compile Include="Assets\Resources\Scripts\Basic.cs" />
     <Compile Include="Assets\Resources\Scripts\BiomeAttributes.cs" />
     <Compile Include="Assets\Resources\Scripts\Chunk.cs" />
@@ -87,6 +85,22 @@
     <Compile Include="Assets\Resources\Scripts\World.cs" />
     <Compile Include="Assets\Resources\UI\MusicControl.cs" />
     <Compile Include="Assets\Resources\UI\UIBbuttonClick.cs" />
+    <Compile Include="Assets\Scripts\ActiveStateToggler.cs" />
+    <Compile Include="Assets\Scripts\ApplicationManager.cs" />
+    <Compile Include="Assets\Scripts\ChangeColor.cs" />
+    <Compile Include="Assets\Scripts\DragMe.cs" />
+    <Compile Include="Assets\Scripts\DragPanel.cs" />
+    <Compile Include="Assets\Scripts\DropMe.cs" />
+    <Compile Include="Assets\Scripts\PanelManager.cs" />
+    <Compile Include="Assets\Scripts\ResizePanel.cs" />
+    <Compile Include="Assets\Scripts\ScrollDetailTexture.cs" />
+    <Compile Include="Assets\Scripts\ShowSliderValue.cs" />
+    <Compile Include="Assets\Scripts\TiltWindow.cs" />
+    <Compile Include="Assets\SpaceStopFolder\BallMove.cs" />
+    <Compile Include="Assets\SpaceStopFolder\loadWorld.cs" />
+    <Compile Include="Assets\SpaceStopFolder\Move.cs" />
+    <Compile Include="Assets\SpaceStopFolder\TextAppear.cs" />
+    <Compile Include="Assets\SpaceStopFolder\WorldAppear.cs" />
     <Compile Include="Assets\voxel_scifi_free\Standard Assets\Characters\FirstPersonCharacter\Scripts\FirstPersonController.cs" />
     <Compile Include="Assets\voxel_scifi_free\Standard Assets\Characters\FirstPersonCharacter\Scripts\HeadBob.cs" />
     <Compile Include="Assets\voxel_scifi_free\Standard Assets\Characters\FirstPersonCharacter\Scripts\MouseLook.cs" />
@@ -190,7 +204,9 @@
     <None Include="Assets\voxel_scifi_free\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAAPreset3.shader" />
     <None Include="Assets\voxel_scifi_free\Standard Assets\Effects\ImageEffects\Shaders\FisheyeShader.shader" />
     <None Include="Assets\voxel_scifi_free\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\Apply.shader" />
+    <None Include="Assets\Fonts\Jupiter\LICENSE.txt" />
     <None Include="Assets\voxel_scifi_free\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\DepthOfField34.shader" />
+    <None Include="Assets\Textures and Sprites\SF UI\Background\LICENSE.txt" />
     <None Include="Assets\voxel_scifi_free\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MobileBlur.shader" />
     <None Include="Assets\voxel_scifi_free\Standard Assets\Effects\ImageEffects\Shaders\SSAOShader.shader" />
     <None Include="Assets\voxel_scifi_free\Standard Assets\Effects\ImageEffects\Shaders\ConvertDepth.shader" />
@@ -203,6 +219,7 @@
     <None Include="Assets\voxel_scifi_free\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionSelective.shader" />
     <None Include="Assets\voxel_scifi_free\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\Bokeh34.shader" />
     <None Include="Assets\voxel_scifi_free\Standard Assets\Effects\ImageEffects\Shaders\CameraMotionBlurDX11.shader" />
+    <None Include="Assets\Materials\UI-Default-No-Alpha.shader" />
     <None Include="Assets\voxel_scifi_free\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\SeparableBlurPlus.shader" />
     <None Include="Assets\voxel_scifi_free\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MultiPassHollywoodFlares.shader" />
     <None Include="Assets\voxel_scifi_free\Standard Assets\Effects\ImageEffects\Shaders\BlurEffectConeTaps.shader" />

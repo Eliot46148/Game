@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - UIItemSlot
+  - moon
+  - ground
+  - Text
   layers:
   - Default
   - TransparentFX

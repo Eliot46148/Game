@@ -253,9 +253,6 @@
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/NTUT/大三/遊戲程式設計/FINAL/Game/Mars pioneer Hero arise/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="com.unity.multiplayer-hlapi.Editor">
-      <HintPath>D:/NTUT/大三/遊戲程式設計/FINAL/Game/Mars pioneer Hero arise/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>D:/NTUT/大三/遊戲程式設計/FINAL/Game/Mars pioneer Hero arise/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
@@ -271,41 +268,14 @@
     <Reference Include="Unity.CollabProxy.Editor">
       <HintPath>D:/NTUT/大三/遊戲程式設計/FINAL/Game/Mars pioneer Hero arise/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="com.unity.multiplayer-weaver.Editor">
-      <HintPath>D:/NTUT/大三/遊戲程式設計/FINAL/Game/Mars pioneer Hero arise/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.XR.LegacyInputHelpers">
-      <HintPath>D:/NTUT/大三/遊戲程式設計/FINAL/Game/Mars pioneer Hero arise/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>D:/NTUT/大三/遊戲程式設計/FINAL/Game/Mars pioneer Hero arise/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>D:/NTUT/大三/遊戲程式設計/FINAL/Game/Mars pioneer Hero arise/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>D:/NTUT/大三/遊戲程式設計/FINAL/Game/Mars pioneer Hero arise/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.SpatialTracking">
-      <HintPath>D:/NTUT/大三/遊戲程式設計/FINAL/Game/Mars pioneer Hero arise/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.SpatialTracking">
-      <HintPath>D:/NTUT/大三/遊戲程式設計/FINAL/Game/Mars pioneer Hero arise/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>D:/NTUT/大三/遊戲程式設計/FINAL/Game/Mars pioneer Hero arise/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>D:/NTUT/大三/遊戲程式設計/FINAL/Game/Mars pioneer Hero arise/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.XR.LegacyInputHelpers">
-      <HintPath>D:/NTUT/大三/遊戲程式設計/FINAL/Game/Mars pioneer Hero arise/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>D:/NTUT/大三/遊戲程式設計/FINAL/Game/Mars pioneer Hero arise/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="com.unity.multiplayer-hlapi.Runtime">
-      <HintPath>D:/NTUT/大三/遊戲程式設計/FINAL/Game/Mars pioneer Hero arise/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>D:/Unity/2019.2.13f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -483,15 +453,6 @@
     </Reference>
     <Reference Include="UnityEngine.XRModule">
       <HintPath>D:/Unity/2019.2.13f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.Editor">
-      <HintPath>D:/NTUT/大三/遊戲程式設計/FINAL/Game/Mars pioneer Hero arise/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>D:/NTUT/大三/遊戲程式設計/FINAL/Game/Mars pioneer Hero arise/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>D:/NTUT/大三/遊戲程式設計/FINAL/Game/Mars pioneer Hero arise/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>D:/Unity/2019.2.13f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

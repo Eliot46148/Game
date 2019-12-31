@@ -10,8 +10,6 @@ public class EightDirectionalController : MonoBehaviour {
     Vector2 input;
     float angle;
 
-    public bool attack;
-
     Quaternion targetrotation;
     Transform cam;
 
@@ -27,23 +25,22 @@ public class EightDirectionalController : MonoBehaviour {
     {
         GetInput();
 
-        if (Mathf.Abs(input.x) < 1 && Mathf.Abs(input.y) < 1)
-            anim.SetInteger("state", 0);
-        else
+        if(Mathf.Abs(input.x) < 1 && Mathf.Abs(input.y) < 1)
         {
-            anim.SetInteger("state", 1);
-            CalculateDirection();
-            Rotate();
-            Move();
-        }            
-        anim.SetBool("attack", attack);
+            anim.SetInteger("state", 0);
+            return;
+        }
+
+        CalculateDirection();
+        Rotate();
+        Move();
+        anim.SetInteger("state", 1);
     }
 
     void GetInput()
     {
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
-        attack = Input.GetKey(KeyCode.Mouse0);  
     }
 
     void CalculateDirection()

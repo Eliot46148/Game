@@ -50,25 +50,7 @@ public class DropItem : MonoBehaviour
         shadow.localScale = new Vector3(size, size, 1f);
 
 
-        CalculateVelocity();
         transform.Translate(velocity, Space.World);
-    }
-
-    private void CalculateVelocity()
-    {
-        // Affect vertical momentum with gravity.
-        if (verticalMomentum > gravity)
-            verticalMomentum += Time.fixedDeltaTime * gravity;
-
-        if ((velocity.z > 0 && Control.front(world, transform.position, width)) || (velocity.z < 0 && Control.back(world, transform.position, width)))
-            velocity.z = 0;
-        if ((velocity.x > 0 && Control.right(world, transform.position, width)) || (velocity.x < 0 && Control.left(world, transform.position, width)))
-            velocity.x = 0;
-
-        if (velocity.y < 0)
-            velocity.y = Control.checkDownSpeed(world, transform.position, velocity.y, width);
-        else if (velocity.y > 0)
-            velocity.y = Control.checkUpSpeed(world, transform.position, velocity.y, width);
     }
 
     public void ChangeSkin(BlockType type)

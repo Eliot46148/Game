@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 public class UIBbuttonClick : MonoBehaviour
 {
 
-    public void changeScene(int index)
+    public void changeScene()
     {
-        SceneManager.LoadScene(index);
+        SceneManager.LoadScene("SpaceStop");
     }
 
     public void QuitApplacation()

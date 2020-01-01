@@ -12,7 +12,7 @@ public class ItemData : MonoBehaviour {
         int index=0;
         ItemStack[] stacks = new ItemStack[36];
         UIItemSlot[] ToolbarSlots = Toolbar.GetComponent<Toolbar>().slots;
-        List<ItemSlot> InventorySlots = Inventory.GetComponent<Inventory>().slots;
+        List<ItemSlot> InventorySlots = Inventory.GetComponent<Inventory>().bag;
         foreach (UIItemSlot s in ToolbarSlots)
         {
             stacks[index++] = s.itemSlot.GetStack();

@@ -70,6 +70,7 @@
     <Compile Include="Assets\Resources\Scripts\ChunkLoadAnimation.cs" />
     <Compile Include="Assets\Resources\Scripts\ChunkModel.cs" />
     <Compile Include="Assets\Resources\Scripts\Control.cs" />
+    <Compile Include="Assets\Resources\Scripts\Create.cs" />
     <Compile Include="Assets\Resources\Scripts\DebugScreen.cs" />
     <Compile Include="Assets\Resources\Scripts\DragAndDropHandler.cs" />
     <Compile Include="Assets\Resources\Scripts\DropItem.cs" />

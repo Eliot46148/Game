@@ -7,7 +7,9 @@ public class Inventory : MonoBehaviour {
     public GameObject slotPrefab;
     World world;
     public Basic basic;
-    public List<ItemSlot> slots = new List<ItemSlot>();
+    public List<ItemSlot> bag = new List<ItemSlot>();
+    public UIItemSlot[] equiments = new UIItemSlot[5];
+    public UIItemSlot[] craftslots = new UIItemSlot[5];
 
     private void Start()
     {
@@ -18,8 +20,18 @@ public class Inventory : MonoBehaviour {
             GameObject newslot = Instantiate(slotPrefab, transform);
 
             ItemStack stack = new ItemStack(2, 10);
-            slots.Add(new ItemSlot(newslot.GetComponent<UIItemSlot>(), stack));
-            //slot.isCreative = true;
+            bag.Add(new ItemSlot(newslot.GetComponent<UIItemSlot>(), stack));       
         }
+
+        foreach(UIItemSlot s in equiments)
+        {           
+            ItemSlot slot = new ItemSlot(s);
+        }
+
+        foreach (UIItemSlot s in craftslots)
+        {
+            ItemSlot slot = new ItemSlot(s);
+        }
+
     }
 }

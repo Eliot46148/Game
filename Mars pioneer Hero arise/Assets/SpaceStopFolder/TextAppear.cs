@@ -17,7 +17,7 @@ public class TextAppear : MonoBehaviour
     {
 
     }
-    private void OnTriggerStay(Collider NPC)
+    private void OnTriggerStay(UnityEngine.Collider NPC)
     {
         if (NPC.gameObject.tag == "Player")
         {

@@ -28,16 +28,12 @@ public class HandCraft : MonoBehaviour
                 bool isEqual = true;
                 for (int i = 0; i < 4; i++)
                 {
-                    Debug.Log(i);
                     if (craftIdArray[i] != r.recipe[i])
                         isEqual = false;
                 }
                 
                 if (isEqual)
-                {
-                    //Debug.Log(r.result);
-                    ShowCraftResult(r.result);
-                }
+                    ShowCraftResult(r.result);                
             }
         }
     }
@@ -50,7 +46,7 @@ public class HandCraft : MonoBehaviour
 
     private void UpdateCraftIdArray()
     {
-        int[] arr = new int[4];
+        int[] arr = new int[4] { 0, 0, 0, 0 };
         for (int i = 0; i < 4; i++)
         {            
             if (!craftSlots[i].itemSlot.HasItem)

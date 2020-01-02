@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5406742, g: 0.57176703, b: 0.61426646, a: 1}
+  m_IndirectSpecularColor: {r: 0.5406755, g: 0.5717683, b: 0.6142678, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2033,6 +2033,11 @@ MonoBehaviour:
   m_Raycaster: {fileID: 399974695}
   m_Events: {fileID: 1689153987}
   basic: {fileID: 11400000, guid: e77ecd2fc7e65464ebd24fae5f615faf, type: 2}
+  handCraftSlots:
+  - {fileID: 308416106}
+  - {fileID: 1983279507}
+  - {fileID: 860909382}
+  - {fileID: 1225447359}
 --- !u!1 &400039710
 GameObject:
   m_ObjectHideFlags: 0
@@ -4260,6 +4265,7 @@ MonoBehaviour:
   - {fileID: 860909382}
   - {fileID: 1225447359}
   resultSlot: {fileID: 672838409}
+  craftIdArray: 
 --- !u!1 &1080902636
 GameObject:
   m_ObjectHideFlags: 0
@@ -7840,6 +7846,10 @@ PrefabInstance:
     - target: {fileID: 1874542662699632, guid: 087e41d255afb3a40adfeea60d08a9a7, type: 3}
       propertyPath: m_Name
       value: finishSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 1874542662699632, guid: 087e41d255afb3a40adfeea60d08a9a7, type: 3}
+      propertyPath: m_TagString
+      value: HandCraftResultSlot
       objectReference: {fileID: 0}
     - target: {fileID: 224560329990934242, guid: 087e41d255afb3a40adfeea60d08a9a7,
         type: 3}

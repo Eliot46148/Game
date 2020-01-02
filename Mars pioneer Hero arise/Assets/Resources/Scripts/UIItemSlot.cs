@@ -151,7 +151,10 @@ public class ItemSlot
     public void add(int amt)
     {
         stack.amount += amt;
-        uiItemSlot.UpdateSlot();
+        if (stack.amount <= 0)
+            EmptySlot();
+        else
+            uiItemSlot.UpdateSlot();
     }
 
     public ItemStack TakeAll()

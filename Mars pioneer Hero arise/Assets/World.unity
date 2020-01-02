@@ -2048,7 +2048,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &400039711
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2700,7 +2700,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1874542662699632, guid: 087e41d255afb3a40adfeea60d08a9a7, type: 3}
       propertyPath: m_Name
-      value: craftSlot2
+      value: craftSlot3
       objectReference: {fileID: 0}
     - target: {fileID: 224560329990934242, guid: 087e41d255afb3a40adfeea60d08a9a7,
         type: 3}
@@ -2740,7 +2740,7 @@ PrefabInstance:
     - target: {fileID: 224560329990934242, guid: 087e41d255afb3a40adfeea60d08a9a7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224560329990934242, guid: 087e41d255afb3a40adfeea60d08a9a7,
         type: 3}
@@ -2855,8 +2855,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1248519509}
-  - {fileID: 105413189}
   - {fileID: 58679538}
+  - {fileID: 105413189}
   - {fileID: 1043865332}
   - {fileID: 838950524}
   - {fileID: 1848737032}
@@ -2866,7 +2866,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 114.5, y: -83.9}
+  m_AnchoredPosition: {x: 84.9, y: -98.7}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &572851931
@@ -4241,19 +4241,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1063495619
-BoxCollider:
+--- !u!114 &1063495619
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1063495614}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.5136241, y: 1.794343, z: 0.2934262}
-  m_Center: {x: -0.009419531, y: 0.8946085, z: -0.0014484674}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62c8d89285503d645b6650d92b9ed8c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InventoryPanel: {fileID: 1374526315}
+  craftSlots:
+  - {fileID: 308416106}
+  - {fileID: 1983279507}
+  - {fileID: 860909382}
+  - {fileID: 1225447359}
+  resultSlot: {fileID: 672838409}
 --- !u!1 &1080902636
 GameObject:
   m_ObjectHideFlags: 0
@@ -7122,7 +7128,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1993194313
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7477,7 +7483,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1874542662699632, guid: 087e41d255afb3a40adfeea60d08a9a7, type: 3}
       propertyPath: m_Name
-      value: craftSlot3
+      value: craftSlot2
       objectReference: {fileID: 0}
     - target: {fileID: 224560329990934242, guid: 087e41d255afb3a40adfeea60d08a9a7,
         type: 3}
@@ -7517,7 +7523,7 @@ PrefabInstance:
     - target: {fileID: 224560329990934242, guid: 087e41d255afb3a40adfeea60d08a9a7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224560329990934242, guid: 087e41d255afb3a40adfeea60d08a9a7,
         type: 3}

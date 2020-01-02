@@ -63,8 +63,8 @@ public class Collider : MonoBehaviour
         else if (velocity.y > 0)
             velocity.y = checkUpSpeed(transform.position, velocity.y);
 
-        isAbleToUp = (velocity.y > 0);
-        isAbleToDown = (velocity.y < 0);
+        isAbleToUp = (checkUpSpeed(transform.position, 1f) > 0);
+        isAbleToDown = (checkDownSpeed(transform.position, -1f) < 0);
         isAbleToLeft = left(transform.position);
         isAbleToRight = right(transform.position);
         isAbleToFront = front(transform.position);
@@ -85,10 +85,10 @@ public class Collider : MonoBehaviour
     public float checkDownSpeed(Vector3 position, float downSpeed)
     {
         if (
-            world.CheckForVoxel(new Vector3s(position.x - height / 2f, position.y + downSpeed, position.z - height / 2f)) ||
-            world.CheckForVoxel(new Vector3s(position.x + height / 2f, position.y + downSpeed, position.z - height / 2f)) ||
-            world.CheckForVoxel(new Vector3s(position.x + height / 2f, position.y + downSpeed, position.z + height / 2f)) ||
-            world.CheckForVoxel(new Vector3s(position.x - height / 2f, position.y + downSpeed, position.z + height / 2f))
+            world.CheckForVoxel(new Vector3s(position.x - width / 2f, position.y + downSpeed, position.z - width / 2f)) ||
+            world.CheckForVoxel(new Vector3s(position.x + width / 2f, position.y + downSpeed, position.z - width / 2f)) ||
+            world.CheckForVoxel(new Vector3s(position.x + width / 2f, position.y + downSpeed, position.z + width / 2f)) ||
+            world.CheckForVoxel(new Vector3s(position.x - width / 2f, position.y + downSpeed, position.z + width / 2f))
            )
             return 0;
         else
@@ -98,10 +98,10 @@ public class Collider : MonoBehaviour
     public float checkUpSpeed(Vector3 position, float upSpeed)
     {
         if (
-            world.CheckForVoxel(new Vector3s(position.x - height / 2f, position.y + 2f + upSpeed, position.z - height / 2f)) ||
-            world.CheckForVoxel(new Vector3s(position.x + height / 2f, position.y + 2f + upSpeed, position.z - height / 2f)) ||
-            world.CheckForVoxel(new Vector3s(position.x + height / 2f, position.y + 2f + upSpeed, position.z + height / 2f)) ||
-            world.CheckForVoxel(new Vector3s(position.x - height / 2f, position.y + 2f + upSpeed, position.z + height / 2f))
+            world.CheckForVoxel(new Vector3s(position.x - width / 2f, position.y + height + upSpeed, position.z - width / 2f)) ||
+            world.CheckForVoxel(new Vector3s(position.x + width / 2f, position.y + height + upSpeed, position.z - width / 2f)) ||
+            world.CheckForVoxel(new Vector3s(position.x + width / 2f, position.y + height + upSpeed, position.z + width / 2f)) ||
+            world.CheckForVoxel(new Vector3s(position.x - width / 2f, position.y + height + upSpeed, position.z + width / 2f))
            )
             return 0;
         else

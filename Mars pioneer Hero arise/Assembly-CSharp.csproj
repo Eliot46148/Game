@@ -2,6 +2,8 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
+    <CscToolPath>D:\Unity\Editor\2019.2.13f1\Editor\Data\Tools\RoslynScripts</CscToolPath>
+    <CscToolExe>unity_csc.bat</CscToolExe>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -72,11 +74,12 @@
     <Compile Include="Assets\Resources\Scripts\ChunkModel.cs" />
     <Compile Include="Assets\Resources\Scripts\Collider.cs" />
     <Compile Include="Assets\Resources\Scripts\Control.cs" />
-    <Compile Include="Assets\Resources\Scripts\Create.cs" />
+    <Compile Include="Assets\Resources\Scripts\CraftRecipe.cs" />
     <Compile Include="Assets\Resources\Scripts\DebugScreen.cs" />
     <Compile Include="Assets\Resources\Scripts\DragAndDropHandler.cs" />
     <Compile Include="Assets\Resources\Scripts\DropItem.cs" />
     <Compile Include="Assets\Resources\Scripts\EightDirectionalController.cs" />
+    <Compile Include="Assets\Resources\Scripts\HandCraft.cs" />
     <Compile Include="Assets\Resources\Scripts\Inventory.cs" />
     <Compile Include="Assets\Resources\Scripts\InventoryToolbar.cs" />
     <Compile Include="Assets\Resources\Scripts\ItemController.cs" />

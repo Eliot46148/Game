@@ -15,7 +15,7 @@ public class Control : MonoBehaviour {
     // 物理定義
     public float walkSpeed = 3f;
     public float sprintSpeed = 6f;
-    public float jumpForce = 5f;
+    public float jumpForce = 3f;
     public float gravity = -9.8f;
 
     // 玩家碰撞設定
@@ -27,8 +27,6 @@ public class Control : MonoBehaviour {
     private float vertical;
     private float mouseHorizontal;
     private float mouseVertical;
-    private Vector3 velocity;
-    private float verticalMomentum = 0;
     private bool jumpRequest;
 
     // UI 物件
@@ -48,22 +46,28 @@ public class Control : MonoBehaviour {
     public GameObject InventoryPanel;
     public GameObject CursorSlot;
 
+    private Collider collider;
+
     void Start ()
 	{
-        world.UIState = 0;    // 讀取中
+        //world.UIState = 0;    // 讀取中
+        collider = transform.GetComponent<Collider>();
     }
 
     void FixedUpdate()
     {
         if (world.UIState == 1)
         {
-            CalculateVelocity();
+            if (isSprinting)
+                collider.velocity = ((transform.forward * vertical) + (transform.right * horizontal)) * Time.fixedDeltaTime * sprintSpeed;
+            else
+                collider.velocity = ((transform.forward * vertical) + (transform.right * horizontal)) * Time.fixedDeltaTime * walkSpeed;
+
             if (jumpRequest)
                 Jump();
 
             transform.Rotate(Vector3.up * mouseHorizontal * world.settings.mouseSensitivity);
             cam.Rotate(Vector3.right * -mouseVertical * world.settings.mouseSensitivity);
-            transform.Translate(velocity, Space.World);
             minimap.transform.position = new Vector3(transform.position.x, 200, transform.position.z);
 
             // 除錯畫面
@@ -94,42 +98,15 @@ public class Control : MonoBehaviour {
             GetPlayerInputs();
             PlaceCursorBlocks();
         }
+
+        isGrounded = collider.isGround;
     }
 
     void Jump()
     {
-        verticalMomentum = jumpForce;
+        collider.verticalMomentum = jumpForce;
         isGrounded = false;
         jumpRequest = false;
-    }
-
-    private void CalculateVelocity()
-    {
-        // Affect vertical momentum with gravity.
-        if (verticalMomentum > gravity)
-            verticalMomentum += Time.fixedDeltaTime * gravity;
-
-        // if we're sprinting, use the sprint multiplier.
-        if (isSprinting)
-            velocity = ((transform.forward * vertical) + (transform.right * horizontal)) * Time.fixedDeltaTime * sprintSpeed;
-        else
-            velocity = ((transform.forward * vertical) + (transform.right * horizontal)) * Time.fixedDeltaTime * walkSpeed;
-
-        // Apply vertical momentum (falling/jumping).
-        velocity += Vector3.up * verticalMomentum * Time.fixedDeltaTime;
-
-        if ((velocity.z > 0 && front(world, transform.position, playerWidth)) || (velocity.z < 0 && back(world, transform.position, playerWidth)))
-            velocity.z = 0;
-        if ((velocity.x > 0 && right(world, transform.position, playerWidth)) || (velocity.x < 0 && left(world, transform.position, playerWidth)))
-            velocity.x = 0;
-
-        if (velocity.y < 0)
-        {
-            velocity.y = checkDownSpeed(world, transform.position, velocity.y, playerWidth);
-            isGrounded = (velocity.y == 0 ? true : false);
-        }
-        else if (velocity.y > 0)
-            velocity.y = checkUpSpeed(world, transform.position, velocity.y, playerWidth);
     }
 
     private void GetPlayerInputs()
@@ -156,6 +133,7 @@ public class Control : MonoBehaviour {
             if (Input.GetMouseButtonDown(0))
             {
                 GameObject drop = Instantiate(dropItem, highlightBlock.position, Quaternion.identity);
+                drop.transform.SetParent(GameObject.Find("DropItem").transform);
                 drop.GetComponent<DropItem>().ChangeSkin(world.GetChunkFromVector3s(World.vs(highlightBlock.position)).GetBlockID(highlightBlock.position));
                 world.GetChunkFromVector3s(World.vs(highlightBlock.position)).EditVoxel(highlightBlock.position, BlockType.Air);
             }
@@ -210,73 +188,5 @@ public class Control : MonoBehaviour {
 
         highlightBlock.gameObject.SetActive(false);
         placeBlock.gameObject.SetActive(false);
-    }
-
-    // 六個方向碰撞檢查
-    public static float checkDownSpeed(World world, Vector3 position, float downSpeed, float width)
-    {
-        if (
-            world.CheckForVoxel(new Vector3s(position.x - width, position.y + downSpeed, position.z - width)) ||
-            world.CheckForVoxel(new Vector3s(position.x + width, position.y + downSpeed, position.z - width)) ||
-            world.CheckForVoxel(new Vector3s(position.x + width, position.y + downSpeed, position.z + width)) ||
-            world.CheckForVoxel(new Vector3s(position.x - width, position.y + downSpeed, position.z + width))
-           )
-            return 0;
-        else
-            return downSpeed;
-    }
-
-    public static float checkUpSpeed(World world, Vector3 position, float upSpeed, float width)
-    {
-        if (
-            world.CheckForVoxel(new Vector3s(position.x - width, position.y + 2f + upSpeed, position.z - width)) ||
-            world.CheckForVoxel(new Vector3s(position.x + width, position.y + 2f + upSpeed, position.z - width)) ||
-            world.CheckForVoxel(new Vector3s(position.x + width, position.y + 2f + upSpeed, position.z + width)) ||
-            world.CheckForVoxel(new Vector3s(position.x - width, position.y + 2f + upSpeed, position.z + width))
-           )
-            return 0;
-        else
-            return upSpeed;
-    }
-
-    public static bool front(World world, Vector3 position, float width)
-    {
-        if (
-            world.CheckForVoxel(new Vector3s(position.x, position.y, position.z + width)) ||
-            world.CheckForVoxel(new Vector3s(position.x, position.y + 1f, position.z + width))
-            )
-            return true;
-        else
-            return false;
-    }
-    public static bool back(World world, Vector3 position, float width)
-    {
-        if (
-            world.CheckForVoxel(new Vector3s(position.x, position.y, position.z - width)) ||
-            world.CheckForVoxel(new Vector3s(position.x, position.y + 1f, position.z - width))
-            )
-            return true;
-        else
-            return false;
-    }
-    public static bool left(World world, Vector3 position, float width)
-    {
-        if (
-            world.CheckForVoxel(new Vector3s(position.x - width, position.y, position.z)) ||
-            world.CheckForVoxel(new Vector3s(position.x - width, position.y + 1f, position.z))
-            )
-            return true;
-        else
-            return false;
-    }
-    public static bool right(World world, Vector3 position, float width)
-    {
-        if (
-            world.CheckForVoxel(new Vector3s(position.x + width, position.y, position.z)) ||
-            world.CheckForVoxel(new Vector3s(position.x + width, position.y + 1f, position.z))
-            )
-            return true;
-        else
-            return false;
     }
 }

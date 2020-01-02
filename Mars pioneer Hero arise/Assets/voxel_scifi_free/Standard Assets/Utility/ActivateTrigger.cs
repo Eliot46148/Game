@@ -87,7 +87,7 @@ namespace UnityStandardAssets.Utility
         }
 
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter(UnityEngine.Collider other)
         {
             DoActivateTrigger();
         }

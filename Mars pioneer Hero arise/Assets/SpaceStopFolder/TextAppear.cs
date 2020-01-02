@@ -27,11 +27,13 @@ public class TextAppear : MonoBehaviour
                 {
                     canvasappear = true;
                     canvas.SetActive(true);
+                    NPC.gameObject.GetComponent<Move>().canMove = false;
                 }
                 else
                 {
                     canvasappear = false;
                     canvas.SetActive(false);
+                    NPC.gameObject.GetComponent<Move>().canMove = true;
                 }
             }
         }

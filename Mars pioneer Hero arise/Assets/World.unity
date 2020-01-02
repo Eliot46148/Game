@@ -506,10 +506,12 @@ MonoBehaviour:
     PlayerRotation: {x: 0, y: 0, z: 0, w: 0}
     items: 
     VoxelMaps: []
+    bag: []
   biomes:
   - {fileID: 11400000, guid: ca84af9b7cbe34e438c7d03a36755553, type: 2}
   - {fileID: 11400000, guid: 68f1cc039ed33ef4a8e7596a782f29f1, type: 2}
   - {fileID: 11400000, guid: f45b623fa43cab848a60139ac64e223b, type: 2}
+  mid: {r: 0, g: 0, b: 0, a: 0}
   globalLightLevel: 0.5
   day: {r: 0, g: 0, b: 0, a: 0}
   night: {r: 0.011764707, g: 0.015686275, b: 0.027450982, a: 0}
@@ -519,6 +521,7 @@ MonoBehaviour:
   player: {fileID: 1063495618}
   _isPlayerPlace: 0
   loading: {fileID: 2114734577}
+  itemController: {fileID: 437595319}
 --- !u!224 &105413189 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 224560329990934242, guid: 087e41d255afb3a40adfeea60d08a9a7,

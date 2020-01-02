@@ -1,2 +1,8 @@
 Base path: 'D:/Unity/Editor/2019.2.13f1/Editor/Data', plugins path ''
 Cmd: initializeCompiler
+Cmd: preprocess
+  insize=1404 outsize=328 ok=1
+Cmd: preprocess
+  insize=1895 outsize=1087 ok=1
+Cmd: preprocess
+  insize=1314 outsize=261 ok=1

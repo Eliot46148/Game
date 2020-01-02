@@ -13,7 +13,7 @@ public class World : MonoBehaviour
 
     [Header("世界生成參數")]
     public BiomeAttributes[] biomes;
-
+    public Color mid;
     // 全域光源設定
     [Range(0f, 1f)]
     public float globalLightLevel;
@@ -49,6 +49,8 @@ public class World : MonoBehaviour
     // 多執行緒變數
     Thread ChunkUpdateThread;
     public object ChunkUpdateThreadLock = new object();
+
+    public ItemController itemController;
 
     private void Start()
     {
@@ -125,7 +127,7 @@ public class World : MonoBehaviour
                 ApplyModifications();
 
             if (chunksToUpdate.Count > 0) { }
-                UpdateChunks();
+            UpdateChunks();
         }
     }
 
@@ -236,7 +238,7 @@ public class World : MonoBehaviour
             {
                 VoxelMod v = queue.Dequeue();
                 ChunkCoord c = GetChunkCoordFromVector3s(v.position);
-                
+
                 if (chunks[c.x, c.z] == null)
                 {
                     chunks[c.x, c.z] = new Chunk(c, this);
@@ -504,7 +506,7 @@ public class World : MonoBehaviour
                 if (yPos > lode.minHeight && yPos < lode.maxHeight)
                     if (Noise.Get3DPerlin(sv(pos), lode.noiseOffset, lode.scale, lode.threshold))
                         voxelValue = lode.blockID;
-        
+
         /* 生態圈表面植被規則 */
         if (yPos == terrainHeight && biome.placeMajorFlora)
             if (Noise.Get2DPerlin(new Vector2(pos.x, pos.z), 0, biome.majorFloraZoneScale) > biome.majorFloraZoneThreshold)
@@ -585,16 +587,25 @@ public class World : MonoBehaviour
             output[i] = s2v(a[i]);
         return output;
     }
-
     public void ExitAndSave()
     {
-        List<string> map = new List<string>();  
+        List<string> map = new List<string>();
+        List<string> bagST = new List<string>();
+        List<string> toolbarST = new List<string>();
+        List<string> equimentsST = new List<string>();
         for (int mx = 0; mx < VoxelData.WorldSizeInChunks; mx++)
             for (int mz = 0; mz < VoxelData.WorldSizeInChunks; mz++)
                 if (chunks[mx, mz] != null && chunks[mx, mz].model.modificationsRecord.Count > 0)
                     map.Add(JsonUtility.ToJson(new WrappingClass(chunks[mx, mz].model.coord, chunks[mx, mz].model.modificationsRecord), true));
-        //File.WriteAllText(Application.dataPath + "/saveData.save", JsonUtility.ToJson(new SaveData(player.position, player.rotation, player.GetComponent<Toolbar>().it, map), true));
 
+       /* foreach (var item in itemController.bag)
+            bagST.Add(JsonUtility.ToJson((item.itemSlot.stack.id, item.itemSlot.stack.amount)));
+        foreach (var item in itemController.toolbar)
+            toolbarST.Add(JsonUtility.ToJson((item.itemSlot.stack.id, item.itemSlot.stack.amount)));
+        foreach (var item in itemController.equiments)
+            equimentsST.Add(JsonUtility.ToJson((item.itemSlot.stack.id, item.itemSlot.stack.amount)));
+            */
+        File.WriteAllText(Application.dataPath + "/saveData.save", JsonUtility.ToJson(new SaveData(player.position, player.rotation, bagST, toolbarST, equimentsST, map), true));
         Exit();
     }
 

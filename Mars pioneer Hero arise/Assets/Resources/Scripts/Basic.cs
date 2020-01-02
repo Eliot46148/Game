@@ -41,7 +41,7 @@ public class BasicBlock
     [Header("方塊材質設定")]
     public BlockTexture blockTexture;
 
-    public BasicBlock(BlockType t, Vector2s i, BlockTexture texture, bool solid=true)
+    public BasicBlock(BlockType t, Vector2s i, BlockTexture texture, bool solid = true)
     {
         type = t;
         icon = i;
@@ -238,14 +238,19 @@ public class SaveData
 {
     public Vector3 PlayerPosition;
     public Quaternion PlayerRotation;
-    public List<BlockType> items;
+    //public List<BlockType> items;
     public List<string> VoxelMaps;
+    public List<string> Bag;
+    public List<string> Toolbar;
+    public List<string> Equiments;
 
-    public SaveData(Vector3 pos, Quaternion rot, List<BlockType> i, List<string> map)
+    public SaveData(Vector3 position, Quaternion rotation, List<string> bag, List<string> toolbar, List<string> equiments, List<string> map)
     {
-        PlayerPosition = pos;
-        PlayerRotation = rot;
-        items = i;
+        PlayerPosition = position;
+        PlayerRotation = rotation;
+        Bag = bag;
+        Toolbar = toolbar;
+        Equiments = equiments;
         VoxelMaps = map;
     }
 }

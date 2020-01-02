@@ -7,8 +7,11 @@ public class DropItem : MonoBehaviour
 {
     public Transform item;
     public Transform shadow;
+    public Transform player;
     public Basic basic;
     public World world;
+
+    public ItemController ItemController;
 
     public BlockType _type = BlockType.Air;
 
@@ -20,7 +23,7 @@ public class DropItem : MonoBehaviour
     float y0;
 
     public float width = 0.1f;
-    public float eight = 0.1f;
+    public float height = 0.1f;
 
     public float gravity = -9.8f;
     public Vector3 velocity;
@@ -30,6 +33,8 @@ public class DropItem : MonoBehaviour
     void Start () {
         y0 = item.position.y;
         world = GameObject.Find("World").GetComponent<World>();
+        player = GameObject.Find("Player").transform;
+        ItemController = GameObject.Find("GameController").GetComponent<ItemController>();
     }
 	
 	// Update is called once per frame
@@ -49,6 +54,7 @@ public class DropItem : MonoBehaviour
             size = 0;
         shadow.localScale = new Vector3(size, size, 1f);
 
+        OnTrigger();
 
         transform.Translate(velocity, Space.World);
     }
@@ -90,5 +96,19 @@ public class DropItem : MonoBehaviour
         meshFilter.mesh.SetTriangles(triangles.ToArray(), 0);
         meshFilter.mesh.uv = World.sl2vl(uvs).ToArray();
         meshFilter.mesh.RecalculateNormals();
+    }
+
+    private void OnTrigger()
+    {
+        Debug.DrawLine(transform.position, player.position, Color.green);
+        float distance = Vector3.Distance(transform.position, player.position);
+        if (distance < 0.3f)
+        {
+            if (ItemController.PickItem(new ItemStack((byte)_type, 1)))
+                Destroy(transform.gameObject);
+        }else if (distance < 2.5f)
+        {
+            transform.position += (player.position - transform.position) * 3f * Time.deltaTime;
+        }
     }
 }

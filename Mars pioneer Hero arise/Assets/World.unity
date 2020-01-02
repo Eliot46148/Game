@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5406755, g: 0.5717683, b: 0.6142678, a: 1}
+  m_IndirectSpecularColor: {r: 0.5406742, g: 0.57176703, b: 0.61426646, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4168,7 +4168,7 @@ MonoBehaviour:
   world: {fileID: 61269163}
   walkSpeed: 3
   sprintSpeed: 6
-  jumpForce: 3
+  jumpForce: 5
   gravity: -15
   playerWidth: 0.3
   playerHeight: 0.9
@@ -4198,7 +4198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 0.5
   height: 1.8
-  gravity: -9.8
+  gravity: -15
   isGround: 0
   velocity: {x: 0, y: 0, z: 0}
   verticalMomentum: 0
@@ -4990,7 +4990,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1355501610
 Transform:
   m_ObjectHideFlags: 0
@@ -5001,7 +5001,7 @@ Transform:
   m_GameObject: {fileID: 1355501609}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_Children:
   - {fileID: 13109078}
   - {fileID: 306106522}

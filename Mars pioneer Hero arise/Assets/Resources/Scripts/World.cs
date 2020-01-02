@@ -592,20 +592,21 @@ public class World : MonoBehaviour
         List<string> map = new List<string>();
         List<string> bagST = new List<string>();
         List<string> toolbarST = new List<string>();
-        List<string> equimentsST = new List<string>();
         for (int mx = 0; mx < VoxelData.WorldSizeInChunks; mx++)
             for (int mz = 0; mz < VoxelData.WorldSizeInChunks; mz++)
                 if (chunks[mx, mz] != null && chunks[mx, mz].model.modificationsRecord.Count > 0)
                     map.Add(JsonUtility.ToJson(new WrappingClass(chunks[mx, mz].model.coord, chunks[mx, mz].model.modificationsRecord), true));
 
-       /* foreach (var item in itemController.bag)
-            bagST.Add(JsonUtility.ToJson((item.itemSlot.stack.id, item.itemSlot.stack.amount)));
+        foreach (var item in itemController.bag)
+            if (item != null)
+                bagST.Add(JsonUtility.ToJson(new SaveItem(item.itemSlot.stack.id, item.itemSlot.stack.amount), true));
         foreach (var item in itemController.toolbar)
-            toolbarST.Add(JsonUtility.ToJson((item.itemSlot.stack.id, item.itemSlot.stack.amount)));
-        foreach (var item in itemController.equiments)
-            equimentsST.Add(JsonUtility.ToJson((item.itemSlot.stack.id, item.itemSlot.stack.amount)));
-            */
-        File.WriteAllText(Application.dataPath + "/saveData.save", JsonUtility.ToJson(new SaveData(player.position, player.rotation, bagST, toolbarST, equimentsST, map), true));
+            if (item != null && item.HasItem)
+                toolbarST.Add(JsonUtility.ToJson((item.itemSlot.stack.id, item.itemSlot.stack.amount)));
+            else if (item != null && !item.HasItem)
+                toolbarST.Add(JsonUtility.ToJson((0, 0)));
+
+        File.WriteAllText(Application.dataPath + "/saveData.save", JsonUtility.ToJson(new SaveData(player.position, player.rotation, bagST, toolbarST, map), true));
         Exit();
     }
 

@@ -234,6 +234,19 @@ public class WrappingClass
 }
 
 [System.Serializable]
+public class SaveItem
+{
+    public int id;
+    public int amount;
+
+    public SaveItem(int ID, int AMOUNT)
+    {
+        id = ID;
+        amount = AMOUNT;
+    }
+}
+
+[System.Serializable]
 public class SaveData
 {
     public Vector3 PlayerPosition;
@@ -242,15 +255,13 @@ public class SaveData
     public List<string> VoxelMaps;
     public List<string> Bag;
     public List<string> Toolbar;
-    public List<string> Equiments;
 
-    public SaveData(Vector3 position, Quaternion rotation, List<string> bag, List<string> toolbar, List<string> equiments, List<string> map)
+    public SaveData(Vector3 position, Quaternion rotation, List<string> bag, List<string> toolbar, List<string> map)
     {
         PlayerPosition = position;
         PlayerRotation = rotation;
         Bag = bag;
         Toolbar = toolbar;
-        Equiments = equiments;
         VoxelMaps = map;
     }
 }

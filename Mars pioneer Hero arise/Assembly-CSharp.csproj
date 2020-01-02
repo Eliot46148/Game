@@ -78,7 +78,7 @@
     <Compile Include="Assets\Resources\Scripts\EightDirectionalController.cs" />
     <Compile Include="Assets\Resources\Scripts\Inventory.cs" />
     <Compile Include="Assets\Resources\Scripts\InventoryToolbar.cs" />
-    <Compile Include="Assets\Resources\Scripts\ItemData.cs" />
+    <Compile Include="Assets\Resources\Scripts\ItemController.cs" />
     <Compile Include="Assets\Resources\Scripts\ItemStack.cs" />
     <Compile Include="Assets\Resources\Scripts\Structure.cs" />
     <Compile Include="Assets\Resources\Scripts\Toolbar.cs" />
@@ -485,9 +485,6 @@
     </Reference>
     <Reference Include="UnityEngine.XRModule">
       <HintPath>D:/Unity/Editor/2019.2.13f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>D:/Class/108_1/gameboy/Game/Mars pioneer Hero arise/Library/PackageCache/com.unity.ads@2.0.8/UnityEngine.Advertisements.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
       <HintPath>D:/Class/108_1/gameboy/Game/Mars pioneer Hero arise/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>

@@ -1304,6 +1304,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotPrefab: {fileID: 1874542662699632, guid: 087e41d255afb3a40adfeea60d08a9a7, type: 3}
   basic: {fileID: 11400000, guid: e77ecd2fc7e65464ebd24fae5f615faf, type: 2}
+  bag:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   equiments:
   - {fileID: 705325051}
   - {fileID: 1176859584}
@@ -2356,6 +2384,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Toolbar: {fileID: 1589553763}
   Inventory: {fileID: 263469296}
+  toolbar: []
+  bag: []
+  equiments: []
+  craftslots: []
 --- !u!4 &437595320
 Transform:
   m_ObjectHideFlags: 0
@@ -4165,7 +4197,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 0.5
   height: 1.8
-  offsetY: 1
   gravity: -9.8
   isGround: 0
   velocity: {x: 0, y: 0, z: 0}

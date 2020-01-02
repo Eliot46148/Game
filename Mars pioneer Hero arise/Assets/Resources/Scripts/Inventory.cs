@@ -7,7 +7,7 @@ public class Inventory : MonoBehaviour {
     public GameObject slotPrefab;
     World world;
     public Basic basic;
-    public List<ItemSlot> bag = new List<ItemSlot>();
+    public UIItemSlot[] bag = new UIItemSlot[27];
     public UIItemSlot[] equiments = new UIItemSlot[5];
     public UIItemSlot[] craftslots = new UIItemSlot[5];
 
@@ -20,7 +20,8 @@ public class Inventory : MonoBehaviour {
             GameObject newslot = Instantiate(slotPrefab, transform);
 
             ItemStack stack = new ItemStack(2, 10);
-            bag.Add(new ItemSlot(newslot.GetComponent<UIItemSlot>(), stack));       
+            ItemSlot itemSlot = new ItemSlot(newslot.GetComponent<UIItemSlot>(), stack);
+            bag[i] = newslot.GetComponent<UIItemSlot>();
         }
 
         foreach(UIItemSlot s in equiments)

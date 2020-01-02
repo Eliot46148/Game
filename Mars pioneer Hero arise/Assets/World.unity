@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5406755, g: 0.5717683, b: 0.6142678, a: 1}
+  m_IndirectSpecularColor: {r: 0.5406742, g: 0.57176703, b: 0.61426646, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4143,6 +4143,7 @@ GameObject:
   - component: {fileID: 1063495617}
   - component: {fileID: 1063495615}
   - component: {fileID: 1063495616}
+  - component: {fileID: 1063495619}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -4167,7 +4168,7 @@ MonoBehaviour:
   world: {fileID: 61269163}
   walkSpeed: 3
   sprintSpeed: 6
-  jumpForce: 3
+  jumpForce: 5
   gravity: -15
   playerWidth: 0.3
   playerHeight: 0.9
@@ -4197,7 +4198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 0.5
   height: 1.8
-  gravity: -9.8
+  gravity: -15
   isGround: 0
   velocity: {x: 0, y: 0, z: 0}
   verticalMomentum: 0
@@ -4240,6 +4241,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1063495619
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063495614}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5136241, y: 1.794343, z: 0.2934262}
+  m_Center: {x: -0.009419531, y: 0.8946085, z: -0.0014484674}
 --- !u!1 &1080902636
 GameObject:
   m_ObjectHideFlags: 0
@@ -4970,7 +4984,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1355501610
 Transform:
   m_ObjectHideFlags: 0
@@ -4981,7 +4995,7 @@ Transform:
   m_GameObject: {fileID: 1355501609}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_Children:
   - {fileID: 13109078}
   - {fileID: 306106522}

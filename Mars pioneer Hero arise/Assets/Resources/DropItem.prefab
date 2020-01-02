@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4972798065102512}
   - component: {fileID: 33384008377382944}
-  - component: {fileID: 65079604921945666}
   - component: {fileID: 23064061985835256}
   m_Layer: 5
   m_Name: Item
@@ -41,19 +40,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1311441665141030}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65079604921945666
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1311441665141030}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &23064061985835256
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -228,7 +214,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1896896905973696}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
@@ -253,10 +239,11 @@ MonoBehaviour:
   shadow: {fileID: 4094705188101692}
   basic: {fileID: 11400000, guid: e77ecd2fc7e65464ebd24fae5f615faf, type: 2}
   world: {fileID: 0}
+  ItemController: {fileID: 0}
   _type: 5
   count: 0
   width: 0.1
-  eight: 0.1
+  height: 0.1
   gravity: -9.8
   velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &-7545110743724307666
@@ -271,8 +258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42086322f0f3ef1448e20fa096f74a71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 0.5
-  height: 1
+  width: 0.1
+  height: 0.1
   gravity: -9.8
   isGround: 0
   velocity: {x: 0, y: 0, z: 0}

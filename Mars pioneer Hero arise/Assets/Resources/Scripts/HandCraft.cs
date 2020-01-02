@@ -9,7 +9,7 @@ public class HandCraft : MonoBehaviour
     public UIItemSlot[] craftSlots;
     public UIItemSlot resultSlot;
 
-    int[] craftIdArray;
+    public int[] craftIdArray;
 
     public List<HandCraftRecipe> recipes = new List<HandCraftRecipe>();
 
@@ -33,7 +33,7 @@ public class HandCraft : MonoBehaviour
                 }
                 
                 if (isEqual)
-                    ShowCraftResult(r.result);                
+                    ShowCraftResult(r.result);
             }
         }
     }
@@ -46,7 +46,7 @@ public class HandCraft : MonoBehaviour
 
     private void UpdateCraftIdArray()
     {
-        int[] arr = new int[4] { 0, 0, 0, 0 };
+        int[] arr = new int[4];
         for (int i = 0; i < 4; i++)
         {            
             if (!craftSlots[i].itemSlot.HasItem)

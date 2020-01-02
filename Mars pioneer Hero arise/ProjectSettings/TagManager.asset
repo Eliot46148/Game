@@ -8,6 +8,8 @@ TagManager:
   - moon
   - ground
   - Text
+  - Block
+  - HandCraftResultSlot
   layers:
   - Default
   - TransparentFX

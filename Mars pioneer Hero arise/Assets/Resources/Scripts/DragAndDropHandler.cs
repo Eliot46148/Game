@@ -17,6 +17,8 @@ public class DragAndDropHandler : MonoBehaviour {
     World world;
     public Basic basic;
 
+    public UIItemSlot[] handCraftSlots;
+
     private void Start()
     {
         world = GameObject.Find("World").GetComponent<World>();
@@ -33,10 +35,7 @@ public class DragAndDropHandler : MonoBehaviour {
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (CheckForSlot() != null)
-            {
-                HandleSlotClick(CheckForSlot());
-            }
+            CheckForSlot();            
         }
     }
 
@@ -88,7 +87,36 @@ public class DragAndDropHandler : MonoBehaviour {
         }
     }
 
-    private UIItemSlot CheckForSlot()
+    private void HandleHandCraftResultSlotClick(UIItemSlot clickedSlot)
+    {
+        if (clickedSlot == null)
+            return;
+
+        if (cursorSlot.HasItem)
+        {
+            if (cursorSlot.itemSlot.stack.id != clickedSlot.itemSlot.stack.id)
+                return;
+            cursorSlot.itemSlot.add(1);
+            clickedSlot.itemSlot.EmptySlot();
+            ReduceHandCraftSlots();
+        }
+        else
+        {
+            cursorSlot.itemSlot.InsertStack(clickedSlot.itemSlot.TakeAll());
+        }   
+                
+    }
+
+    private void ReduceHandCraftSlots()
+    {
+        foreach(UIItemSlot s in handCraftSlots)
+        {
+            if (s.itemSlot.HasItem)
+                s.itemSlot.add(-1);
+        }
+    }
+
+    private void CheckForSlot()
     {
         m_PointEventData = new PointerEventData(m_Events);
         m_PointEventData.position = Input.mousePosition;
@@ -97,10 +125,19 @@ public class DragAndDropHandler : MonoBehaviour {
         m_Raycaster.Raycast(m_PointEventData, results);
 
         foreach(RaycastResult result in results)
-        {
+        {            
+            if (result.gameObject.tag == "HandCraftResultSlot")
+            {
+                HandleHandCraftResultSlotClick(result.gameObject.GetComponent<UIItemSlot>());
+                return;
+            }
+
             if (result.gameObject.tag == "UIItemSlot")
-                return result.gameObject.GetComponent<UIItemSlot>();
+            {
+                HandleSlotClick(result.gameObject.GetComponent<UIItemSlot>());
+                return;
+            }
         }
-        return null;
+        return;
     }
 }

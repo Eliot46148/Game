@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Move : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class Move : MonoBehaviour
     }
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(0);
+        }
         CharacterController controller = GetComponent<CharacterController>();
         if (controller.isGrounded)
         {
@@ -28,12 +33,8 @@ public class Move : MonoBehaviour
         }
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
+        
         anim.SetInteger("state", 1);
-
-        /*if(GameObject.Find("Minecraft").transform.position.y < -23)
-        {
-            GameObject.Find("Minecraft").transform.position = new Vector3(18.19f, 2.85f, 4.23f);
-        }*/
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
@@ -42,11 +43,7 @@ public class Move : MonoBehaviour
         if (hit.gameObject.tag == "moon")
         {
             GameObject.Find("Minecraft").transform.position = new Vector3(18.19f, 2.85f, 4.23f);
-            //Invoke("SetPosition",1f);
         }
     }
-    /*void SetPosition()
-    {
-        GameObject.Find("Minecraft").transform.position = new Vector3(18.19f, 2.85f, 4.23f);
-    }*/
+
 }

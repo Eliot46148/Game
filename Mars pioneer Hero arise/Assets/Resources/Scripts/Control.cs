@@ -138,7 +138,7 @@ public class Control : MonoBehaviour {
                 world.GetChunkFromVector3s(World.vs(highlightBlock.position)).EditVoxel(highlightBlock.position, BlockType.Air);
             }
             if (Input.GetMouseButtonDown(1))
-            {
+            {                
                 switch (id)
                 {
                     case (BlockType.Box):
@@ -149,6 +149,8 @@ public class Control : MonoBehaviour {
                         {
                             if (toolbar.slots[toolbar.slotindex].HasItem)
                             {
+                                if (toolbar.slots[toolbar.slotindex].itemSlot.stack.id == (int)BlockType.Stick)
+                                    break;
                                 world.GetChunkFromVector3s(World.vs(placeBlock.position)).EditVoxel(placeBlock.position, (BlockType)toolbar.slots[toolbar.slotindex].itemSlot.stack.id);
                                 toolbar.slots[toolbar.slotindex].itemSlot.Take(1);
                             }

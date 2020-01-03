@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/SpaceStop.unity
     guid: 43c1eedc69124ea479e06519f1faae80
+  - enabled: 1
+    path: Assets/startindvideo.unity
+    guid: cd31df468c2cd55459dd14e014f390e5
   m_configObjects: {}

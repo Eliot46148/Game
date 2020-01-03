@@ -73,7 +73,7 @@ public class World : MonoBehaviour
         try
         {
             //throw new System.InvalidOperationException("Debugging");
-            string jsonImport = File.ReadAllText(Application.dataPath + "/saveData.save");
+            string jsonImport = File.ReadAllText(Application.dataPath + "/" + loadWorld.fileName);
             data = JsonUtility.FromJson<SaveData>(jsonImport);
             spawnPosition = data.PlayerPosition;
             player.rotation = data.PlayerRotation;

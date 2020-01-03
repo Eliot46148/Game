@@ -104,6 +104,7 @@
     <Compile Include="Assets\SpaceStopFolder\loadWorld.cs" />
     <Compile Include="Assets\SpaceStopFolder\Move.cs" />
     <Compile Include="Assets\SpaceStopFolder\TextAppear.cs" />
+    <Compile Include="Assets\SpaceStopFolder\videoLoadWorld.cs" />
     <Compile Include="Assets\SpaceStopFolder\WorldAppear.cs" />
     <Compile Include="Assets\voxel_scifi_free\Standard Assets\Characters\FirstPersonCharacter\Scripts\FirstPersonController.cs" />
     <Compile Include="Assets\voxel_scifi_free\Standard Assets\Characters\FirstPersonCharacter\Scripts\HeadBob.cs" />

@@ -149,7 +149,7 @@ public class Control : MonoBehaviour {
                         {
                             if (toolbar.slots[toolbar.slotindex].HasItem)
                             {
-                                if (toolbar.slots[toolbar.slotindex].itemSlot.stack.id == (int)BlockType.Stick)
+                                if (toolbar.slots[toolbar.slotindex].itemSlot.stack.id == (int)BlockType.Stick || toolbar.slots[toolbar.slotindex].itemSlot.stack.id == (int)BlockType.Sword)
                                     break;
                                 world.GetChunkFromVector3s(World.vs(placeBlock.position)).EditVoxel(placeBlock.position, (BlockType)toolbar.slots[toolbar.slotindex].itemSlot.stack.id);
                                 toolbar.slots[toolbar.slotindex].itemSlot.Take(1);

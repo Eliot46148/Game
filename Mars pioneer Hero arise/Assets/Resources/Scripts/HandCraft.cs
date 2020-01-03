@@ -47,6 +47,7 @@ public class HandCraft : MonoBehaviour
 
     private void InitializeRecipes()
     {
+        //recipes.Add(new HandCraftRecipe(new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 0));
         int i = 5;
         recipes.Add(new HandCraftRecipe(new int[] { i, 0, 0, i, 0 ,0, 0, 0, 0 }, 20));
         recipes.Add(new HandCraftRecipe(new int[] { 0, 0, 0, i, 0, 0, i, 0, 0 }, 20));
@@ -54,6 +55,14 @@ public class HandCraft : MonoBehaviour
         recipes.Add(new HandCraftRecipe(new int[] { 0, 0, 0, 0, i, 0, 0, i, 0 }, 20));
         recipes.Add(new HandCraftRecipe(new int[] { 0, 0, i, 0, 0, i, 0, 0, 0 }, 20));
         recipes.Add(new HandCraftRecipe(new int[] { 0, 0, 0, 0, 0, i, 0, 0, i }, 20));
+
+        i = (int)BlockType.Stick;
+        int j = (int)BlockType.IronOre;
+        int k = (int)BlockType.Sword;
+        recipes.Add(new HandCraftRecipe(new int[] { j, 0, 0, j, 0, 0, i, 0, 0 }, k));
+        recipes.Add(new HandCraftRecipe(new int[] { 0, j, 0, 0, j, 0, 0, i, 0 }, k));
+        recipes.Add(new HandCraftRecipe(new int[] { 0, 0, j, 0, 0, j, 0, 0, i }, k));
+
     }
 
     private void UpdateCraftIdArray()

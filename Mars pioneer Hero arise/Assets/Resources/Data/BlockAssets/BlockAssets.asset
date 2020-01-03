@@ -416,6 +416,25 @@ MonoBehaviour:
       under:
         x: 0
         y: 0
+  - name: Sword
+    icon:
+      x: 0
+      y: 0
+    iconImage: {fileID: 21300470, guid: 4f61cd1bbfae1e7469fe9c6d6c754bd7, type: 3}
+    type: 21
+    isSolid: 0
+    renderNeighborFaces: 1
+    transparency: 1
+    blockTexture:
+      side:
+        x: 0
+        y: 0
+      plane:
+        x: 0
+        y: 0
+      under:
+        x: 0
+        y: 0
   - name: Empty
     icon:
       x: 0

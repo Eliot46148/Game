@@ -7,19 +7,29 @@ using UnityEngine.UI;
 public class loadWorld : MonoBehaviour
 {
     public static string fileName;
-    public int index = 0;
+    public static string SceneType;
+    public int fileindex = 0;
+    public int type = 0;
     private float timer_f = 0f;
     private int timer_i = 0;
 
-    public void LoadByHistoryIndex(int sceneIndex)
+    public void LoadVideo()
     {
-        if(sceneIndex == 1)
+        if(fileindex == 1)
         {
             fileName = "saveData.save";
         }
-        else if(sceneIndex == 2)
+        else if(fileindex == 2)
         {
             fileName = "saveData2.save";
+        }
+        if (type == 1)
+        {
+            SceneType = "World";
+        }
+        else if (type == 2)
+        {
+            SceneType = "SpaceStop";
         }
         SceneManager.LoadScene(3);
     }

@@ -172,8 +172,13 @@ public class ItemSlot
 
     public void InsertStack(ItemStack _stack)
     {
-        stack = _stack;
-        uiItemSlot.UpdateSlot();
+        if (_stack.amount > 0)
+        {
+            stack = _stack;
+            uiItemSlot.UpdateSlot();
+        }
+        else
+            EmptySlot();
     }
 
     public bool HasItem

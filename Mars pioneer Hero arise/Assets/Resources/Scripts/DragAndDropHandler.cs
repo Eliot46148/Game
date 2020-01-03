@@ -59,8 +59,11 @@ public class DragAndDropHandler : MonoBehaviour {
         }*/
 
         if (!cursorSlot.HasItem && clickedSlot.HasItem)
-        {
-            cursorSlot.itemSlot.InsertStack(clickedSlot.itemSlot.TakeAll());
+        {   
+            if(amt==-1)
+                cursorSlot.itemSlot.InsertStack(clickedSlot.itemSlot.TakeAll());
+            else
+                cursorSlot.itemSlot.InsertStack(new ItemStack(clickedSlot.itemSlot.stack.id, clickedSlot.itemSlot.Take((int)clickedSlot.itemSlot.stack.amount/2)));
             return;
         }
 
@@ -68,20 +71,14 @@ public class DragAndDropHandler : MonoBehaviour {
         {
             if (amt == -1)
                 clickedSlot.itemSlot.InsertStack(cursorItemSlot.TakeAll());
-            else
-            {
-                int amount = (int)(cursorItemSlot.stack.amount / 2);
-                if (amount == 0)
-                    clickedSlot.itemSlot.InsertStack(cursorItemSlot.TakeAll());
-                else
-                    clickedSlot.itemSlot.InsertStack(new ItemStack(cursorItemSlot.stack.id, amount));
-            }
+            else                     
+                clickedSlot.itemSlot.InsertStack(new ItemStack(cursorItemSlot.stack.id,cursorItemSlot.Take(1)));                                            
             return;
         }
 
         if (cursorSlot.HasItem && clickedSlot.HasItem)
         {
-            if(cursorSlot.itemSlot.stack.id != clickedSlot.itemSlot.stack.id)
+            if(cursorSlot.itemSlot.stack.id != clickedSlot.itemSlot.stack.id && amt==-1)
             {
                 ItemStack oldCursorSlot = cursorSlot.itemSlot.TakeAll();
                 ItemStack oldSlot = clickedSlot.itemSlot.TakeAll();
@@ -92,11 +89,16 @@ public class DragAndDropHandler : MonoBehaviour {
 
             if (cursorSlot.itemSlot.stack.id == clickedSlot.itemSlot.stack.id)
             {
-                int num = 64 - clickedSlot.itemSlot.stack.amount;
-                if(num > 0)
+                if (amt == -1)
                 {
-                    clickedSlot.itemSlot.add(cursorSlot.itemSlot.Take(num));       
+                    int num = 64 - clickedSlot.itemSlot.stack.amount;
+                    if (num > 0)
+                    {
+                        clickedSlot.itemSlot.add(cursorSlot.itemSlot.Take(num));
+                    }
                 }
+                else                
+                    clickedSlot.itemSlot.add(cursorSlot.itemSlot.Take(1));       
             }
         }
     }

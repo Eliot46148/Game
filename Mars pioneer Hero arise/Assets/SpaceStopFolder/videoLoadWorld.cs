@@ -7,6 +7,7 @@ public class videoLoadWorld : MonoBehaviour
 {
     private float timer_f = 0f;
     private int timer_i = 0;
+    public GameObject StartCam, EndCam;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,5 +24,16 @@ public class videoLoadWorld : MonoBehaviour
         {
             SceneManager.LoadScene("World");
         }
+        else if (loadWorld.SceneType == "World")
+        {
+            StartCam.SetActive(true);
+            EndCam.SetActive(false);
+            Debug.Log(timer_i);
+            if (timer_i == 20 || Input.GetKeyDown(KeyCode.Escape))
+            {
+                SceneManager.LoadScene(1);
+            }
+        }
+        
     }
 }

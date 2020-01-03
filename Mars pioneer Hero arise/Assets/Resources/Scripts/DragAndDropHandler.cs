@@ -69,7 +69,13 @@ public class DragAndDropHandler : MonoBehaviour {
             if (amt == -1)
                 clickedSlot.itemSlot.InsertStack(cursorItemSlot.TakeAll());
             else
-                clickedSlot.itemSlot.InsertStack(new ItemStack(cursorItemSlot.stack.id, cursorItemSlot.Take((int)(cursorItemSlot.stack.amount / 2))));
+            {
+                int amount = (int)(cursorItemSlot.stack.amount / 2);
+                if (amount == 0)
+                    clickedSlot.itemSlot.InsertStack(cursorItemSlot.TakeAll());
+                else
+                    clickedSlot.itemSlot.InsertStack(new ItemStack(cursorItemSlot.stack.id, amount));
+            }
             return;
         }
 

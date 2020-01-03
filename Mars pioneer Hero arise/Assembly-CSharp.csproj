@@ -66,10 +66,11 @@
     <Compile Include="Assets\Character Model\MoveAndAnimatorController.cs" />
     <Compile Include="Assets\Character Model\script\charControl.cs" />
     <Compile Include="Assets\Resources\Scripts\Basic.cs" />
-    <Compile Include="Assets\Resources\Scripts\BiomeAttributes.cs" />
-    <Compile Include="Assets\Resources\Scripts\Chunk.cs" />
-    <Compile Include="Assets\Resources\Scripts\ChunkLoadAnimation.cs" />
-    <Compile Include="Assets\Resources\Scripts\ChunkModel.cs" />
+    <Compile Include="Assets\Resources\Scripts\Chunk\BiomeAttributes.cs" />
+    <Compile Include="Assets\Resources\Scripts\Chunk\Chunk.cs" />
+    <Compile Include="Assets\Resources\Scripts\Chunk\ChunkLoadAnimation.cs" />
+    <Compile Include="Assets\Resources\Scripts\Chunk\ChunkModel.cs" />
+    <Compile Include="Assets\Resources\Scripts\Chunk\VoxelData.cs" />
     <Compile Include="Assets\Resources\Scripts\Collider.cs" />
     <Compile Include="Assets\Resources\Scripts\Control.cs" />
     <Compile Include="Assets\Resources\Scripts\CraftRecipe.cs" />
@@ -85,7 +86,6 @@
     <Compile Include="Assets\Resources\Scripts\Structure.cs" />
     <Compile Include="Assets\Resources\Scripts\Toolbar.cs" />
     <Compile Include="Assets\Resources\Scripts\UIItemSlot.cs" />
-    <Compile Include="Assets\Resources\Scripts\VoxelData.cs" />
     <Compile Include="Assets\Resources\Scripts\World.cs" />
     <Compile Include="Assets\Resources\UI\MusicControl.cs" />
     <Compile Include="Assets\Resources\UI\UIBbuttonClick.cs" />

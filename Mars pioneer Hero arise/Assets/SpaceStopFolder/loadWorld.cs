@@ -2,13 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class loadWorld : MonoBehaviour
 {
+    public static string fileName;
+    public int index = 0;
+    private float timer_f = 0f;
+    private int timer_i = 0;
 
     public void LoadByHistoryIndex(int sceneIndex)
     {
-        SceneManager.LoadScene(sceneIndex);
+        if(sceneIndex == 1)
+        {
+            fileName = "saveData.save";
+        }
+        else if(sceneIndex == 2)
+        {
+            fileName = "saveData2.save";
+        }
+        SceneManager.LoadScene(3);
     }
     // Start is called before the first frame update
     void Start()

@@ -103,6 +103,7 @@ public class DragAndDropHandler : MonoBehaviour {
         else
         {
             cursorSlot.itemSlot.InsertStack(clickedSlot.itemSlot.TakeAll());
+            ReduceHandCraftSlots();
         }   
                 
     }

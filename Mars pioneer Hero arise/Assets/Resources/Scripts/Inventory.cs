@@ -11,8 +11,8 @@ public class Inventory : MonoBehaviour {
     public UIItemSlot[] equiments = new UIItemSlot[5];
     public UIItemSlot[] craftslots = new UIItemSlot[5];
 
-    private void Start()
-    {
+    public void Start()
+    {        
         world = GameObject.Find("World").GetComponent<World>();
 
         for (int i = 0; i < 27; i++)

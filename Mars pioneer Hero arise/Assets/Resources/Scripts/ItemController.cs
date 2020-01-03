@@ -13,7 +13,7 @@ public class ItemController : MonoBehaviour {
     public UIItemSlot[] craftslots;    
 
     public void Start()
-    {       
+    {
         toolbar = Toolbar.GetComponent<Toolbar>().slots;
         bag = Inventory.GetComponent<Inventory>().bag;
         equiments = Inventory.GetComponent<Inventory>().equiments;

@@ -50,7 +50,7 @@ public class World : MonoBehaviour
     Thread ChunkUpdateThread;
     public object ChunkUpdateThreadLock = new object();
 
-    public ItemController itemController;
+    public ItemController itemController;    
 
     private void Start()
     {
@@ -97,7 +97,7 @@ public class World : MonoBehaviour
             ChunkUpdateThread.Start();
         }
         GenerateWorld();
-        playerLastChunkCoord = GetChunkCoordFromVector3s(vs(player.position));
+        playerLastChunkCoord = GetChunkCoordFromVector3s(vs(player.position));        
     }
 
     private void Update()

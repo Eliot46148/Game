@@ -51,7 +51,7 @@ public class Control : MonoBehaviour {
     void Start ()
 	{
         //world.UIState = 0;    // 讀取中
-        collider = transform.GetComponent<Collider>();
+        collider = transform.GetComponent<Collider>();       
     }
 
     void FixedUpdate()

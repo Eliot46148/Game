@@ -26,7 +26,7 @@ public class HandCraft : MonoBehaviour
             foreach (HandCraftRecipe r in recipes)
             {
                 bool isEqual = true;
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < 9; i++)
                 {
                     if (craftIdArray[i] != r.recipe[i])
                         isEqual = false;
@@ -34,20 +34,27 @@ public class HandCraft : MonoBehaviour
                 
                 if (isEqual)
                     ShowCraftResult(r.result);
+                else
+                    ShowCraftResult(0);
             }
         }
     }
 
     private void InitializeRecipes()
     {
-        recipes.Add(new HandCraftRecipe(new int[] { 5, 0, 5, 0 }, 10));
-        recipes.Add(new HandCraftRecipe(new int[] { 0, 5, 0, 5 }, 10));
+        int i = 5;
+        recipes.Add(new HandCraftRecipe(new int[] { i, 0, 0, i, 0 ,0, 0, 0, 0 }, 10));
+        recipes.Add(new HandCraftRecipe(new int[] { 0, 0, 0, i, 0, 0, i, 0, 0 }, 10));
+        recipes.Add(new HandCraftRecipe(new int[] { 0, i, 0, 0, i, 0, 0, 0, 0 }, 10));
+        recipes.Add(new HandCraftRecipe(new int[] { 0, 0, 0, 0, i, 0, 0, i, 0 }, 10));
+        recipes.Add(new HandCraftRecipe(new int[] { 0, 0, i, 0, 0, i, 0, 0, 0 }, 10));
+        recipes.Add(new HandCraftRecipe(new int[] { 0, 0, 0, 0, 0, i, 0, 0, i }, 10));
     }
 
     private void UpdateCraftIdArray()
     {
-        int[] arr = new int[4];
-        for (int i = 0; i < 4; i++)
+        int[] arr = new int[9];
+        for (int i = 0; i < 9; i++)
         {            
             if (!craftSlots[i].itemSlot.HasItem)
                 arr[i] = 0;
@@ -59,6 +66,14 @@ public class HandCraft : MonoBehaviour
 
     private void ShowCraftResult(int ID)
     {
-        resultSlot.itemSlot.InsertStack(new ItemStack(ID, 1));
+        if (ID == 0)
+        {
+            if (resultSlot.itemSlot.HasItem)
+                resultSlot.itemSlot.EmptySlot();
+        }
+        else
+        {
+            resultSlot.itemSlot.InsertStack(new ItemStack(ID, 1));
+        }
     }
 }

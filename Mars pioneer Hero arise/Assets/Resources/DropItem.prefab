@@ -199,7 +199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4648203473401002}
   - component: {fileID: 114277836026154586}
-  - component: {fileID: -7545110743724307666}
+  - component: {fileID: -3551084976504359995}
   m_Layer: 5
   m_Name: DropItem
   m_TagString: Untagged
@@ -237,6 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 4972798065102512}
   shadow: {fileID: 4094705188101692}
+  player: {fileID: 0}
   basic: {fileID: 11400000, guid: e77ecd2fc7e65464ebd24fae5f615faf, type: 2}
   world: {fileID: 0}
   ItemController: {fileID: 0}
@@ -244,9 +245,9 @@ MonoBehaviour:
   count: 0
   width: 0.1
   height: 0.1
-  gravity: -9.8
+  gravity: -15
   velocity: {x: 0, y: 0, z: 0}
---- !u!114 &-7545110743724307666
+--- !u!114 &-3551084976504359995
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -260,7 +261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 0.1
   height: 0.1
-  gravity: -9.8
+  gravity: -2
   isGround: 0
   velocity: {x: 0, y: 0, z: 0}
   verticalMomentum: 0

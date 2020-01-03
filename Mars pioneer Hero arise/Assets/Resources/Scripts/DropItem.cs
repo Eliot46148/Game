@@ -31,7 +31,7 @@ public class DropItem : MonoBehaviour
 
     // Use this for initialization
     void Start () {
-        y0 = item.position.y;
+        y0 = item.localPosition.y;
         world = GameObject.Find("World").GetComponent<World>();
         player = GameObject.Find("Player").transform;
         ItemController = GameObject.Find("GameController").GetComponent<ItemController>();
@@ -48,7 +48,7 @@ public class DropItem : MonoBehaviour
     void FixedUpdate()
     {
         transform.Rotate(new Vector3(0, 75 * Time.deltaTime, 0));
-        item.position = new Vector3(item.position.x,  y0 + 0.1f * Mathf.Sin(3f * Time.time), item.position.z);
+        item.localPosition = new Vector3(item.localPosition.x,  y0 + 0.1f * Mathf.Sin(3f * Time.time), item.localPosition.z);
         float size = 0.5f * (2 - item.localPosition.y) / 2f;
         if (size < 0)
             size = 0;

@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Threading;
 using System.IO;
 using UnityEngine.SceneManagement;
+using UnityEngine.AI;
 
 public class World : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class World : MonoBehaviour
     [Header("世界生成參數")]
     public BiomeAttributes[] biomes;
     public Color mid;
+    public NavMeshSurface navMeshSurface;
     // 全域光源設定
     [Range(0f, 1f)]
     public float globalLightLevel;
@@ -49,6 +51,7 @@ public class World : MonoBehaviour
     // 多執行緒變數
     Thread ChunkUpdateThread;
     public object ChunkUpdateThreadLock = new object();
+    List<WrappingClass> saveModifications = new List<WrappingClass>();
 
     public ItemController itemController;    
 
@@ -77,6 +80,8 @@ public class World : MonoBehaviour
             data = JsonUtility.FromJson<SaveData>(jsonImport);
             spawnPosition = data.PlayerPosition;
             player.rotation = data.PlayerRotation;
+            foreach (string json in data.VoxelMaps)
+                saveModifications.Add(JsonUtility.FromJson<WrappingClass>(json));
         }
         catch
         {
@@ -96,7 +101,7 @@ public class World : MonoBehaviour
             ChunkUpdateThread = new Thread(new ThreadStart(ThreadedUpdate));
             ChunkUpdateThread.Start();
         }
-        GenerateWorld();
+        GenerateWorld(5);
         playerLastChunkCoord = GetChunkCoordFromVector3s(vs(player.position));        
     }
 
@@ -122,18 +127,22 @@ public class World : MonoBehaviour
         // 更新預計被更新的區塊
         if (!settings.enableThreading)
         {
-
             if (!applyingModifications)
                 ApplyModifications();
 
             if (chunksToUpdate.Count > 0) { }
             UpdateChunks();
         }
+
+        //navMeshSurface.BuildNavMesh();
     }
 
     // 生成主要副程式
-    void GenerateWorld()
+    void GenerateWorld(int preGenerateRadius = -1)
     {
+        preGenerateRadius = (preGenerateRadius == -1 ? settings.viewDistance : preGenerateRadius);
+
+        /*
         if (data != null)
         {
             foreach (string json in data.VoxelMaps)
@@ -147,19 +156,23 @@ public class World : MonoBehaviour
             }
         }
         else
-        {
-            for (int x = (VoxelData.WorldSizeInChunks / 2) - settings.viewDistance; x < (VoxelData.WorldSizeInChunks / 2) + settings.viewDistance; x++)
-            {
-                for (int z = (VoxelData.WorldSizeInChunks / 2) - settings.viewDistance; z < (VoxelData.WorldSizeInChunks / 2) + settings.viewDistance; z++)
+        {*/
+        ChunkCoord playerChunk = GetChunkCoordFromVector3s(vs(spawnPosition));
+        for (int x =-preGenerateRadius; x < preGenerateRadius; x++)
+            for (int z = -preGenerateRadius; z < preGenerateRadius; z++)
+                if (Mathf.Pow((Mathf.Pow(x, 2f) + Mathf.Pow(z, 2f)), 0.5f) < preGenerateRadius)
                 {
-                    ChunkCoord newChunk = new ChunkCoord(x, z);
-                    chunks[x, z] = new Chunk(newChunk, this);
+                    ChunkCoord newChunk = new ChunkCoord(playerChunk.x + x, playerChunk.z + z);
+                    chunks[newChunk.x, newChunk.z] = new Chunk(newChunk, this);
                     chunksToCreate.Add(newChunk);
                 }
-            }
-        }
+        /*
+        }*/
 
         // 生成玩家位置
+        _isPlayerPlace = true;
+        loading.SetActive(false); // 讀取結束
+        UIState = 1;
         player.position = spawnPosition;
         CheckViewDistance();
     }
@@ -169,7 +182,20 @@ public class World : MonoBehaviour
     {
         ChunkCoord c = chunksToCreate[0];
         chunksToCreate.RemoveAt(0);
-        chunks[c.x, c.z].Init();
+
+        WrappingClass modification = null;
+        foreach (WrappingClass mod in saveModifications)
+            if (mod.Coordinate == c)
+                modification = mod;
+
+        if (modification != null)
+        {
+            chunks[c.x, c.z].Init(modification.Modifications);
+            saveModifications.Remove(modification);
+        }
+        else
+            chunks[c.x, c.z].Init();
+
         if (!_isPlayerPlace && c.Equals(playerChunkCoord))
         {
             spawnPosition = new Vector3((VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f, VoxelData.ChunkHeight - 128f, (VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f);
@@ -275,33 +301,37 @@ public class World : MonoBehaviour
         playerLastChunkCoord = playerChunkCoord;
         activeChunks.Clear();
 
-        // 迴圈所有視野範圍內的區塊 ( 以玩家為中心 (視野*2+1) x (視野*2+1) 的矩陣大小 )
+        // 迴圈所有視野範圍內的區塊 ( 以玩家為中心 直徑為(視野)的圓形 的矩陣大小 )
         for (int x = coord.x - settings.viewDistance; x < coord.x + settings.viewDistance; x++)
         {
             for (int z = coord.z - settings.viewDistance; z < coord.z + settings.viewDistance; z++)
             {
-                ChunkCoord thisChunkCoord = new ChunkCoord(x, z);
-
-                // 如果區塊存在於世界中
-                if (IsChunkInWorld(thisChunkCoord))
+                ChunkCoord newChunk = new ChunkCoord(x - coord.x, z - coord.z);
+                if (Mathf.Pow((Mathf.Pow(newChunk.x, 2f) + Mathf.Pow(newChunk.z, 2f)), 0.5f) < settings.viewDistance)
                 {
-                    // 如果區塊還沒被生成
-                    if (chunks[x, z] == null)
-                    {
-                        chunks[x, z] = new Chunk(thisChunkCoord, this);
-                        chunksToCreate.Add(thisChunkCoord);
-                    }
-                    else if (!chunks[x, z].isActive)
-                    {
-                        chunks[x, z].isActive = true;
-                    }
-                    activeChunks.Add(thisChunkCoord);
-                }
+                    ChunkCoord thisChunkCoord = new ChunkCoord(x, z);
 
-                // 如果區塊已經顯示那麼不再重複顯示
-                for (int i = 0; i < previouslyActiveChunks.Count; i++)
-                    if (previouslyActiveChunks[i].Equals(thisChunkCoord))
-                        previouslyActiveChunks.RemoveAt(i);
+                    // 如果區塊存在於世界中
+                    if (IsChunkInWorld(thisChunkCoord))
+                    {
+                        // 如果區塊還沒被生成
+                        if (chunks[x, z] == null)
+                        {
+                            chunks[x, z] = new Chunk(thisChunkCoord, this);
+                            chunksToCreate.Add(thisChunkCoord);
+                        }
+                        else if (!chunks[x, z].isActive)
+                        {
+                            chunks[x, z].isActive = true;
+                        }
+                        activeChunks.Add(thisChunkCoord);
+                    }
+
+                    // 如果區塊已經顯示那麼不再重複顯示
+                    for (int i = 0; i < previouslyActiveChunks.Count; i++)
+                        if (previouslyActiveChunks[i].Equals(thisChunkCoord))
+                            previouslyActiveChunks.RemoveAt(i);
+                }
             }
         }
 

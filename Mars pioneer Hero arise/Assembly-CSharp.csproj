@@ -72,7 +72,12 @@
     <Compile Include="Assets\Resources\Scripts\Chunk\ChunkModel.cs" />
     <Compile Include="Assets\Resources\Scripts\Chunk\VoxelData.cs" />
     <Compile Include="Assets\Resources\Scripts\Collider.cs" />
-    <Compile Include="Assets\Resources\Scripts\Control.cs" />
+    <Compile Include="Assets\Resources\Scripts\Controller\CharacterCombat.cs" />
+    <Compile Include="Assets\Resources\Scripts\Controller\CharacterStats.cs" />
+    <Compile Include="Assets\Resources\Scripts\Controller\Control.cs" />
+    <Compile Include="Assets\Resources\Scripts\Controller\EnemyController.cs" />
+    <Compile Include="Assets\Resources\Scripts\Controller\PlayerManager.cs" />
+    <Compile Include="Assets\Resources\Scripts\Controller\Stats.cs" />
     <Compile Include="Assets\Resources\Scripts\CraftRecipe.cs" />
     <Compile Include="Assets\Resources\Scripts\DebugScreen.cs" />
     <Compile Include="Assets\Resources\Scripts\DragAndDropHandler.cs" />
@@ -851,6 +856,16 @@
     <Reference Include="Boo.Lang">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.13f1/Editor/Data/MonoBleedingEdge/lib/mono/unityscript/Boo.Lang.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="NavMeshComponentsEditor.csproj">
+      <Project>{9549A5B2-BEAF-53F4-B457-6CAA9A37DD2D}</Project>
+      <Name>NavMeshComponentsEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshComponents.csproj">
+      <Project>{731D073D-F87A-3661-C5A9-CFB91288C968}</Project>
+      <Name>NavMeshComponents</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

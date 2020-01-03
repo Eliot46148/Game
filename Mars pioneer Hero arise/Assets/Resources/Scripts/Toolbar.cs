@@ -12,7 +12,7 @@ public class Toolbar : MonoBehaviour
 
     public void Start()
     {
-        byte index = 1;
+        byte index = 10;
         foreach(UIItemSlot s in slots)
         {
             ItemStack stack = new ItemStack(index, (byte)Random.Range(2,65));

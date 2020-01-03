@@ -35,11 +35,16 @@ public class DragAndDropHandler : MonoBehaviour {
 
         if (Input.GetMouseButtonDown(0))
         {
-            CheckForSlot();            
+            CheckForSlot();
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            CheckForSlot(0);
         }
     }
 
-    private void HandleSlotClick(UIItemSlot clickedSlot)
+    private void HandleSlotClick(UIItemSlot clickedSlot, int amt = -1)
     {
         if (clickedSlot == null)
             return;
@@ -61,7 +66,10 @@ public class DragAndDropHandler : MonoBehaviour {
 
         if (cursorSlot.HasItem && !clickedSlot.HasItem)
         {
-            clickedSlot.itemSlot.InsertStack(cursorItemSlot.TakeAll());
+            if (amt == -1)
+                clickedSlot.itemSlot.InsertStack(cursorItemSlot.TakeAll());
+            else
+                clickedSlot.itemSlot.InsertStack(new ItemStack(cursorItemSlot.stack.id, cursorItemSlot.Take((int)(cursorItemSlot.stack.amount / 2))));
             return;
         }
 
@@ -117,7 +125,7 @@ public class DragAndDropHandler : MonoBehaviour {
         }
     }
 
-    private void CheckForSlot()
+    private void CheckForSlot(int amt = -1)
     {
         m_PointEventData = new PointerEventData(m_Events);
         m_PointEventData.position = Input.mousePosition;
@@ -135,7 +143,7 @@ public class DragAndDropHandler : MonoBehaviour {
 
             if (result.gameObject.tag == "UIItemSlot")
             {
-                HandleSlotClick(result.gameObject.GetComponent<UIItemSlot>());
+                HandleSlotClick(result.gameObject.GetComponent<UIItemSlot>(), amt);
                 return;
             }
         }

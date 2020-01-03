@@ -29,11 +29,16 @@ public class HandCraft : MonoBehaviour
                 for (int i = 0; i < 9; i++)
                 {
                     if (craftIdArray[i] != r.recipe[i])
+                    {                                            
                         isEqual = false;
+                    }
                 }
-                
+
                 if (isEqual)
+                {
                     ShowCraftResult(r.result);
+                    break;
+                }
                 else
                     ShowCraftResult(0);
             }

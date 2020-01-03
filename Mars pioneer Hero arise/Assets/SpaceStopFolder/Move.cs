@@ -42,7 +42,7 @@ public class Move : MonoBehaviour
         GameObject.Find("Minecraft").transform.rotation = Quaternion.LookRotation(new Vector3(controller.velocity.x, 0, controller.velocity.z), Vector3.up);
 
         if (controller.velocity.x + controller.velocity.z != 0)
-            anim.SetInteger("state", 1);
+            anim.SetInteger("state", 1); 
         else
             anim.SetInteger("state", 0);
     }

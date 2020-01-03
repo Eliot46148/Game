@@ -53,7 +53,7 @@ public class World : MonoBehaviour
     public object ChunkUpdateThreadLock = new object();
     List<WrappingClass> saveModifications = new List<WrappingClass>();
 
-    public ItemController itemController;    
+    public ItemController itemController;
 
     private void Start()
     {
@@ -76,7 +76,7 @@ public class World : MonoBehaviour
         try
         {
             //throw new System.InvalidOperationException("Debugging");
-            string jsonImport = File.ReadAllText(Application.dataPath + "/saveData.save");
+            string jsonImport = File.ReadAllText(Application.dataPath + "/" + loadWorld.fileName);
             data = JsonUtility.FromJson<SaveData>(jsonImport);
             spawnPosition = data.PlayerPosition;
             player.rotation = data.PlayerRotation;
@@ -632,9 +632,9 @@ public class World : MonoBehaviour
                 bagST.Add(JsonUtility.ToJson(new SaveItem(item.itemSlot.stack.id, item.itemSlot.stack.amount), true));
         foreach (var item in itemController.toolbar)
             if (item != null && item.HasItem)
-                toolbarST.Add(JsonUtility.ToJson((item.itemSlot.stack.id, item.itemSlot.stack.amount)));
+                toolbarST.Add(JsonUtility.ToJson(new SaveItem(item.itemSlot.stack.id, item.itemSlot.stack.amount), true));
             else if (item != null && !item.HasItem)
-                toolbarST.Add(JsonUtility.ToJson((0, 0)));
+                toolbarST.Add(JsonUtility.ToJson((0, 0), true));
 
         File.WriteAllText(Application.dataPath + "/saveData.save", JsonUtility.ToJson(new SaveData(player.position, player.rotation, bagST, toolbarST, map), true));
         Exit();

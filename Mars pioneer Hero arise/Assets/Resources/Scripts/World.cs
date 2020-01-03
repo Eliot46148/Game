@@ -5,6 +5,7 @@ using System.Threading;
 using System.IO;
 using UnityEngine.SceneManagement;
 using UnityEngine.AI;
+using System.Linq;
 
 public class World : MonoBehaviour
 {
@@ -40,6 +41,8 @@ public class World : MonoBehaviour
     List<ChunkCoord> chunksToCreate = new List<ChunkCoord>();   // 預計被生成的區塊座標陣列
     List<Chunk> _chunksToUpdate = new List<Chunk>();            // 預計被更新的區塊陣列
     Queue<Chunk> _chunksToDraw = new Queue<Chunk>();            // 預計被繪製的區塊陣列
+    int chunkToBeCreate;
+    int chunkCreated;
 
     // 生態區更新變數
     Queue<Queue<VoxelMod>> modifications = new Queue<Queue<VoxelMod>>();
@@ -82,10 +85,12 @@ public class World : MonoBehaviour
             player.rotation = data.PlayerRotation;
             foreach (string json in data.VoxelMaps)
                 saveModifications.Add(JsonUtility.FromJson<WrappingClass>(json));
+            Debug.Log("Get known save file : " + Application.dataPath + "/" + loadWorld.fileName + " .");
         }
         catch
         {
             spawnPosition = new Vector3((VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f, VoxelData.ChunkHeight - 50f, (VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f);
+            Debug.Log("Load world with new setting.");
         }
 
         // 初始化亂數
@@ -133,8 +138,6 @@ public class World : MonoBehaviour
             if (chunksToUpdate.Count > 0) { }
             UpdateChunks();
         }
-
-        //navMeshSurface.BuildNavMesh();
     }
 
     // 生成主要副程式
@@ -165,14 +168,12 @@ public class World : MonoBehaviour
                     ChunkCoord newChunk = new ChunkCoord(playerChunk.x + x, playerChunk.z + z);
                     chunks[newChunk.x, newChunk.z] = new Chunk(newChunk, this);
                     chunksToCreate.Add(newChunk);
+                    chunkToBeCreate++;
                 }
         /*
         }*/
 
         // 生成玩家位置
-        _isPlayerPlace = true;
-        loading.SetActive(false); // 讀取結束
-        UIState = 1;
         player.position = spawnPosition;
         CheckViewDistance();
     }
@@ -199,6 +200,12 @@ public class World : MonoBehaviour
         if (!_isPlayerPlace && c.Equals(playerChunkCoord))
         {
             spawnPosition = new Vector3((VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f, VoxelData.ChunkHeight - 128f, (VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f);
+        }
+        if (chunkCreated < chunkToBeCreate)
+            chunkCreated++;
+        else
+        {
+            CheckViewDistance();
             _isPlayerPlace = true;
             loading.SetActive(false); // 讀取結束
             UIState = 1;
@@ -325,6 +332,7 @@ public class World : MonoBehaviour
                             chunks[x, z].isActive = true;
                         }
                         activeChunks.Add(thisChunkCoord);
+                        //navMeshSurface.BuildNavMesh();
                     }
 
                     // 如果區塊已經顯示那麼不再重複顯示
@@ -636,14 +644,14 @@ public class World : MonoBehaviour
             else if (item != null && !item.HasItem)
                 toolbarST.Add(JsonUtility.ToJson((0, 0), true));
 
-        File.WriteAllText(Application.dataPath + "/saveData.save", JsonUtility.ToJson(new SaveData(player.position, player.rotation, bagST, toolbarST, map), true));
+        File.WriteAllText(Application.dataPath + "/" + loadWorld.fileName, JsonUtility.ToJson(new SaveData(player.position, player.rotation, bagST, toolbarST, map), true));
         Exit();
     }
 
     public void Exit()
     {
         UIState = 1;
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("SpaceStop");
     }
 }
 

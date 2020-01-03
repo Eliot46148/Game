@@ -18,10 +18,10 @@ public class videoLoadWorld : MonoBehaviour
     {
         timer_f += Time.deltaTime;
         timer_i = (int)timer_f;
-        Debug.Log(timer_i);
+        //Debug.Log(timer_i);
         if (timer_i == 53 || Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene("World");
         }
     }
 }

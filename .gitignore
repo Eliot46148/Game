@@ -23,6 +23,7 @@ UnityVS.meta
 *.user
 *.unityproj
 *.booproj
+*.log
 StyleCopViolations.xml
 StyleCop.Cache
 

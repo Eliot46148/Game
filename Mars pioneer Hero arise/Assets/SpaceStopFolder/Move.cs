@@ -39,7 +39,10 @@ public class Move : MonoBehaviour
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
 
-        GameObject.Find("Minecraft").transform.rotation = Quaternion.LookRotation(new Vector3(controller.velocity.x, 0, controller.velocity.z), Vector3.up);
+        if (new Vector3(controller.velocity.x, 0, controller.velocity.z) != Vector3.zero)
+        {
+            GameObject.Find("Minecraft").transform.rotation = Quaternion.LookRotation(new Vector3(controller.velocity.x, 0, controller.velocity.z), Vector3.up);
+        }
 
         if (controller.velocity.x + controller.velocity.z != 0)
             anim.SetInteger("state", 1); 

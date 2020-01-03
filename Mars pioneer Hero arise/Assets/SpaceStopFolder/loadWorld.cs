@@ -21,7 +21,7 @@ public class loadWorld : MonoBehaviour
         {
             fileName = "saveData2.save";
         }
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene("startindvideo");
     }
     // Start is called before the first frame update
     void Start()

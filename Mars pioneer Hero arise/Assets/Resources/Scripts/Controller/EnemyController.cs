@@ -11,14 +11,14 @@ public class EnemyController : MonoBehaviour
     public float lookRadius = 10f;  // Detection range for player
 
     Transform target;   // Reference to the player
-    NavMeshAgent agent; // Reference to the NavMeshAgent
+    NavAgent agent; // Reference to the NavMeshAgent
     CharacterCombat combat;
 
     // Use this for initialization
     void Start()
     {
         target = PlayerManager.instance.player.transform;
-        agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavAgent>();
         combat = GetComponent<CharacterCombat>();
     }
 
@@ -43,8 +43,8 @@ public class EnemyController : MonoBehaviour
                     combat.Attack(targetStats);
                 }
 
-                FaceTarget();   // Make sure to face towards the target
             }
+            FaceTarget();   // Make sure to face towards the target
         }
     }
 
@@ -52,8 +52,8 @@ public class EnemyController : MonoBehaviour
     void FaceTarget()
     {
         Vector3 direction = (target.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+        if (direction.x !=0 || direction.z != 0)
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z)), Time.deltaTime * 5f);
     }
 
     // Show the lookRadius in editor

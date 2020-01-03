@@ -238,9 +238,10 @@ public class SaveItem
 {
     public int id;
     public int amount;
-
+    
     public SaveItem(int ID, int AMOUNT)
     {
+
         id = ID;
         amount = AMOUNT;
     }

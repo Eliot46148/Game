@@ -66,14 +66,14 @@ MonoBehaviour:
     transparency: 0
     blockTexture:
       side:
-        x: 6
-        y: 8
+        x: 0
+        y: 3
       plane:
-        x: 6
-        y: 8
+        x: 0
+        y: 0
       under:
-        x: 6
-        y: 8
+        x: 0
+        y: 2
   - name: Dirt
     icon:
       x: 0
@@ -161,13 +161,13 @@ MonoBehaviour:
     transparency: 0
     blockTexture:
       side:
-        x: 0
+        x: 9
         y: 0
       plane:
-        x: 0
+        x: 9
         y: 0
       under:
-        x: 0
+        x: 9
         y: 0
   - name: Lava
     icon:
@@ -180,14 +180,14 @@ MonoBehaviour:
     transparency: 0
     blockTexture:
       side:
-        x: 0
-        y: 0
+        x: 3
+        y: 21
       plane:
-        x: 0
-        y: 0
+        x: 3
+        y: 21
       under:
-        x: 0
-        y: 0
+        x: 3
+        y: 21
   - name: Sand
     icon:
       x: 0
@@ -218,14 +218,14 @@ MonoBehaviour:
     transparency: 0
     blockTexture:
       side:
-        x: 0
-        y: 0
+        x: 1
+        y: 3
       plane:
-        x: 0
-        y: 0
+        x: 1
+        y: 3
       under:
-        x: 0
-        y: 0
+        x: 1
+        y: 3
   - name: Gold Ore
     icon:
       x: 0
@@ -359,7 +359,7 @@ MonoBehaviour:
       under:
         x: 4
         y: 7
-  - name: Snow Grass
+  - name: Sponge
     icon:
       x: 0
       y: 0
@@ -370,13 +370,13 @@ MonoBehaviour:
     transparency: 0
     blockTexture:
       side:
-        x: 0
+        x: 3
         y: 0
       plane:
-        x: 0
+        x: 3
         y: 0
       under:
-        x: 0
+        x: 3
         y: 0
   - name: Box
     icon:
@@ -390,7 +390,7 @@ MonoBehaviour:
     blockTexture:
       side:
         x: 6
-        y: 19
+        y: 18
       plane:
         x: 6
         y: 17

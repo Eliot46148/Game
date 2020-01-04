@@ -11,7 +11,16 @@ public class videoLoadWorld : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (loadWorld.SceneType == "SpaceStop")
+        {
+            StartCam.SetActive(true);
+            EndCam.SetActive(false);
+        }
+        else
+        {
+            StartCam.SetActive(false);
+            EndCam.SetActive(true);
+        }
     }
 
     // Update is called once per frame
@@ -20,20 +29,9 @@ public class videoLoadWorld : MonoBehaviour
         timer_f += Time.deltaTime;
         timer_i = (int)timer_f;
         //Debug.Log(timer_i);
-        if (timer_i == 53 || Input.GetKeyDown(KeyCode.Escape))
-        {
+        if (loadWorld.SceneType == "SpaceStop" && (timer_i >= 53 || Input.GetKeyDown(KeyCode.Escape)))
             SceneManager.LoadScene("World");
-        }
-        else if (loadWorld.SceneType == "World")
-        {
-            StartCam.SetActive(true);
-            EndCam.SetActive(false);
-            Debug.Log(timer_i);
-            if (timer_i == 20 || Input.GetKeyDown(KeyCode.Escape))
-            {
-                SceneManager.LoadScene(1);
-            }
-        }
-        
+        if (loadWorld.SceneType == "World" && (timer_i >= 20 || Input.GetKeyDown(KeyCode.Escape)))
+            SceneManager.LoadScene("SpaceStop");
     }
 }

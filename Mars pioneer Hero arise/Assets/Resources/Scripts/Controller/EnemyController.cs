@@ -13,6 +13,7 @@ public class EnemyController : MonoBehaviour
     Transform target;   // Reference to the player
     NavAgent agent; // Reference to the NavMeshAgent
     CharacterCombat combat;
+    CharacterStats stats;
 
     // Use this for initialization
     void Start()
@@ -20,6 +21,7 @@ public class EnemyController : MonoBehaviour
         target = PlayerManager.instance.player.transform;
         agent = GetComponent<NavAgent>();
         combat = GetComponent<CharacterCombat>();
+        stats = GetComponent<CharacterStats>();
     }
 
     // Update is called once per frame
@@ -41,11 +43,19 @@ public class EnemyController : MonoBehaviour
                 if (targetStats != null)
                 {
                     combat.Attack(targetStats);
+                    agent.collider.anim.SetBool("attack", true);
                 }
+                else
+                    agent.collider.anim.SetBool("attack", false);
 
             }
             FaceTarget();   // Make sure to face towards the target
         }
+        else
+            agent.SetDestination(agent.transform.position);
+
+        if (stats.currentHealth <= 0)
+            Die();
     }
 
     // Rotate to face the target
@@ -61,5 +71,12 @@ public class EnemyController : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
+    }
+
+    void Die()
+    {
+        for (int i = 0; i < (int)Random.Range(1, 5); i++)
+            GameObject.Find("World").GetComponent<World>().DropItem((BlockType)Random.Range(2, 20), transform.position);
+        Destroy(transform.gameObject);
     }
 }

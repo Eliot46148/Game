@@ -347,7 +347,7 @@ MonoBehaviour:
     iconImage: {fileID: 21300250, guid: 4f61cd1bbfae1e7469fe9c6d6c754bd7, type: 3}
     type: 17
     isSolid: 1
-    renderNeighborFaces: 0
+    renderNeighborFaces: 1
     transparency: 0
     blockTexture:
       side:

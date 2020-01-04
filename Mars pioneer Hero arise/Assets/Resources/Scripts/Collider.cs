@@ -24,6 +24,8 @@ public class Collider : MonoBehaviour
     public bool isAbleToFront;
     public bool isAbleToBack;
 
+    public Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +42,13 @@ public class Collider : MonoBehaviour
 
         }
         transform.Translate(velocity, Space.World);
+        if (anim != null)
+        {
+            if (velocity.x!=0 || velocity.z != 0)
+                anim.SetInteger("state", 1);
+            else
+                anim.SetInteger("state", 0);
+        }
     }
 
 
@@ -49,7 +58,7 @@ public class Collider : MonoBehaviour
     }
 
 
-    private void CalculateVelocity()
+    public void CalculateVelocity()
     {
 
         // Affect vertical momentum with gravity.

@@ -29,6 +29,7 @@ public class World : MonoBehaviour
     public Material transparentMaterial;
     public List<SaveItem> toolbarLoadData;
     public List<SaveItem> bagLoadData;
+    public GameObject dropItemPrefab;         // 掉落物品
 
     [Header("玩家設定")]
     public Transform player;
@@ -370,6 +371,15 @@ public class World : MonoBehaviour
         return blocks[(int)GetInitialVoxel(pos)].isSolid;
     }
 
+    // 用座標取得地面座標
+    public Vector3 GetGroundY(Vector3 pos)
+    {
+        for (int i = 255; i >= 0; i--)
+            if (CheckForVoxel(vs(new Vector3(pos.x, i, pos.z))))
+                return new Vector3(pos.x, i + 1, pos.z);
+        return new Vector3(pos.x, 100, pos.z);
+    }
+
     // 用實際座標得到方塊
     public VoxelState GetVoxelState(Vector3s pos)
     {
@@ -658,7 +668,16 @@ public class World : MonoBehaviour
     public void Exit()
     {
         UIState = 1;
-        SceneManager.LoadScene("SpaceStop");
+        loadWorld.SceneType = "World";
+        SceneManager.LoadScene("startindvideo");
+    }
+
+    public GameObject DropItem(BlockType id, Vector3 position)
+    {
+        GameObject drop = Instantiate(dropItemPrefab, position, Quaternion.identity);
+        drop.transform.SetParent(GameObject.Find("DropItem").transform);
+        drop.GetComponent<DropItem>().ChangeSkin(id);
+        return drop;
     }
 }
 

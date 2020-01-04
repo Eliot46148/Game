@@ -16,11 +16,6 @@ public class Control : MonoBehaviour {
     public float walkSpeed = 3f;
     public float sprintSpeed = 6f;
     public float jumpForce = 3f;
-    public float gravity = -9.8f;
-
-    // 玩家碰撞設定
-    public float playerWidth = 0.3f;
-    public float playerHeight = 0.9f;
 
     // 滑鼠鍵盤輸入的變數
     private float horizontal;
@@ -35,7 +30,6 @@ public class Control : MonoBehaviour {
 
     public Transform highlightBlock;    // 選中的方塊位置參考物件
     public Transform placeBlock;        // 創建的方塊位置參考物件
-    public GameObject dropItem;         // 掉落物品
     public float checkIncrement = 0.1f; // 模擬 Raycast 的增量
     public float reach = 8f;            // 玩家手長
     public int CurrentBlock = 2;
@@ -132,10 +126,20 @@ public class Control : MonoBehaviour {
                 id = chunk.model.voxelMap[(int)pos.x % VoxelData.ChunkWidth, (int)pos.y % VoxelData.ChunkHeight, (int)pos.z % VoxelData.ChunkWidth].id;
             if (Input.GetMouseButtonDown(0))
             {
-                GameObject drop = Instantiate(dropItem, highlightBlock.position, Quaternion.identity);
-                drop.transform.SetParent(GameObject.Find("DropItem").transform);
-                drop.GetComponent<DropItem>().ChangeSkin(world.GetChunkFromVector3s(World.vs(highlightBlock.position)).GetBlockID(highlightBlock.position));
-                world.GetChunkFromVector3s(World.vs(highlightBlock.position)).EditVoxel(highlightBlock.position, BlockType.Air);
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit))
+                {
+                    if (hit.transform.tag == "Enemy")
+                    {
+                        hit.transform.GetComponent<CharacterStats>().TakeDamage(GetComponent<CharacterStats>().damage.GetValue());
+                    }
+                }
+                else
+                {
+                    world.DropItem(world.GetChunkFromVector3s(World.vs(highlightBlock.position)).GetBlockID(highlightBlock.position), highlightBlock.position);
+                    world.GetChunkFromVector3s(World.vs(highlightBlock.position)).EditVoxel(highlightBlock.position, BlockType.Air);
+                }
             }
             if (Input.GetMouseButtonDown(1))
             {                
@@ -149,7 +153,12 @@ public class Control : MonoBehaviour {
                         {
                             if (toolbar.slots[toolbar.slotindex].HasItem)
                             {
-                                if (toolbar.slots[toolbar.slotindex].itemSlot.stack.id == (int)BlockType.Stick || toolbar.slots[toolbar.slotindex].itemSlot.stack.id == (int)BlockType.Sword)
+                                bool flag = true;
+                                List<BlockType> banList = new List<BlockType> { BlockType.Stick, BlockType.Sword, BlockType.Water, BlockType.Lava };
+                                foreach (BlockType type in banList)
+                                    if (id == type)
+                                        flag = false;
+                                if (!flag)
                                     break;
                                 world.GetChunkFromVector3s(World.vs(placeBlock.position)).EditVoxel(placeBlock.position, (BlockType)toolbar.slots[toolbar.slotindex].itemSlot.stack.id);
                                 toolbar.slots[toolbar.slotindex].itemSlot.Take(1);

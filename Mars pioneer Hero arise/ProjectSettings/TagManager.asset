@@ -10,6 +10,8 @@ TagManager:
   - Text
   - Block
   - HandCraftResultSlot
+  - Item
+  - Enemy
   layers:
   - Default
   - TransparentFX

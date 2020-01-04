@@ -23,6 +23,7 @@ public class loadWorld : MonoBehaviour
         {
             fileName = "saveData2.save";
         }
+        SceneType = "SpaceStop";
         SceneManager.LoadScene("startindvideo");
     }
     // Start is called before the first frame update

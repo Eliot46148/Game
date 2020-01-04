@@ -869,3 +869,5 @@ D:\Class\108_1\gameboy\Game\Mars pioneer Hero arise\obj\Debug\Assembly-CSharp.cs
 D:\Class\108_1\gameboy\Game\Mars pioneer Hero arise\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 D:\Class\108_1\gameboy\Game\Mars pioneer Hero arise\obj\Debug\Assembly-CSharp.dll
 D:\Class\108_1\gameboy\Game\Mars pioneer Hero arise\obj\Debug\Assembly-CSharp.pdb
+D:\Class\108_1\gameboy\Game\Mars pioneer Hero arise\Temp\bin\Debug\NavMeshComponentsEditor.pdb
+D:\Class\108_1\gameboy\Game\Mars pioneer Hero arise\Temp\bin\Debug\NavMeshComponents.pdb

@@ -112,7 +112,7 @@ public class DragAndDropHandler : MonoBehaviour {
         {
             if (cursorSlot.itemSlot.stack.id != clickedSlot.itemSlot.stack.id)
                 return;
-            cursorSlot.itemSlot.add(1);
+            cursorSlot.itemSlot.add(clickedSlot.itemSlot.stack.amount);
             clickedSlot.itemSlot.EmptySlot();
             ReduceHandCraftSlots();
         }

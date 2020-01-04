@@ -90,10 +90,15 @@ public class World : MonoBehaviour
             player.rotation = data.PlayerRotation;
             foreach (string json in data.VoxelMaps)
                 saveModifications.Add(JsonUtility.FromJson<WrappingClass>(json));
+            
             foreach (string json in data.Toolbar)
                 toolbarLoadData.Add(JsonUtility.FromJson<SaveItem>(json));
-            foreach (string json in data.Bag)
-                bagLoadData.Add(JsonUtility.FromJson<SaveItem>(json));
+            if (data.Bag.Count != 0)
+                foreach (string json in data.Bag)
+                    bagLoadData.Add(JsonUtility.FromJson<SaveItem>(json));
+            else
+                for (int i = 0; i < 27; i++)
+                    bagLoadData.Add(new SaveItem(0, 0));
 
             Debug.Log("Get known save file : " + Application.dataPath + "/" + loadWorld.fileName + " .");
         }

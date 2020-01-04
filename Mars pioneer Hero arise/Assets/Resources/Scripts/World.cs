@@ -208,7 +208,7 @@ public class World : MonoBehaviour
 
         if (!_isPlayerPlace && c.Equals(playerChunkCoord))
         {
-            spawnPosition = new Vector3((VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f, VoxelData.ChunkHeight - 128f, (VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f);
+          //  spawnPosition = new Vector3((VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f, VoxelData.ChunkHeight - 128f, (VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f);
         }
         if (chunkCreated < chunkToBeCreate)
             chunkCreated++;

@@ -1,31 +1,29 @@
 {
     "PlayerPosition": {
         "x": 806.6214599609375,
-        "y": 48.079994201660159,
+        "y": 48.01999282836914,
         "z": 813.1433715820313
     },
     "PlayerRotation": {
         "x": 0.0,
-        "y": 0.15815818309783936,
+        "y": -0.03664360195398331,
         "z": 0.0,
-        "w": 0.9874138236045837
+        "w": 0.9993283748626709
     },
-    "VoxelMaps": [
-        "{\n    \"Coordinate\": {\n        \"x\": 50,\n        \"z\": 51\n    },\n    \"Modifications\": [\n        {\n            \"position\": {\n                \"x\": 7.0,\n                \"y\": 49.0,\n                \"z\": 0.0\n            },\n            \"id\": 0\n        },\n        {\n            \"position\": {\n                \"x\": 7.0,\n                \"y\": 48.0,\n                \"z\": 0.0\n            },\n            \"id\": 0\n        }\n    ]\n}"
-    ],
+    "VoxelMaps": [],
     "Bag": [
         "{\n    \"id\": 0,\n    \"amount\": 0\n}",
         "{\n    \"id\": 0,\n    \"amount\": 0\n}",
-        "{\n    \"id\": 12,\n    \"amount\": 63\n}",
-        "{\n    \"id\": 15,\n    \"amount\": 52\n}",
+        "{\n    \"id\": 12,\n    \"amount\": 61\n}",
+        "{\n    \"id\": 15,\n    \"amount\": 50\n}",
+        "{\n    \"id\": 20,\n    \"amount\": 15\n}",
         "{\n    \"id\": 0,\n    \"amount\": 0\n}",
         "{\n    \"id\": 0,\n    \"amount\": 0\n}",
         "{\n    \"id\": 0,\n    \"amount\": 0\n}",
         "{\n    \"id\": 0,\n    \"amount\": 0\n}",
         "{\n    \"id\": 0,\n    \"amount\": 0\n}",
-        "{\n    \"id\": 0,\n    \"amount\": 0\n}",
-        "{\n    \"id\": 0,\n    \"amount\": 0\n}",
-        "{\n    \"id\": 0,\n    \"amount\": 0\n}",
+        "{\n    \"id\": 17,\n    \"amount\": 5\n}",
+        "{\n    \"id\": 18,\n    \"amount\": 24\n}",
         "{\n    \"id\": 13,\n    \"amount\": 28\n}",
         "{\n    \"id\": 16,\n    \"amount\": 30\n}",
         "{\n    \"id\": 0,\n    \"amount\": 0\n}",
@@ -34,7 +32,7 @@
         "{\n    \"id\": 0,\n    \"amount\": 0\n}",
         "{\n    \"id\": 0,\n    \"amount\": 0\n}",
         "{\n    \"id\": 11,\n    \"amount\": 54\n}",
-        "{\n    \"id\": 0,\n    \"amount\": 0\n}",
+        "{\n    \"id\": 10,\n    \"amount\": 30\n}",
         "{\n    \"id\": 0,\n    \"amount\": 0\n}",
         "{\n    \"id\": 0,\n    \"amount\": 0\n}",
         "{\n    \"id\": 14,\n    \"amount\": 20\n}",
@@ -43,9 +41,9 @@
         "{\n    \"id\": 0,\n    \"amount\": 0\n}"
     ],
     "Toolbar": [
-        "{\n    \"id\": 10,\n    \"amount\": 30\n}",
-        "{\n    \"id\": 17,\n    \"amount\": 5\n}",
-        "{\n    \"id\": 18,\n    \"amount\": 24\n}",
+        "{\n    \"id\": 21,\n    \"amount\": 1\n}",
+        "{\n    \"Item1\": 0,\n    \"Item2\": 0\n}",
+        "{\n    \"Item1\": 0,\n    \"Item2\": 0\n}",
         "{\n    \"Item1\": 0,\n    \"Item2\": 0\n}",
         "{\n    \"Item1\": 0,\n    \"Item2\": 0\n}",
         "{\n    \"Item1\": 0,\n    \"Item2\": 0\n}",

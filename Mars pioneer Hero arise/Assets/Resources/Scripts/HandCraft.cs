@@ -36,11 +36,11 @@ public class HandCraft : MonoBehaviour
 
                 if (isEqual)
                 {
-                    ShowCraftResult(r.result);
+                    ShowCraftResult(r.result, r.amount);
                     break;
                 }
                 else
-                    ShowCraftResult(0);
+                    ShowCraftResult(0, r.amount);
             }
         }
     }
@@ -49,12 +49,12 @@ public class HandCraft : MonoBehaviour
     {
         //recipes.Add(new HandCraftRecipe(new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 0));
         int i = 5;
-        recipes.Add(new HandCraftRecipe(new int[] { i, 0, 0, i, 0 ,0, 0, 0, 0 }, 20));
-        recipes.Add(new HandCraftRecipe(new int[] { 0, 0, 0, i, 0, 0, i, 0, 0 }, 20));
-        recipes.Add(new HandCraftRecipe(new int[] { 0, i, 0, 0, i, 0, 0, 0, 0 }, 20));
-        recipes.Add(new HandCraftRecipe(new int[] { 0, 0, 0, 0, i, 0, 0, i, 0 }, 20));
-        recipes.Add(new HandCraftRecipe(new int[] { 0, 0, i, 0, 0, i, 0, 0, 0 }, 20));
-        recipes.Add(new HandCraftRecipe(new int[] { 0, 0, 0, 0, 0, i, 0, 0, i }, 20));
+        recipes.Add(new HandCraftRecipe(new int[] { i, 0, 0, i, 0 ,0, 0, 0, 0 }, 20, 4));
+        recipes.Add(new HandCraftRecipe(new int[] { 0, 0, 0, i, 0, 0, i, 0, 0 }, 20, 4));
+        recipes.Add(new HandCraftRecipe(new int[] { 0, i, 0, 0, i, 0, 0, 0, 0 }, 20, 4));
+        recipes.Add(new HandCraftRecipe(new int[] { 0, 0, 0, 0, i, 0, 0, i, 0 }, 20, 4));
+        recipes.Add(new HandCraftRecipe(new int[] { 0, 0, i, 0, 0, i, 0, 0, 0 }, 20, 4));
+        recipes.Add(new HandCraftRecipe(new int[] { 0, 0, 0, 0, 0, i, 0, 0, i }, 20, 4));
 
         i = (int)BlockType.Stick;
         int j = (int)BlockType.IronOre;
@@ -62,6 +62,18 @@ public class HandCraft : MonoBehaviour
         recipes.Add(new HandCraftRecipe(new int[] { j, 0, 0, j, 0, 0, i, 0, 0 }, k));
         recipes.Add(new HandCraftRecipe(new int[] { 0, j, 0, 0, j, 0, 0, i, 0 }, k));
         recipes.Add(new HandCraftRecipe(new int[] { 0, 0, j, 0, 0, j, 0, 0, i }, k));
+
+        i = (int)BlockType.OakLog;
+        j = (int)BlockType.Wooden;
+        recipes.Add(new HandCraftRecipe(new int[] { i, 0, 0, 0, 0, 0, 0, 0, 0 }, j, 4));
+        recipes.Add(new HandCraftRecipe(new int[] { 0, i, 0, 0, 0, 0, 0, 0, 0 }, j, 4));
+        recipes.Add(new HandCraftRecipe(new int[] { 0, 0, i, 0, 0, 0, 0, 0, 0 }, j, 4));
+        recipes.Add(new HandCraftRecipe(new int[] { 0, 0, 0, i, 0, 0, 0, 0, 0 }, j, 4));
+        recipes.Add(new HandCraftRecipe(new int[] { 0, 0, 0, 0, i, 0, 0, 0, 0 }, j, 4));
+        recipes.Add(new HandCraftRecipe(new int[] { 0, 0, 0, 0, 0, i, 0, 0, 0 }, j, 4));
+        recipes.Add(new HandCraftRecipe(new int[] { 0, 0, 0, 0, 0, 0, i, 0, 0 }, j, 4));
+        recipes.Add(new HandCraftRecipe(new int[] { 0, 0, 0, 0, 0, 0, 0, i, 0 }, j, 4));
+        recipes.Add(new HandCraftRecipe(new int[] { 0, 0, 0, 0, 0, 0, 0, 0, i }, j, 4));
 
     }
 
@@ -78,7 +90,7 @@ public class HandCraft : MonoBehaviour
         craftIdArray = arr;
     }
 
-    private void ShowCraftResult(int ID)
+    private void ShowCraftResult(int ID, int amt)
     {
         if (ID == 0)
         {
@@ -87,7 +99,8 @@ public class HandCraft : MonoBehaviour
         }
         else
         {
-            resultSlot.itemSlot.InsertStack(new ItemStack(ID, 1));
+            resultSlot.itemSlot.InsertStack(new ItemStack(ID, amt));
         }
     }
+
 }

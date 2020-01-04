@@ -14,13 +14,11 @@ public class Toolbar : MonoBehaviour
 
     public void Start()
     {
-        world = GameObject.Find("World").GetComponent<World>();
-        byte index = 10;
+        world = GameObject.Find("World").GetComponent<World>();        
         for(int i=0;i<9;i++)
         {            
-            ItemSlot slot = new ItemSlot(slots[i], world.toolbarLoadData[i]);
-            index++;
-        }                
+            ItemSlot slot = new ItemSlot(slots[i], world.toolbarLoadData[i]);            
+        } 
     }
 
     private void Update()

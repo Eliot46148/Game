@@ -11,6 +11,7 @@ public class Inventory : MonoBehaviour {
     public UIItemSlot[] equiments = new UIItemSlot[5];
     public UIItemSlot[] craftslots = new UIItemSlot[5];
 
+
     public void Start()
     {        
         world = GameObject.Find("World").GetComponent<World>();
@@ -19,8 +20,7 @@ public class Inventory : MonoBehaviour {
         {
             GameObject newslot = Instantiate(slotPrefab, transform);
 
-            ItemStack stack = new ItemStack(5, 10);
-            ItemSlot itemSlot = new ItemSlot(newslot.GetComponent<UIItemSlot>(), stack);
+            ItemSlot itemSlot = new ItemSlot(newslot.GetComponent<UIItemSlot>(), world.bagLoadData[i]);
             bag[i] = newslot.GetComponent<UIItemSlot>();
         }
 

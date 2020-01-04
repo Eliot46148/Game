@@ -64,6 +64,8 @@ public class World : MonoBehaviour
     {
         loading.SetActive(true); // 讀取中
 
+        //loadWorld.fileName = "saveData.save";
+
         try
         {
             // 讀取設定檔
@@ -644,7 +646,10 @@ public class World : MonoBehaviour
 
         foreach (var item in itemController.bag)
             if (item != null)
-                bagST.Add(JsonUtility.ToJson(new SaveItem(item.itemSlot.stack.id, item.itemSlot.stack.amount), true));
+                if(item.itemSlot.HasItem)
+                    bagST.Add(JsonUtility.ToJson(new SaveItem(item.itemSlot.stack.id, item.itemSlot.stack.amount), true));
+                else
+                    bagST.Add(JsonUtility.ToJson(new SaveItem(0, 0), true));
         foreach (var item in itemController.toolbar)
             if (item != null && item.HasItem)
                 toolbarST.Add(JsonUtility.ToJson(new SaveItem(item.itemSlot.stack.id, item.itemSlot.stack.amount), true));
@@ -652,6 +657,7 @@ public class World : MonoBehaviour
                 toolbarST.Add(JsonUtility.ToJson((0, 0), true));
 
         File.WriteAllText(Application.dataPath + "/" + loadWorld.fileName, JsonUtility.ToJson(new SaveData(player.position, player.rotation, bagST, toolbarST, map), true));
+        //File.WriteAllText(Application.dataPath + "/" + "saveData.save", JsonUtility.ToJson(new SaveData(player.position, player.rotation, bagST, toolbarST, map), true)); 
         Exit();
     }
 

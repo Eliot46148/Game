@@ -110,6 +110,16 @@ public class ItemSlot
         uiItemSlot.Link(this);
     }
 
+    public ItemSlot(UIItemSlot _uIItemSlot, SaveItem _item)
+    {
+        if (_item.amount > 0)
+        {
+            stack = new ItemStack(_item.id, _item.amount);
+        }
+        uiItemSlot = _uIItemSlot;
+        uiItemSlot.Link(this);
+    }
+
     public void LinkUISlot(UIItemSlot uiSlot)
     {
         uiItemSlot = uiSlot;
@@ -175,6 +185,17 @@ public class ItemSlot
         if (_stack.amount > 0)
         {
             stack = _stack;
+            uiItemSlot.UpdateSlot();
+        }
+        else
+            EmptySlot();
+    }
+
+    public void InsertStack(SaveItem _item)
+    {
+        if (_item.amount > 0)
+        {
+            stack = new ItemStack(_item.id, _item.amount);
             uiItemSlot.UpdateSlot();
         }
         else

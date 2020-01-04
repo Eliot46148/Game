@@ -10,13 +10,15 @@ public class Toolbar : MonoBehaviour
     public Control control;
     public int slotindex = 0;
 
+    World world;
+
     public void Start()
     {
+        world = GameObject.Find("World").GetComponent<World>();
         byte index = 10;
-        foreach(UIItemSlot s in slots)
-        {
-            ItemStack stack = new ItemStack(index, (byte)Random.Range(2,65));
-            ItemSlot slot = new ItemSlot(s, stack);
+        for(int i=0;i<9;i++)
+        {            
+            ItemSlot slot = new ItemSlot(slots[i], world.toolbarLoadData[i]);
             index++;
         }                
     }

@@ -1,19 +1,50 @@
 {
     "PlayerPosition": {
-        "x": 800.0,
-        "y": 53.83399963378906,
-        "z": 800.0
+        "x": 804.0847778320313,
+        "y": 48.20000076293945,
+        "z": 803.2672119140625
     },
     "PlayerRotation": {
         "x": 0.0,
-        "y": 0.0,
+        "y": 0.9986522793769836,
         "z": 0.0,
-        "w": 1.0
+        "w": -0.051900461316108707
     },
-    "VoxelMaps": [],
-    "Bag": [],
+    "VoxelMaps": [
+        "{\n    \"Coordinate\": {\n        \"x\": 50,\n        \"z\": 49\n    },\n    \"Modifications\": [\n        {\n            \"position\": {\n                \"x\": 5.0,\n                \"y\": 48.0,\n                \"z\": 15.0\n            },\n            \"id\": 10\n        },\n        {\n            \"position\": {\n                \"x\": 4.0,\n                \"y\": 48.0,\n                \"z\": 15.0\n            },\n            \"id\": 10\n        },\n        {\n            \"position\": {\n                \"x\": 3.0,\n                \"y\": 48.0,\n                \"z\": 15.0\n            },\n            \"id\": 10\n        },\n        {\n            \"position\": {\n                \"x\": 2.0,\n                \"y\": 48.0,\n                \"z\": 15.0\n            },\n            \"id\": 10\n        },\n        {\n            \"position\": {\n                \"x\": 1.0,\n                \"y\": 48.0,\n                \"z\": 15.0\n            },\n            \"id\": 10\n        }\n    ]\n}",
+        "{\n    \"Coordinate\": {\n        \"x\": 50,\n        \"z\": 50\n    },\n    \"Modifications\": [\n        {\n            \"position\": {\n                \"x\": 4.0,\n                \"y\": 48.0,\n                \"z\": 0.0\n            },\n            \"id\": 10\n        },\n        {\n            \"position\": {\n                \"x\": 3.0,\n                \"y\": 48.0,\n                \"z\": 0.0\n            },\n            \"id\": 10\n        },\n        {\n            \"position\": {\n                \"x\": 4.0,\n                \"y\": 48.0,\n                \"z\": 1.0\n            },\n            \"id\": 10\n        },\n        {\n            \"position\": {\n                \"x\": 1.0,\n                \"y\": 48.0,\n                \"z\": 0.0\n            },\n            \"id\": 10\n        },\n        {\n            \"position\": {\n                \"x\": 1.0,\n                \"y\": 48.0,\n                \"z\": 0.0\n            },\n            \"id\": 0\n        },\n        {\n            \"position\": {\n                \"x\": 2.0,\n                \"y\": 48.0,\n                \"z\": 0.0\n            },\n            \"id\": 10\n        },\n        {\n            \"position\": {\n                \"x\": 3.0,\n                \"y\": 48.0,\n                \"z\": 1.0\n            },\n            \"id\": 10\n        },\n        {\n            \"position\": {\n                \"x\": 4.0,\n                \"y\": 48.0,\n                \"z\": 1.0\n            },\n            \"id\": 0\n        }\n    ]\n}"
+    ],
+    "Bag": [
+        "{\n    \"id\": 5,\n    \"amount\": 10\n}",
+        "{\n    \"id\": 5,\n    \"amount\": 10\n}",
+        "{\n    \"id\": 5,\n    \"amount\": 10\n}",
+        "{\n    \"id\": 5,\n    \"amount\": 10\n}",
+        "{\n    \"id\": 5,\n    \"amount\": 10\n}",
+        "{\n    \"id\": 5,\n    \"amount\": 10\n}",
+        "{\n    \"id\": 5,\n    \"amount\": 10\n}",
+        "{\n    \"id\": 5,\n    \"amount\": 10\n}",
+        "{\n    \"id\": 5,\n    \"amount\": 10\n}",
+        "{\n    \"id\": 5,\n    \"amount\": 10\n}",
+        "{\n    \"id\": 5,\n    \"amount\": 10\n}",
+        "{\n    \"id\": 5,\n    \"amount\": 10\n}",
+        "{\n    \"id\": 5,\n    \"amount\": 10\n}",
+        "{\n    \"id\": 5,\n    \"amount\": 10\n}",
+        "{\n    \"id\": 5,\n    \"amount\": 10\n}",
+        "{\n    \"id\": 5,\n    \"amount\": 10\n}",
+        "{\n    \"id\": 5,\n    \"amount\": 10\n}",
+        "{\n    \"id\": 5,\n    \"amount\": 10\n}",
+        "{\n    \"id\": 5,\n    \"amount\": 10\n}",
+        "{\n    \"id\": 5,\n    \"amount\": 10\n}",
+        "{\n    \"id\": 5,\n    \"amount\": 10\n}",
+        "{\n    \"id\": 5,\n    \"amount\": 10\n}",
+        "{\n    \"id\": 5,\n    \"amount\": 10\n}",
+        "{\n    \"id\": 5,\n    \"amount\": 10\n}",
+        "{\n    \"id\": 5,\n    \"amount\": 10\n}",
+        "{\n    \"id\": 5,\n    \"amount\": 10\n}",
+        "{\n    \"id\": 5,\n    \"amount\": 10\n}"
+    ],
     "Toolbar": [
-        "{\n    \"id\": 10,\n    \"amount\": 30\n}",
+        "{\n    \"id\": 10,\n    \"amount\": 20\n}",
         "{\n    \"id\": 11,\n    \"amount\": 54\n}",
         "{\n    \"id\": 12,\n    \"amount\": 63\n}",
         "{\n    \"id\": 13,\n    \"amount\": 28\n}",

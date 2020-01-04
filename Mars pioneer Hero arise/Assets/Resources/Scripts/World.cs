@@ -27,6 +27,8 @@ public class World : MonoBehaviour
     public Basic basic;
     public Material material;
     public Material transparentMaterial;
+    public List<SaveItem> toolbarLoadData;
+    public List<SaveItem> bagLoadData;
 
     [Header("玩家設定")]
     public Transform player;
@@ -85,6 +87,11 @@ public class World : MonoBehaviour
             player.rotation = data.PlayerRotation;
             foreach (string json in data.VoxelMaps)
                 saveModifications.Add(JsonUtility.FromJson<WrappingClass>(json));
+            foreach (string json in data.Toolbar)
+                toolbarLoadData.Add(JsonUtility.FromJson<SaveItem>(json));
+            foreach (string json in data.Bag)
+                bagLoadData.Add(JsonUtility.FromJson<SaveItem>(json));
+
             Debug.Log("Get known save file : " + Application.dataPath + "/" + loadWorld.fileName + " .");
         }
         catch

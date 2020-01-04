@@ -6,7 +6,7 @@ using UnityEngine;
 // 方塊ID定義
 public enum BlockType
 {
-    Air, Stone, Grass, Dirt, Cobblestone, Wooden, Bedrock, Water, Lava, Sand, Gravel, GoldOre, IronOre, CoalOre, Glass, OakLog, OakLeaves, Cactus, SnowGrass, Box, Stick, Sword
+    Air, Stone, Grass, Dirt, Cobblestone, Wooden, Bedrock, Water, Lava, Sand, Gravel, GoldOre, IronOre, CoalOre, Glass, OakLog, OakLeaves, Cactus, SnowGrass, Box, Stick, WoodenSword, IronSword, GoldenSword
 }
 
 // 所有方塊設定
@@ -28,6 +28,8 @@ public class Basic : ScriptableObject
 public class BasicBlock
 {
     public string name;
+    [Header("方塊是否工具")]
+    public bool isTool;
     [Header("方塊圖示矩陣座標")]
     public Vector2s icon;
     public Sprite iconImage;
@@ -40,6 +42,8 @@ public class BasicBlock
     public float transparency;
     [Header("方塊材質設定")]
     public BlockTexture blockTexture;
+    [Header("破壞設定")]
+    public float timeToShatter;
 
     public BasicBlock(BlockType t, Vector2s i, BlockTexture texture, bool solid = true)
     {

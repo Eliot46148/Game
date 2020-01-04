@@ -57,8 +57,20 @@ public class HandCraft : MonoBehaviour
         recipes.Add(new HandCraftRecipe(new int[] { 0, 0, 0, 0, 0, i, 0, 0, i }, 20, 4));
 
         i = (int)BlockType.Stick;
-        int j = (int)BlockType.IronOre;
-        int k = (int)BlockType.Sword;
+        int j = (int)BlockType.Wooden;
+        int k = (int)BlockType.WoodenSword;
+        recipes.Add(new HandCraftRecipe(new int[] { j, 0, 0, j, 0, 0, i, 0, 0 }, k));
+        recipes.Add(new HandCraftRecipe(new int[] { 0, j, 0, 0, j, 0, 0, i, 0 }, k));
+        recipes.Add(new HandCraftRecipe(new int[] { 0, 0, j, 0, 0, j, 0, 0, i }, k));
+
+        j = (int)BlockType.IronOre;
+        k = (int)BlockType.IronSword;
+        recipes.Add(new HandCraftRecipe(new int[] { j, 0, 0, j, 0, 0, i, 0, 0 }, k));
+        recipes.Add(new HandCraftRecipe(new int[] { 0, j, 0, 0, j, 0, 0, i, 0 }, k));
+        recipes.Add(new HandCraftRecipe(new int[] { 0, 0, j, 0, 0, j, 0, 0, i }, k));
+
+        j = (int)BlockType.GoldOre;
+        k = (int)BlockType.GoldenSword;
         recipes.Add(new HandCraftRecipe(new int[] { j, 0, 0, j, 0, 0, i, 0, 0 }, k));
         recipes.Add(new HandCraftRecipe(new int[] { 0, j, 0, 0, j, 0, 0, i, 0 }, k));
         recipes.Add(new HandCraftRecipe(new int[] { 0, 0, j, 0, 0, j, 0, 0, i }, k));
@@ -74,6 +86,13 @@ public class HandCraft : MonoBehaviour
         recipes.Add(new HandCraftRecipe(new int[] { 0, 0, 0, 0, 0, 0, i, 0, 0 }, j, 4));
         recipes.Add(new HandCraftRecipe(new int[] { 0, 0, 0, 0, 0, 0, 0, i, 0 }, j, 4));
         recipes.Add(new HandCraftRecipe(new int[] { 0, 0, 0, 0, 0, 0, 0, 0, i }, j, 4));
+
+        i = (int)BlockType.Wooden;
+        j = (int)BlockType.Box;
+        recipes.Add(new HandCraftRecipe(new int[] { i, i, 0, i, i, 0, 0, 0, 0 }, j));
+        recipes.Add(new HandCraftRecipe(new int[] { 0, i, i, 0, i, i, 0, 0, 0 }, j));
+        recipes.Add(new HandCraftRecipe(new int[] { 0, 0, 0, i, i, 0, i, i, 0 }, j));
+        recipes.Add(new HandCraftRecipe(new int[] { 0, 0, 0, 0, i, i, 0, i, i }, j));
 
     }
 

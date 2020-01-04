@@ -88,6 +88,7 @@ public class World : MonoBehaviour
             data = JsonUtility.FromJson<SaveData>(jsonImport);
             spawnPosition = data.PlayerPosition;
             player.rotation = data.PlayerRotation;
+
             foreach (string json in data.VoxelMaps)
                 saveModifications.Add(JsonUtility.FromJson<WrappingClass>(json));
             
@@ -104,6 +105,11 @@ public class World : MonoBehaviour
         }
         catch
         {
+            for (int i = 0; i < 9; i++)
+                toolbarLoadData.Add(new SaveItem(0, 0));
+            for (int i = 0; i < 27; i++)
+                bagLoadData.Add(new SaveItem(0, 0));
+
             spawnPosition = new Vector3((VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f, VoxelData.ChunkHeight - 50f, (VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f);
             Debug.Log("Load world with new setting.");
         }

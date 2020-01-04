@@ -55,7 +55,7 @@ public class EnemyController : MonoBehaviour
             agent.SetDestination(agent.transform.position);
 
         if (stats.currentHealth <= 0)
-            Die();
+            StartCoroutine(Die());
     }
 
     // Rotate to face the target
@@ -73,10 +73,14 @@ public class EnemyController : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, lookRadius);
     }
 
-    void Die()
+    IEnumerator Die()
     {
+        foreach (var child in transform)
+            if (GetComponent<Renderer>() != null)
+                GetComponent<Renderer>().material.color = Color.red;
         for (int i = 0; i < (int)Random.Range(1, 5); i++)
             GameObject.Find("World").GetComponent<World>().DropItem((BlockType)Random.Range(2, 20), transform.position);
+        yield return new WaitForSeconds(0.05f);
         Destroy(transform.gameObject);
     }
 }

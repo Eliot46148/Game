@@ -41,6 +41,7 @@ public class Control : MonoBehaviour {
     public GameObject CursorSlot;
 
     private Collider collider;
+    private bool shattering;
 
     void Start ()
 	{
@@ -124,51 +125,81 @@ public class Control : MonoBehaviour {
             BlockType id = BlockType.Air;
             if (chunk != null)
                 id = chunk.model.voxelMap[(int)pos.x % VoxelData.ChunkWidth, (int)pos.y % VoxelData.ChunkHeight, (int)pos.z % VoxelData.ChunkWidth].id;
-            if (Input.GetMouseButtonDown(0))
-            {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit))
-                {
-                    if (hit.transform.tag == "Enemy")
-                    {
-                        hit.transform.GetComponent<CharacterStats>().TakeDamage(GetComponent<CharacterStats>().damage.GetValue());
-                    }
-                }
-                else
-                {
-                    world.DropItem(world.GetChunkFromVector3s(World.vs(highlightBlock.position)).GetBlockID(highlightBlock.position), highlightBlock.position);
-                    world.GetChunkFromVector3s(World.vs(highlightBlock.position)).EditVoxel(highlightBlock.position, BlockType.Air);
-                }
-            }
-            if (Input.GetMouseButtonDown(1))
-            {                
-                switch (id)
-                {
-                    case (BlockType.Box):
-                        world.Exit();
-                        break;
 
-                    default:
-                        {
-                            if (toolbar.slots[toolbar.slotindex].HasItem)
-                            {
-                                bool flag = true;
-                                List<BlockType> banList = new List<BlockType> { BlockType.Stick, BlockType.Sword, BlockType.Water, BlockType.Lava };
-                                foreach (BlockType type in banList)
-                                    if (id == type)
-                                        flag = false;
-                                if (!flag)
-                                    break;
-                                world.GetChunkFromVector3s(World.vs(placeBlock.position)).EditVoxel(placeBlock.position, (BlockType)toolbar.slots[toolbar.slotindex].itemSlot.stack.id);
-                                toolbar.slots[toolbar.slotindex].itemSlot.Take(1);
-                            }
-                        }
-                        break;
-                }
-            }
+            ProcessMouseActivity(id);
         }
         
+    }
+
+    void ProcessMouseActivity(BlockType cursorId)
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.transform.tag == "Enemy")
+                {
+                    hit.transform.GetComponent<CharacterStats>().TakeDamage(GetComponent<CharacterStats>().damage.GetValue());
+                }
+            }
+            else
+            {
+                shattering = true;
+                StartCoroutine(highlightBlock.GetChild(0).GetComponent<Shatter>().Play(world.blocks[(int)cursorId].timeToShatter));
+            }
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            if (highlightBlock.GetChild(0).GetComponent<Shatter>().IsCompleted())
+            {
+                world.DropItem(world.GetChunkFromVector3s(World.vs(highlightBlock.position)).GetBlockID(highlightBlock.position), highlightBlock.position);
+                world.GetChunkFromVector3s(World.vs(highlightBlock.position)).EditVoxel(highlightBlock.position, BlockType.Air);
+                highlightBlock.GetChild(0).GetComponent<Shatter>().StopAnim();
+
+                StartCoroutine(highlightBlock.GetChild(0).GetComponent<Shatter>().Play(world.blocks[(int)cursorId].timeToShatter));
+            }
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            highlightBlock.GetChild(0).GetComponent<Shatter>().StopAnim();
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            switch (cursorId)
+            {
+                case (BlockType.Box):
+                    InventoryPanel.SetActive(true);
+                    world.UIState = 0;
+                    CursorSlot.SetActive(true);
+                    break;
+
+                default:
+                    {
+                        if (toolbar.slots[toolbar.slotindex].HasItem)
+                        {
+                            bool flag = true;
+                            List<BlockType> banList = new List<BlockType>();
+                            foreach (var block in GameObject.Find("World").GetComponent<World>().blocks)
+                                if (block.isTool)
+                                    banList.Add(block.type);
+                            foreach (BlockType type in banList)
+                                if ((BlockType)toolbar.slots[toolbar.slotindex].itemSlot.stack.id == type)
+                                    flag = false;
+                            if (!flag)
+                                break;
+                            world.GetChunkFromVector3s(World.vs(placeBlock.position)).EditVoxel(placeBlock.position, (BlockType)toolbar.slots[toolbar.slotindex].itemSlot.stack.id);
+                            toolbar.slots[toolbar.slotindex].itemSlot.Take(1);
+                        }
+                    }
+                    break;
+            }
+        }
     }
 
     // 模擬 Raycast 來讓玩家編輯刪除方塊

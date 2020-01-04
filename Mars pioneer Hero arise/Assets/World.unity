@@ -1149,6 +1149,7 @@ GameObject:
   - component: {fileID: 245449426}
   - component: {fileID: 245449425}
   - component: {fileID: 245449424}
+  - component: {fileID: 245449427}
   m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
@@ -1229,6 +1230,28 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 245449422}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &245449427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245449422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ff8ccb43e426424b929abac446aecb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frames:
+  - {fileID: 2100000, guid: 204ef9702f569bd498bf9aa0c247ba8d, type: 2}
+  - {fileID: 2100000, guid: 5ce9b63f82db67e42be4cfac796c4c3d, type: 2}
+  - {fileID: 2100000, guid: 7714d218f657e8d428fe32d520b61a95, type: 2}
+  - {fileID: 2100000, guid: 60fe077474b17ad428c64023842c2d3d, type: 2}
+  - {fileID: 2100000, guid: 244aced1495cb244facca6968e7fd7e4, type: 2}
+  - {fileID: 2100000, guid: 76c68ab2456ec6246b44a35b7c6b73ac, type: 2}
+  loop: 0
+  delayTime: 0.01
+  index: 0
 --- !u!1 &263469296
 GameObject:
   m_ObjectHideFlags: 0
@@ -4364,7 +4387,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   damage:
-    baseValue: 100
+    baseValue: 50
   armor:
     baseValue: 0
 --- !u!114 &957578437

@@ -57,7 +57,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 09b2330a7c12a8949b73a2d8a1748734, type: 2}
+  - {fileID: 2100000, guid: c1e307fa67e37774883853ac936714cc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -272,3 +272,4 @@ MonoBehaviour:
   isAbleToRight: 0
   isAbleToFront: 0
   isAbleToBack: 0
+  anim: {fileID: 0}

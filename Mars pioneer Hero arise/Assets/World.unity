@@ -2614,8 +2614,8 @@ MonoBehaviour:
   enemyPrefab: {fileID: 3229305001189162350, guid: 9e995aebed1030744b50e38cc761c12d,
     type: 3}
   spawnRadius: 20
-  spawnSpeed: 0.01
-  spawnDelay: 10
+  spawnSpeed: 0.05
+  spawnDelay: 5
 --- !u!224 &439991553 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 224208957914340316, guid: da29f2d727a1b4e4da0ef6dea278a6db,

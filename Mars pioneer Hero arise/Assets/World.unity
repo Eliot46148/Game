@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5406755, g: 0.5717683, b: 0.6142678, a: 1}
+  m_IndirectSpecularColor: {r: 0.5406742, g: 0.57176703, b: 0.61426646, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -519,6 +519,8 @@ MonoBehaviour:
   basic: {fileID: 11400000, guid: e77ecd2fc7e65464ebd24fae5f615faf, type: 2}
   material: {fileID: 2100000, guid: 09b2330a7c12a8949b73a2d8a1748734, type: 2}
   transparentMaterial: {fileID: 2100000, guid: c1e307fa67e37774883853ac936714cc, type: 2}
+  toolbarLoadData: []
+  bagLoadData: []
   player: {fileID: 1063495618}
   _isPlayerPlace: 0
   loading: {fileID: 2114734577}
@@ -6163,9 +6165,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 23.999992, y: 0}
   m_SizeDelta: {x: 24, y: 24}
-  m_Pivot: {x: 0, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1412527852
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/World.unity
+- path: Assets/SpaceStop.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

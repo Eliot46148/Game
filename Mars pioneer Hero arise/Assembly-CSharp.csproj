@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Assets\Character Model\MoveAndAnimatorController.cs" />
     <Compile Include="Assets\Character Model\script\charControl.cs" />
+    <Compile Include="Assets\Meme\MemeMaker.cs" />
     <Compile Include="Assets\Resources\Materials\Materials\Shatter.cs" />
     <Compile Include="Assets\Resources\Scripts\Basic.cs" />
     <Compile Include="Assets\Resources\Scripts\Chunk\BiomeAttributes.cs" />

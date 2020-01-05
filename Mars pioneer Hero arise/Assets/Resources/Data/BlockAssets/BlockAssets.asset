@@ -521,6 +521,321 @@ MonoBehaviour:
         x: 0
         y: 0
     timeToShatter: 0
+  - name: Wool0
+    isTool: 0
+    icon:
+      x: 0
+      y: 0
+    iconImage: {fileID: 21300100, guid: 4f61cd1bbfae1e7469fe9c6d6c754bd7, type: 3}
+    type: 24
+    isSolid: 1
+    renderNeighborFaces: 1
+    transparency: 0
+    blockTexture:
+      side:
+        x: 4
+        y: 0
+      plane:
+        x: 4
+        y: 0
+      under:
+        x: 4
+        y: 0
+    timeToShatter: 0.01
+  - name: Wool1
+    isTool: 0
+    icon:
+      x: 0
+      y: 0
+    iconImage: {fileID: 21300130, guid: 4f61cd1bbfae1e7469fe9c6d6c754bd7, type: 3}
+    type: 25
+    isSolid: 1
+    renderNeighborFaces: 1
+    transparency: 0
+    blockTexture:
+      side:
+        x: 7
+        y: 1
+      plane:
+        x: 7
+        y: 1
+      under:
+        x: 7
+        y: 1
+    timeToShatter: 0.01
+  - name: Wool2
+    isTool: 0
+    icon:
+      x: 0
+      y: 0
+    iconImage: {fileID: 21300128, guid: 4f61cd1bbfae1e7469fe9c6d6c754bd7, type: 3}
+    type: 26
+    isSolid: 1
+    renderNeighborFaces: 1
+    transparency: 0
+    blockTexture:
+      side:
+        x: 8
+        y: 1
+      plane:
+        x: 8
+        y: 1
+      under:
+        x: 8
+        y: 1
+    timeToShatter: 0.01
+  - name: Wool3
+    isTool: 0
+    icon:
+      x: 0
+      y: 0
+    iconImage: {fileID: 21300126, guid: 4f61cd1bbfae1e7469fe9c6d6c754bd7, type: 3}
+    type: 27
+    isSolid: 1
+    renderNeighborFaces: 1
+    transparency: 0
+    blockTexture:
+      side:
+        x: 9
+        y: 1
+      plane:
+        x: 9
+        y: 1
+      under:
+        x: 9
+        y: 1
+    timeToShatter: 0.01
+  - name: Wool4
+    isTool: 0
+    icon:
+      x: 0
+      y: 0
+    iconImage: {fileID: 21300124, guid: 4f61cd1bbfae1e7469fe9c6d6c754bd7, type: 3}
+    type: 28
+    isSolid: 1
+    renderNeighborFaces: 1
+    transparency: 0
+    blockTexture:
+      side:
+        x: 10
+        y: 1
+      plane:
+        x: 10
+        y: 1
+      under:
+        x: 10
+        y: 1
+    timeToShatter: 0.01
+  - name: Wool5
+    isTool: 0
+    icon:
+      x: 0
+      y: 0
+    iconImage: {fileID: 21300122, guid: 4f61cd1bbfae1e7469fe9c6d6c754bd7, type: 3}
+    type: 29
+    isSolid: 1
+    renderNeighborFaces: 1
+    transparency: 0
+    blockTexture:
+      side:
+        x: 11
+        y: 1
+      plane:
+        x: 11
+        y: 1
+      under:
+        x: 11
+        y: 1
+    timeToShatter: 0.01
+  - name: Wool6
+    isTool: 0
+    icon:
+      x: 0
+      y: 0
+    iconImage: {fileID: 21300120, guid: 4f61cd1bbfae1e7469fe9c6d6c754bd7, type: 3}
+    type: 30
+    isSolid: 1
+    renderNeighborFaces: 1
+    transparency: 0
+    blockTexture:
+      side:
+        x: 12
+        y: 1
+      plane:
+        x: 12
+        y: 1
+      under:
+        x: 12
+        y: 1
+    timeToShatter: 0.01
+  - name: Wool7
+    isTool: 0
+    icon:
+      x: 0
+      y: 0
+    iconImage: {fileID: 21300118, guid: 4f61cd1bbfae1e7469fe9c6d6c754bd7, type: 3}
+    type: 31
+    isSolid: 1
+    renderNeighborFaces: 1
+    transparency: 0
+    blockTexture:
+      side:
+        x: 13
+        y: 1
+      plane:
+        x: 13
+        y: 1
+      under:
+        x: 13
+        y: 1
+    timeToShatter: 0.01
+  - name: Wool8
+    isTool: 0
+    icon:
+      x: 0
+      y: 0
+    iconImage: {fileID: 21300114, guid: 4f61cd1bbfae1e7469fe9c6d6c754bd7, type: 3}
+    type: 32
+    isSolid: 1
+    renderNeighborFaces: 1
+    transparency: 0
+    blockTexture:
+      side:
+        x: 7
+        y: 2
+      plane:
+        x: 7
+        y: 2
+      under:
+        x: 7
+        y: 2
+    timeToShatter: 0.01
+  - name: Wool9
+    isTool: 0
+    icon:
+      x: 0
+      y: 0
+    iconImage: {fileID: 21300112, guid: 4f61cd1bbfae1e7469fe9c6d6c754bd7, type: 3}
+    type: 33
+    isSolid: 1
+    renderNeighborFaces: 1
+    transparency: 0
+    blockTexture:
+      side:
+        x: 8
+        y: 2
+      plane:
+        x: 8
+        y: 2
+      under:
+        x: 8
+        y: 2
+    timeToShatter: 0.01
+  - name: Wool10
+    isTool: 0
+    icon:
+      x: 0
+      y: 0
+    iconImage: {fileID: 21300110, guid: 4f61cd1bbfae1e7469fe9c6d6c754bd7, type: 3}
+    type: 34
+    isSolid: 1
+    renderNeighborFaces: 1
+    transparency: 0
+    blockTexture:
+      side:
+        x: 9
+        y: 2
+      plane:
+        x: 9
+        y: 2
+      under:
+        x: 9
+        y: 2
+    timeToShatter: 0.01
+  - name: Wool11
+    isTool: 0
+    icon:
+      x: 0
+      y: 0
+    iconImage: {fileID: 21300108, guid: 4f61cd1bbfae1e7469fe9c6d6c754bd7, type: 3}
+    type: 35
+    isSolid: 1
+    renderNeighborFaces: 1
+    transparency: 0
+    blockTexture:
+      side:
+        x: 10
+        y: 2
+      plane:
+        x: 10
+        y: 2
+      under:
+        x: 10
+        y: 2
+    timeToShatter: 0.01
+  - name: Wool12
+    isTool: 0
+    icon:
+      x: 0
+      y: 0
+    iconImage: {fileID: 21300106, guid: 4f61cd1bbfae1e7469fe9c6d6c754bd7, type: 3}
+    type: 36
+    isSolid: 1
+    renderNeighborFaces: 1
+    transparency: 0
+    blockTexture:
+      side:
+        x: 11
+        y: 2
+      plane:
+        x: 11
+        y: 2
+      under:
+        x: 11
+        y: 2
+    timeToShatter: 0.01
+  - name: Wool13
+    isTool: 0
+    icon:
+      x: 0
+      y: 0
+    iconImage: {fileID: 21300104, guid: 4f61cd1bbfae1e7469fe9c6d6c754bd7, type: 3}
+    type: 37
+    isSolid: 1
+    renderNeighborFaces: 1
+    transparency: 0
+    blockTexture:
+      side:
+        x: 12
+        y: 2
+      plane:
+        x: 12
+        y: 2
+      under:
+        x: 12
+        y: 2
+    timeToShatter: 0.01
+  - name: Wool14
+    isTool: 0
+    icon:
+      x: 0
+      y: 0
+    iconImage: {fileID: 21300102, guid: 4f61cd1bbfae1e7469fe9c6d6c754bd7, type: 3}
+    type: 38
+    isSolid: 1
+    renderNeighborFaces: 1
+    transparency: 0
+    blockTexture:
+      side:
+        x: 13
+        y: 2
+      plane:
+        x: 13
+        y: 2
+      under:
+        x: 13
+        y: 2
+    timeToShatter: 0.01
   - name: Empty
     isTool: 0
     icon:

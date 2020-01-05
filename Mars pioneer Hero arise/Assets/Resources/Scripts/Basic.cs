@@ -6,7 +6,8 @@ using UnityEngine;
 // 方塊ID定義
 public enum BlockType
 {
-    Air, Stone, Grass, Dirt, Cobblestone, Wooden, Bedrock, Water, Lava, Sand, Gravel, GoldOre, IronOre, CoalOre, Glass, OakLog, OakLeaves, Cactus, SnowGrass, Box, Stick, WoodenSword, IronSword, GoldenSword
+    Air, Stone, Grass, Dirt, Cobblestone, Wooden, Bedrock, Water, Lava, Sand, Gravel, GoldOre, IronOre, CoalOre, Glass, OakLog, OakLeaves, Cactus, SnowGrass, Box, Stick, WoodenSword, IronSword, GoldenSword,
+    Wool0, Wool1, Wool2, Wool3, Wool4, Wool5, Wool6, Wool7, Wool8, Wool9, Wool10, Wool11, Wool12, Wool13, Wool14
 }
 
 // 所有方塊設定

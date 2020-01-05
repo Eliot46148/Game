@@ -54,9 +54,24 @@ public class DragAndDropHandler : MonoBehaviour {
 
         if (clickedSlot.itemSlot.isCreative)
         {
-            Debug.Log(clickedSlot.itemSlot.stack.id);
-            cursorItemSlot.EmptySlot();
-            cursorItemSlot.InsertStack(new ItemStack(clickedSlot.itemSlot.stack.id, -1));
+            if (cursorSlot.itemSlot.isCreative)
+            {
+                if (cursorSlot.itemSlot.stack.id == clickedSlot.itemSlot.stack.id)
+                    cursorSlot.itemSlot.EmptySlot();
+                else
+                {
+                    ItemStack oldCursorSlot = cursorSlot.itemSlot.TakeAll();
+                    ItemStack oldSlot = clickedSlot.itemSlot.TakeAll();
+
+                    clickedSlot.itemSlot.InsertStack(oldCursorSlot);
+                    cursorSlot.itemSlot.InsertStack(oldSlot);
+                }
+            }
+            else
+            {
+                cursorItemSlot.EmptySlot();
+                cursorItemSlot.InsertStack(new ItemStack(clickedSlot.itemSlot.stack.id, -1));
+            }
         }
         else
         {

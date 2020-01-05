@@ -140,6 +140,7 @@ public class ItemSlot
     public void EmptySlot()
     {
         stack = null;
+        isCreative = false;
         if (uiItemSlot != null)
             uiItemSlot.UpdateSlot();
     }

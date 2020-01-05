@@ -43,18 +43,22 @@ public class ItemController : MonoBehaviour {
         UIItemSlot emptySlot = null;
         foreach (UIItemSlot s in slots)
         {
-            if (s.HasItem)
-            {
-                if (s.itemSlot.stack.id == stack.id && 64 - s.itemSlot.stack.amount >= stack.amount)
+            
+                if (s.HasItem)
                 {
-                    s.itemSlot.add(stack.amount);
-                    return true;
+                    if (s.itemSlot.stack.amount > 0)
+                    {
+                        if (s.itemSlot.stack.id == stack.id && 64 - s.itemSlot.stack.amount >= stack.amount)
+                        {
+                            s.itemSlot.add(stack.amount);
+                            return true;
+                        }
+                    }
                 }
-            }
-            else if(emptySlot == null)
-            {
-                emptySlot = s;
-            }
+                else if (emptySlot == null)
+                {
+                    emptySlot = s;
+                }            
         }
 
         if (emptySlot != null)

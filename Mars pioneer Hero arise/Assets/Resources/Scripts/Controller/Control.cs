@@ -194,7 +194,8 @@ public class Control : MonoBehaviour {
                             if (!flag)
                                 break;
                             world.GetChunkFromVector3s(World.vs(placeBlock.position)).EditVoxel(placeBlock.position, (BlockType)toolbar.slots[toolbar.slotindex].itemSlot.stack.id);
-                            toolbar.slots[toolbar.slotindex].itemSlot.Take(1);
+                            if(!toolbar.slots[toolbar.slotindex].itemSlot.isCreative)
+                                toolbar.slots[toolbar.slotindex].itemSlot.Take(1);
                         }
                     }
                     break;

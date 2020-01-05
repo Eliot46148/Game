@@ -52,53 +52,72 @@ public class DragAndDropHandler : MonoBehaviour {
         if (!cursorSlot.HasItem && !clickedSlot.HasItem)
             return;
 
-        /*if (clickedSlot.itemSlot.isCreative)
+        if (clickedSlot.itemSlot.isCreative)
         {
-            cursorItemSlot.EmptySlot();
-            cursorItemSlot.InsertStack(clickedSlot.itemSlot.stack);
-        }*/
-
-        if (!cursorSlot.HasItem && clickedSlot.HasItem)
-        {   
-            if(amt==-1)
-                cursorSlot.itemSlot.InsertStack(clickedSlot.itemSlot.TakeAll());
-            else
-                cursorSlot.itemSlot.InsertStack(new ItemStack(clickedSlot.itemSlot.stack.id, clickedSlot.itemSlot.Take((int)clickedSlot.itemSlot.stack.amount/2)));
-            return;
-        }
-
-        if (cursorSlot.HasItem && !clickedSlot.HasItem)
-        {
-            if (amt == -1)
-                clickedSlot.itemSlot.InsertStack(cursorItemSlot.TakeAll());
-            else                     
-                clickedSlot.itemSlot.InsertStack(new ItemStack(cursorItemSlot.stack.id,cursorItemSlot.Take(1)));                                            
-            return;
-        }
-
-        if (cursorSlot.HasItem && clickedSlot.HasItem)
-        {
-            if(cursorSlot.itemSlot.stack.id != clickedSlot.itemSlot.stack.id && amt==-1)
+            if (cursorSlot.itemSlot.isCreative)
             {
-                ItemStack oldCursorSlot = cursorSlot.itemSlot.TakeAll();
-                ItemStack oldSlot = clickedSlot.itemSlot.TakeAll();
+                if (cursorSlot.itemSlot.stack.id == clickedSlot.itemSlot.stack.id)
+                    cursorSlot.itemSlot.EmptySlot();
+                else
+                {
+                    ItemStack oldCursorSlot = cursorSlot.itemSlot.TakeAll();
+                    ItemStack oldSlot = clickedSlot.itemSlot.TakeAll();
 
-                clickedSlot.itemSlot.InsertStack(oldCursorSlot);
-                cursorSlot.itemSlot.InsertStack(oldSlot);
+                    clickedSlot.itemSlot.InsertStack(oldCursorSlot);
+                    cursorSlot.itemSlot.InsertStack(oldSlot);
+                }
             }
+            else
+            {
+                cursorItemSlot.EmptySlot();
+                cursorItemSlot.InsertStack(new ItemStack(clickedSlot.itemSlot.stack.id, -1));
+            }
+        }
+        else
+        {
 
-            if (cursorSlot.itemSlot.stack.id == clickedSlot.itemSlot.stack.id)
+            if (!cursorSlot.HasItem && clickedSlot.HasItem)
             {
                 if (amt == -1)
+                    cursorSlot.itemSlot.InsertStack(clickedSlot.itemSlot.TakeAll());
+                else
+                    cursorSlot.itemSlot.InsertStack(new ItemStack(clickedSlot.itemSlot.stack.id, clickedSlot.itemSlot.Take((int)clickedSlot.itemSlot.stack.amount / 2)));
+                return;
+            }
+
+            if (cursorSlot.HasItem && !clickedSlot.HasItem)
+            {
+                if (amt == -1)
+                    clickedSlot.itemSlot.InsertStack(cursorItemSlot.TakeAll());
+                else
+                    clickedSlot.itemSlot.InsertStack(new ItemStack(cursorItemSlot.stack.id, cursorItemSlot.Take(1)));
+                return;
+            }
+
+            if (cursorSlot.HasItem && clickedSlot.HasItem)
+            {
+                if (cursorSlot.itemSlot.stack.id != clickedSlot.itemSlot.stack.id && amt == -1)
                 {
-                    int num = 64 - clickedSlot.itemSlot.stack.amount;
-                    if (num > 0)
-                    {
-                        clickedSlot.itemSlot.add(cursorSlot.itemSlot.Take(num));
-                    }
+                    ItemStack oldCursorSlot = cursorSlot.itemSlot.TakeAll();
+                    ItemStack oldSlot = clickedSlot.itemSlot.TakeAll();
+
+                    clickedSlot.itemSlot.InsertStack(oldCursorSlot);
+                    cursorSlot.itemSlot.InsertStack(oldSlot);
                 }
-                else                
-                    clickedSlot.itemSlot.add(cursorSlot.itemSlot.Take(1));       
+
+                if (cursorSlot.itemSlot.stack.id == clickedSlot.itemSlot.stack.id)
+                {
+                    if (amt == -1)
+                    {
+                        int num = 64 - clickedSlot.itemSlot.stack.amount;
+                        if (num > 0)
+                        {
+                            clickedSlot.itemSlot.add(cursorSlot.itemSlot.Take(num));
+                        }
+                    }
+                    else
+                        clickedSlot.itemSlot.add(cursorSlot.itemSlot.Take(1));
+                }
             }
         }
     }

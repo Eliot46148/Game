@@ -63,6 +63,8 @@ public class UIItemSlot : MonoBehaviour {
                 Debug.Log(e);
             }
             slotAmount.text = itemSlot.stack.amount.ToString();
+            if (itemSlot.stack.amount < 0)
+                slotAmount.text = "";
             slotIcon.enabled = true;
             slotAmount.enabled = true;
         }
@@ -94,7 +96,7 @@ public class ItemSlot
     public ItemStack stack = null;
     private UIItemSlot uiItemSlot = null;
 
-    public bool isCreative;
+    public bool isCreative = false;
 
     public ItemSlot(UIItemSlot _uIItemSlot)
     {
@@ -112,7 +114,12 @@ public class ItemSlot
 
     public ItemSlot(UIItemSlot _uIItemSlot, SaveItem _item)
     {
-        if (_item.amount > 0)
+        if(_item.amount < 0)
+        {
+            stack = new ItemStack(_item.id, -1);
+            isCreative = true;
+        }
+        else if (_item.amount > 0)
         {
             stack = new ItemStack(_item.id, _item.amount);
         }
@@ -133,6 +140,7 @@ public class ItemSlot
     public void EmptySlot()
     {
         stack = null;
+        isCreative = false;
         if (uiItemSlot != null)
             uiItemSlot.UpdateSlot();
     }
@@ -182,7 +190,13 @@ public class ItemSlot
 
     public void InsertStack(ItemStack _stack)
     {
-        if (_stack.amount > 0)
+        if (_stack.amount < 0)
+        {
+            isCreative = true;
+            stack = _stack;
+            uiItemSlot.UpdateSlot();
+        }
+        else if (_stack.amount > 0)
         {
             stack = _stack;
             uiItemSlot.UpdateSlot();

@@ -37,16 +37,22 @@ public class Control : MonoBehaviour {
     // 除錯 UI Text
     public GameObject debugScreen;
     public GameObject escPanel;
+    public GameObject diePanel;
     public GameObject InventoryPanel;
     public GameObject CursorSlot;
 
     private Collider collider;
     private bool shattering;
+    private BlockType shatteringType;
+    private bool isDead;
 
     void Start ()
 	{
         //world.UIState = 0;    // 讀取中
-        collider = transform.GetComponent<Collider>();       
+        collider = transform.GetComponent<Collider>();
+
+        InventoryPanel.SetActive(true);
+        InventoryPanel.SetActive(false);
     }
 
     void FixedUpdate()
@@ -73,18 +79,30 @@ public class Control : MonoBehaviour {
 
     private void Update()
     {
-        // 開啟背包UI (到 World -> inUI 的 Property去顯示Panel)
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            InventoryPanel.SetActive(!InventoryPanel.activeSelf);
-            world.UIState = (InventoryPanel.activeSelf ? 0 : 1);
-            CursorSlot.SetActive(!CursorSlot.activeSelf);
-        }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (isDead)
         {
-            escPanel.SetActive(!escPanel.activeSelf);
-            world.UIState = (escPanel.activeSelf ? 0 : 1);
+            diePanel.SetActive(true);
+            InventoryPanel.SetActive(false);
+            escPanel.SetActive(false);
+            CursorSlot.SetActive(false);
+            world.UIState = 0;
+        }
+        else
+        {
+            // 開啟背包UI (到 World -> inUI 的 Property去顯示Panel)
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                InventoryPanel.SetActive(!InventoryPanel.activeSelf);
+                world.UIState = (InventoryPanel.activeSelf ? 0 : 1);
+                CursorSlot.SetActive(!CursorSlot.activeSelf);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                escPanel.SetActive(!escPanel.activeSelf);
+                world.UIState = (escPanel.activeSelf ? 0 : 1);
+            }
         }
 
         // 回到遊戲模式
@@ -95,6 +113,8 @@ public class Control : MonoBehaviour {
         }
 
         isGrounded = collider.isGround;
+        if (GetComponent<CharacterStats>().currentHealth <= 0)
+            isDead = true;
     }
 
     void Jump()
@@ -133,6 +153,15 @@ public class Control : MonoBehaviour {
 
     void ProcessMouseActivity(BlockType cursorId)
     {
+        BlockType tool = BlockType.Air;
+        try
+        {
+            tool = (BlockType)toolbar.slots[toolbar.slotindex].itemSlot.stack.id;
+        }
+        catch
+        {
+            ;
+        }
         if (Input.GetMouseButtonDown(0))
         {
 
@@ -142,25 +171,50 @@ public class Control : MonoBehaviour {
             {
                 if (hit.transform.tag == "Enemy")
                 {
-                    hit.transform.GetComponent<CharacterStats>().TakeDamage(GetComponent<CharacterStats>().damage.GetValue());
+                    switch (tool)
+                    {
+                        case BlockType.WoodenSword:
+                            hit.transform.GetComponent<EnemyController>().BennSttack((int)(GetComponent<CharacterStats>().damage.GetValue() * 1.5f));
+                            break;
+                        case BlockType.IronSword:
+                            hit.transform.GetComponent<EnemyController>().BennSttack((int)(GetComponent<CharacterStats>().damage.GetValue() * 2f));
+                            break;
+                        case BlockType.GoldenSword:
+                            hit.transform.GetComponent<EnemyController>().BennSttack((int)(GetComponent<CharacterStats>().damage.GetValue() * 2.5f));
+                            break;
+                        default:
+                            hit.transform.GetComponent<EnemyController>().BennSttack(GetComponent<CharacterStats>().damage.GetValue());
+                            break;
+                    }
                 }
             }
             else
             {
                 shattering = true;
-                StartCoroutine(highlightBlock.GetChild(0).GetComponent<Shatter>().Play(world.blocks[(int)cursorId].timeToShatter));
+                shatteringType = cursorId;
+                StartCoroutine(highlightBlock.GetChild(0).GetComponent<Shatter>().Play((world.isCreative ? 0.01f : TimeToShatter(tool, cursorId))));
             }
         }
 
         if (Input.GetMouseButton(0))
         {
-            if (highlightBlock.GetChild(0).GetComponent<Shatter>().IsCompleted())
+            if (shatteringType == cursorId)
             {
-                world.DropItem(world.GetChunkFromVector3s(World.vs(highlightBlock.position)).GetBlockID(highlightBlock.position), highlightBlock.position);
-                world.GetChunkFromVector3s(World.vs(highlightBlock.position)).EditVoxel(highlightBlock.position, BlockType.Air);
-                highlightBlock.GetChild(0).GetComponent<Shatter>().StopAnim();
+                if (highlightBlock.GetChild(0).GetComponent<Shatter>().IsCompleted())
+                {
+                    world.DropItem(world.GetChunkFromVector3s(World.vs(highlightBlock.position)).GetBlockID(highlightBlock.position), highlightBlock.position);
+                    world.GetChunkFromVector3s(World.vs(highlightBlock.position)).EditVoxel(highlightBlock.position, BlockType.Air);
+                    highlightBlock.GetChild(0).GetComponent<Shatter>().StopAnim();
 
-                StartCoroutine(highlightBlock.GetChild(0).GetComponent<Shatter>().Play(world.blocks[(int)cursorId].timeToShatter));
+                    StartCoroutine(highlightBlock.GetChild(0).GetComponent<Shatter>().Play((world.isCreative ? 0.01f : TimeToShatter(tool, cursorId))));
+                    shatteringType = cursorId;
+                }
+            }
+            else
+            {
+                highlightBlock.GetChild(0).GetComponent<Shatter>().StopAnim();
+                StartCoroutine(highlightBlock.GetChild(0).GetComponent<Shatter>().Play((world.isCreative ? 0.01f : TimeToShatter(tool, cursorId))));
+                shatteringType = cursorId;
             }
         }
 
@@ -201,6 +255,17 @@ public class Control : MonoBehaviour {
                     break;
             }
         }
+    }
+
+    float TimeToShatter(BlockType tool, BlockType block)
+    {
+        float time = world.blocks[(int)block].timeToShatter;
+
+        foreach (shat s in Shatter.shatteringCompare)
+            if (s.tool == tool && s.block == block)
+                return s.ratio * time;
+
+        return time;
     }
 
     // 模擬 Raycast 來讓玩家編輯刪除方塊

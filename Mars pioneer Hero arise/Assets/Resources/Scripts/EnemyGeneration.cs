@@ -25,9 +25,12 @@ public class EnemyGeneration : MonoBehaviour
 
     void Update()
     {
-        spawnCooldown -= Time.deltaTime;
-        if (Random.Range(0, 100) < 10)
-            Spawn();
+        if (!world.isCreative)
+        {
+            spawnCooldown -= Time.deltaTime;
+            if (Random.Range(0, 100) < 10)
+                Spawn();
+        }
     }
 
     public void Spawn()

@@ -836,6 +836,195 @@ MonoBehaviour:
         x: 13
         y: 2
     timeToShatter: 0.01
+  - name: WoodenAxe
+    isTool: 1
+    icon:
+      x: 0
+      y: 0
+    iconImage: {fileID: 21300478, guid: 4f61cd1bbfae1e7469fe9c6d6c754bd7, type: 3}
+    type: 39
+    isSolid: 0
+    renderNeighborFaces: 0
+    transparency: 0
+    blockTexture:
+      side:
+        x: 0
+        y: 0
+      plane:
+        x: 0
+        y: 0
+      under:
+        x: 0
+        y: 0
+    timeToShatter: 0
+  - name: IronAxe
+    isTool: 1
+    icon:
+      x: 0
+      y: 0
+    iconImage: {fileID: 21300450, guid: 4f61cd1bbfae1e7469fe9c6d6c754bd7, type: 3}
+    type: 40
+    isSolid: 0
+    renderNeighborFaces: 0
+    transparency: 0
+    blockTexture:
+      side:
+        x: 0
+        y: 0
+      plane:
+        x: 0
+        y: 0
+      under:
+        x: 0
+        y: 0
+    timeToShatter: 0
+  - name: GoldenAxe
+    isTool: 1
+    icon:
+      x: 0
+      y: 0
+    iconImage: {fileID: 21300508, guid: 4f61cd1bbfae1e7469fe9c6d6c754bd7, type: 3}
+    type: 41
+    isSolid: 0
+    renderNeighborFaces: 0
+    transparency: 0
+    blockTexture:
+      side:
+        x: 0
+        y: 0
+      plane:
+        x: 0
+        y: 0
+      under:
+        x: 0
+        y: 0
+    timeToShatter: 0
+  - name: WoodenPickaxe
+    isTool: 1
+    icon:
+      x: 0
+      y: 0
+    iconImage: {fileID: 21300474, guid: 4f61cd1bbfae1e7469fe9c6d6c754bd7, type: 3}
+    type: 45
+    isSolid: 0
+    renderNeighborFaces: 0
+    transparency: 0
+    blockTexture:
+      side:
+        x: 0
+        y: 0
+      plane:
+        x: 0
+        y: 0
+      under:
+        x: 0
+        y: 0
+    timeToShatter: 0
+  - name: IronPickaxe
+    isTool: 1
+    icon:
+      x: 0
+      y: 0
+    iconImage: {fileID: 21300446, guid: 4f61cd1bbfae1e7469fe9c6d6c754bd7, type: 3}
+    type: 46
+    isSolid: 0
+    renderNeighborFaces: 0
+    transparency: 0
+    blockTexture:
+      side:
+        x: 0
+        y: 0
+      plane:
+        x: 0
+        y: 0
+      under:
+        x: 0
+        y: 0
+    timeToShatter: 0
+  - name: GoldenPickaxe
+    isTool: 1
+    icon:
+      x: 0
+      y: 0
+    iconImage: {fileID: 21300504, guid: 4f61cd1bbfae1e7469fe9c6d6c754bd7, type: 3}
+    type: 47
+    isSolid: 0
+    renderNeighborFaces: 0
+    transparency: 0
+    blockTexture:
+      side:
+        x: 0
+        y: 0
+      plane:
+        x: 0
+        y: 0
+      under:
+        x: 0
+        y: 0
+    timeToShatter: 0
+  - name: WoodenShavel
+    isTool: 1
+    icon:
+      x: 0
+      y: 0
+    iconImage: {fileID: 21300476, guid: 4f61cd1bbfae1e7469fe9c6d6c754bd7, type: 3}
+    type: 42
+    isSolid: 0
+    renderNeighborFaces: 0
+    transparency: 0
+    blockTexture:
+      side:
+        x: 0
+        y: 0
+      plane:
+        x: 0
+        y: 0
+      under:
+        x: 0
+        y: 0
+    timeToShatter: 0
+  - name: IronShavel
+    isTool: 1
+    icon:
+      x: 0
+      y: 0
+    iconImage: {fileID: 21300448, guid: 4f61cd1bbfae1e7469fe9c6d6c754bd7, type: 3}
+    type: 43
+    isSolid: 0
+    renderNeighborFaces: 0
+    transparency: 0
+    blockTexture:
+      side:
+        x: 0
+        y: 0
+      plane:
+        x: 0
+        y: 0
+      under:
+        x: 0
+        y: 0
+    timeToShatter: 0
+  - name: GoldenShavel
+    isTool: 1
+    icon:
+      x: 0
+      y: 0
+    iconImage: {fileID: 21300506, guid: 4f61cd1bbfae1e7469fe9c6d6c754bd7, type: 3}
+    type: 44
+    isSolid: 0
+    renderNeighborFaces: 0
+    transparency: 0
+    blockTexture:
+      side:
+        x: 0
+        y: 0
+      plane:
+        x: 0
+        y: 0
+      under:
+        x: 0
+        y: 0
+    timeToShatter: 0
   - name: Empty
     isTool: 0
     icon:

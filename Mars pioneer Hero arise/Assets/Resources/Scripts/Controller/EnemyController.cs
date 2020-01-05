@@ -15,6 +15,9 @@ public class EnemyController : MonoBehaviour
     CharacterCombat combat;
     CharacterStats stats;
 
+    bool isBennAttack = false;
+    bool beenAttacking = false;
+
     // Use this for initialization
     void Start()
     {
@@ -33,21 +36,28 @@ public class EnemyController : MonoBehaviour
         // If inside the lookRadius
         if (distance <= lookRadius)
         {
-            // Move towards the target
-            agent.SetDestination(target.position);
-
-            // If within attacking distance
-            if (distance <= agent.stoppingDistance)
+            if (!isBennAttack)
             {
-                CharacterStats targetStats = target.GetComponent<CharacterStats>();
-                if (targetStats != null)
-                {
-                    combat.Attack(targetStats);
-                    agent.collider.anim.SetBool("attack", true);
-                }
-                else
-                    agent.collider.anim.SetBool("attack", false);
+                // Move towards the target
+                agent.SetDestination(target.position);
 
+                // If within attacking distance
+                if (distance <= agent.stoppingDistance)
+                {
+                    CharacterStats targetStats = target.GetComponent<CharacterStats>();
+                    if (targetStats != null)
+                    {
+                        combat.Attack(targetStats);
+                        agent.collider.anim.SetBool("attack", true);
+                    }
+                    else
+                        agent.collider.anim.SetBool("attack", false);
+
+                }
+            }
+            else
+            {
+                agent.collider.velocity = Vector3.zero;
             }
             FaceTarget();   // Make sure to face towards the target
         }
@@ -56,6 +66,32 @@ public class EnemyController : MonoBehaviour
 
         if (stats.currentHealth <= 0)
             StartCoroutine(Die());
+    }
+
+    IEnumerator Pause()
+    {
+        foreach (Transform child in transform)
+        {
+            Renderer rend = child.GetComponent<Renderer>();
+            if (rend != null)
+                rend.material.color = Color.red;
+        }
+        yield return new WaitForSeconds(1f);
+        foreach (Transform child in transform)
+        {
+            Renderer rend = child.GetComponent<Renderer>();
+            if (rend != null)
+                rend.material.color = Color.white;
+        }
+        isBennAttack = false;
+        yield return null;
+    }
+
+    public void BennSttack(int dmg)
+    {
+        stats.TakeDamage(dmg);
+        isBennAttack = true;
+        StartCoroutine(Pause());
     }
 
     // Rotate to face the target
@@ -75,10 +111,7 @@ public class EnemyController : MonoBehaviour
 
     IEnumerator Die()
     {
-        foreach (var child in transform)
-            if (GetComponent<Renderer>() != null)
-                GetComponent<Renderer>().material.color = Color.red;
-        for (int i = 0; i < (int)Random.Range(1, 5); i++)
+        for (int i = 0; i < (int)Random.Range(1, 2); i++)
             GameObject.Find("World").GetComponent<World>().DropItem((BlockType)Random.Range(2, 20), transform.position);
         yield return new WaitForSeconds(0.05f);
         Destroy(transform.gameObject);

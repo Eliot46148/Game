@@ -12,6 +12,7 @@ public class World : MonoBehaviour
     [Header("主遊戲設定")]
     public Settings settings;
     public SaveData data = null;
+    public bool isCreative = false;
 
     [Header("世界生成參數")]
     public BiomeAttributes[] biomes;
@@ -85,6 +86,8 @@ public class World : MonoBehaviour
         {
             //throw new System.InvalidOperationException("Debugging");
             string jsonImport = File.ReadAllText(Application.dataPath + "/" + loadWorld.fileName);
+            if (loadWorld.fileName == "saveData2.save")
+                isCreative = true;
             data = JsonUtility.FromJson<SaveData>(jsonImport);
             spawnPosition = data.PlayerPosition;
             player.rotation = data.PlayerRotation;

@@ -12,7 +12,7 @@ public class Inventory : MonoBehaviour {
     public UIItemSlot[] craftslots = new UIItemSlot[5];
 
 
-    public void Start()
+    public void Awake()
     {        
         world = GameObject.Find("World").GetComponent<World>();
 

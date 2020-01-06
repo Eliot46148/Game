@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyGeneration : MonoBehaviour
 {
-    public GameObject enemyPrefab;
+    public List<GameObject> enemyPrefab = new List<GameObject>();
     public float spawnRadius = 10f;
 
     Transform target;   // Reference to the player
@@ -50,7 +50,8 @@ public class EnemyGeneration : MonoBehaviour
         Vector3 position = target.position + new Vector3(Random.Range(-spawnRadius / 2, spawnRadius), 0, Random.Range(-spawnRadius / 2, spawnRadius));
         position = world.GetGroundY(position);
 
-        GameObject drop = Instantiate(enemyPrefab, position, Quaternion.identity);
+        GameObject enemy = enemyPrefab[(int)Random.Range(0, enemyPrefab.Count)];
+        GameObject drop = Instantiate(enemy, position, Quaternion.identity);
         drop.transform.SetParent(GameObject.Find("Enemies").transform);
     }
 

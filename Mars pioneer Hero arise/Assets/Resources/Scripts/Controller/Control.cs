@@ -80,7 +80,7 @@ public class Control : MonoBehaviour {
     private void Update()
     {
 
-        if (isDead)
+        if (isDead || transform.position.y < -20)
         {
             diePanel.SetActive(true);
             InventoryPanel.SetActive(false);
